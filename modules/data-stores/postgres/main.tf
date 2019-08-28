@@ -11,12 +11,10 @@ terraform {
   }
 }
 
-// read vpc from remote stage
-
 resource "aws_db_subnet_group" "pg_sg" {
   name        = "pg-${var.environment}-sg"
   description = "pg-${var.environment} RDS subnet group"
-  subnet_ids  = module.vpc.private_subnet_ids
+  subnet_ids  = local.subnet_ids
 }
 
 // Postgres Database
@@ -32,19 +30,19 @@ resource "aws_db_instance" "pg" {
 
   backup_window           = "22:00-23:59"
   maintenance_window      = "sat:20:00-sat:21:00"
-  backup_retention_period = "7"
+  backup_retention_period = "14"
 
-  vpc_security_group_ids = var.rds_security_group_id
+  vpc_security_group_ids = local.vpc_security_group_ids
 
   db_subnet_group_name = aws_db_subnet_group.pg_sg.name
   parameter_group_name = "default.postgres11"
 
   multi_az                  = true
   storage_type              = "gp2"
-  skip_final_snapshot       = true
+  skip_final_snapshot       = false
   final_snapshot_identifier = "postgres-${var.environment}"
 
-  tags {
+  tags = {
     Terraform   = true
     Name        = "postgres-${var.environment}"
     Environment = var.environment
