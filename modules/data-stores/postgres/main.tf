@@ -24,7 +24,7 @@ resource "aws_db_instance" "pg" {
   engine            = "postgres"
   engine_version    = "11.4"
   instance_class    = "db.t2.micro"
-  name              = "postgres-${var.environment}"
+  name              = "postgres_${var.environment}"
   username          = var.db_username
   password          = var.db_password
 
