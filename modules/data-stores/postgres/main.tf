@@ -1,3 +1,7 @@
+locals {
+  db_name = "postgres_${var.environment}"
+}
+
 resource "aws_db_subnet_group" "pg_sg" {
   name        = "pg-${var.environment}-sg"
   description = "pg-${var.environment} RDS subnet group"
@@ -11,7 +15,7 @@ resource "aws_db_instance" "pg" {
   engine            = "postgres"
   engine_version    = "11.4"
   instance_class    = "db.t2.micro"
-  name              = "postgres_${var.environment}"
+  name              = local.db_name
   username          = var.db_username
   password          = var.db_password
 
