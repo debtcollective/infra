@@ -14,6 +14,6 @@ locals {
   environment                     = "stage"
   postgres_remote_state_workspace = "stage-postgres"
   remote_state_organization       = "debtcollective"
-  db_name                         = data.terraform_remote_state.postgres.outputs.db_name
-  db_port                         = data.terraform_remote_state.postgres.outputs.db_port
+  master_db_name                  = data.terraform_remote_state.postgres.outputs.db_name
+  master_db_port                  = data.terraform_remote_state.postgres.outputs.db_port
 }

@@ -1,7 +1,7 @@
 provider "postgresql" {
   host            = "localhost"
-  port            = local.db_port
-  database        = local.db_name
+  port            = local.master_db_port
+  database        = local.master_db_name
   username        = var.db_username
   password        = var.db_password
   sslmode         = "require"

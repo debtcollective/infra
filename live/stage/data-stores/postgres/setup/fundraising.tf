@@ -1,3 +1,4 @@
+// Generate random username and password
 resource "random_string" "fundraising_db_user" {
   length           = 8
   special          = true
@@ -10,13 +11,27 @@ resource "random_password" "fundraising_db_pass" {
   override_special = "/@\" "
 }
 
+// Store both in SSM
+resource "aws_ssm_parameter" "fundraising_db_user" {
+  name  = "/${local.environment}/fundraising/db_user"
+  type  = "String"
+  value = random_string.fundraising_db_user.result
+}
+
+resource "aws_ssm_parameter" "fundraising_db_pass" {
+  name  = "/${local.environment}/fundraising/db_pass"
+  type  = "SecureString"
+  value = random_password.fundraising_db_pass.result
+}
+
+// Create postgres role and db
 resource "postgresql_role" "fundraising" {
-  name     = "fundraising_${random_string.fundraising_db_user.result}"
+  name     = "fundraising_${aws_ssm_parameter.fundraising_db_user.value}"
   login    = true
-  password = random_password.fundraising_db_pass.result
+  password = aws_ssm_parameter.fundraising_db_pass.value
 }
 
 resource "postgresql_database" "fundraising" {
   name  = "fundraising_${local.environment}"
-  owner = "fundraising_${random_string.fundraising_db_user.result}"
+  owner = "fundraising_${aws_ssm_parameter.fundraising_db_user.value}"
 }
