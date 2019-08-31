@@ -5,3 +5,7 @@ output "fundraising_db_user" {
 output "fundraising_db_pass" {
   value = random_password.fundraising_db_pass.result
 }
+
+output "fundraising_db_name" {
+  value = "fundraising_${local.environment}"
+}

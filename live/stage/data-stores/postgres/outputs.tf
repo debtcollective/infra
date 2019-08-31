@@ -9,3 +9,11 @@ output "db_port" {
 output "db_name" {
   value = module.postgres.db_name
 }
+
+output "ssm_master_user_key" {
+  value = module.postgres.ssm_master_user_key
+}
+
+output "ssm_master_pass_key" {
+  value = module.postgres.ssm_master_pass_key
+}
