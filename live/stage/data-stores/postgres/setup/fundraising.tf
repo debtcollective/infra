@@ -5,8 +5,9 @@ resource "random_string" "fundraising_db_user" {
 }
 
 resource "random_password" "fundraising_db_pass" {
-  length           = 16
+  length           = 20
   special          = true
+  min_special      = 1
   override_special = "/@\" "
 }
 
@@ -14,7 +15,7 @@ resource "random_password" "fundraising_db_pass" {
 resource "aws_ssm_parameter" "fundraising_db_user" {
   name  = "/${local.environment}/services/fundraising/db_user"
   type  = "String"
-  value = random_string.fundraising_db_user.result
+  value = "fundraising_${random_string.fundraising_db_user.result}"
 }
 
 resource "aws_ssm_parameter" "fundraising_db_pass" {
@@ -25,12 +26,13 @@ resource "aws_ssm_parameter" "fundraising_db_pass" {
 
 // Create postgres role and db
 resource "postgresql_role" "fundraising" {
-  name     = "fundraising_${aws_ssm_parameter.fundraising_db_user.value}"
-  login    = true
-  password = aws_ssm_parameter.fundraising_db_pass.value
+  name                = aws_ssm_parameter.fundraising_db_user.value
+  login               = true
+  password            = aws_ssm_parameter.fundraising_db_pass.value
+  skip_reassign_owned = true
 }
 
 resource "postgresql_database" "fundraising" {
   name  = "fundraising_${local.environment}"
-  owner = "fundraising_${aws_ssm_parameter.fundraising_db_user.value}"
+  owner = aws_ssm_parameter.fundraising_db_user.value
 }
