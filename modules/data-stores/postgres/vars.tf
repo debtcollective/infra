@@ -4,7 +4,8 @@ variable "remote_state_organization" {
 }
 
 variable "vpc_remote_state_workspace" {
-  type = string
+  default = "stage-network"
+  type    = string
 }
 
 variable "environment" {

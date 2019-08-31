@@ -1,38 +1,39 @@
-// VPC ID
 output "vpc_id" {
-  value = module.vpc.vpc_id
+  description = "VPC ID"
+  value       = module.vpc.vpc_id
 }
 
-// EC2 Security group ID
 output "ec2_security_group_id" {
-  value = module.vpc.ec2_security_group_id
+  description = "EC2 Security group ID"
+  value       = module.vpc.ec2_security_group_id
 }
 
-// ELB Security group ID
 output "elb_security_group_id" {
-  value = module.vpc.elb_security_group_id
+  description = "ELB Security group ID"
+  value       = module.vpc.elb_security_group_id
 }
 
-// RDS Security group ID
 output "rds_security_group_id" {
-  value = module.vpc.rds_security_group_id
+  description = "RDS Security group ID"
+  value       = module.vpc.rds_security_group_id
 }
 
-// Redis Security group ID
 output "redis_security_group_id" {
-  value = module.vpc.redis_security_group_id
+  description = "Redis Security group ID"
+  value       = module.vpc.redis_security_group_id
 }
 
-// VPC Public subnet IDs
 output "public_subnet_ids" {
-  value = module.vpc.private_subnet_ids
+  description = "VPC Public subnet IDs"
+  value       = module.vpc.public_subnet_ids
 }
 
-// VPC Private subnet IDs
 output "private_subnet_ids" {
-  value = module.vpc.private_subnet_ids
+  description = "VPC Private subnet IDs"
+  value       = module.vpc.private_subnet_ids
 }
 
 output "ssh_key_pair_name" {
-  value = aws_key_pair.ssh.key_name
+  description = "SSH key pair name"
+  value       = aws_key_pair.ssh.key_name
 }

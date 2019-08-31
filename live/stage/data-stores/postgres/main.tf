@@ -19,8 +19,6 @@ module "postgres" {
   source      = "../../../../modules/data-stores/postgres"
   environment = "stage"
 
-  remote_state_organization  = "debtcollective"
-  vpc_remote_state_workspace = "stage-network"
-  db_username                = var.db_username
-  db_password                = var.db_password
+  db_username = var.db_username
+  db_password = var.db_password
 }

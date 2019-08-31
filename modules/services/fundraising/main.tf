@@ -45,7 +45,7 @@ data "aws_acm_certificate" "domain" {
 
 resource "aws_lb" "fundraising" {
   name_prefix     = local.name_prefix
-  security_groups = [var.elb_security_groups]
+  security_groups = var.elb_security_groups
   subnets         = var.subnet_ids
 }
 
@@ -110,9 +110,9 @@ module "autoscaling" {
   cluster_name            = aws_ecs_cluster.fundraising.name
   key_name                = var.key_name
   iam_instance_profile_id = var.iam_instance_profile_id
-  security_groups         = [var.security_groups]
+  security_groups         = var.security_groups
   instance_type           = var.instance_type
-  subnet_ids              = [var.subnet_ids]
+  subnet_ids              = var.subnet_ids
 }
 
 module "container_definitions" {
