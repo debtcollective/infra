@@ -21,11 +21,7 @@
 
 data "aws_ami" "ecs_ami" {
   most_recent = true
-
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
+  owners      = ["amazon"]
 
   filter {
     name   = "virtualization-type"
@@ -41,7 +37,7 @@ data "aws_ami" "ecs_ami" {
 data "template_file" "user_data" {
   template = file("${path.module}/user_data.sh")
 
-  vars {
+  vars = {
     environment  = var.environment
     cluster_name = var.cluster_name
   }
@@ -53,7 +49,7 @@ resource "aws_launch_configuration" "lc" {
   image_id             = data.aws_ami.ecs_ami.id
   instance_type        = var.instance_type
   key_name             = var.key_name
-  security_groups      = [var.security_groups]
+  security_groups      = var.security_groups
   user_data            = data.template_file.user_data.rendered
 
   lifecycle {
@@ -66,5 +62,5 @@ resource "aws_autoscaling_group" "asg" {
   min_size             = var.asg_min_size
   max_size             = var.asg_max_size
   health_check_type    = "ELB"
-  vpc_zone_identifier  = [var.subnet_ids]
+  vpc_zone_identifier  = var.subnet_ids
 }

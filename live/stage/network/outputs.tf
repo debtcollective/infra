@@ -32,3 +32,7 @@ output "public_subnet_ids" {
 output "private_subnet_ids" {
   value = module.vpc.private_subnet_ids
 }
+
+output "ssh_key_pair_name" {
+  value = aws_key_pair.ssh.key_name
+}

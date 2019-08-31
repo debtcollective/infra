@@ -15,9 +15,19 @@ provider "aws" {
   version = "~> 2.0"
 }
 
+locals {
+  environment = "stage"
+}
+
 module "vpc" {
   source = "../../../modules/network/vpc"
 
   name        = "next"
-  environment = "stage"
+  environment = local.environment
+}
+
+// create aws key pair to be used
+resource "aws_key_pair" "ssh" {
+  key_name   = "${local.environment}-kp"
+  public_key = var.ssh_public_key
 }

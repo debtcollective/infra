@@ -10,10 +10,6 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-data "aws_subnet_ids" "default" {
-  vpc_id = local.vpc_id
-}
-
 locals {
   vpc_id                 = data.terraform_remote_state.vpc.outputs.vpc_id
   subnet_ids             = data.terraform_remote_state.vpc.outputs.private_subnet_ids

@@ -2,31 +2,9 @@ variable "environment" {
   description = "Environment name"
 }
 
-variable "image" {
+variable "container_image" {
   description = "Docker image name"
   default     = "debtcollective/fundraising:latest"
-}
-
-variable "db_host" {
-  description = "Database Host URL"
-}
-
-variable "db_username" {
-  description = "Database Username"
-}
-
-variable "db_password" {
-  description = "Database Password"
-}
-
-variable "db_port" {
-  description = "Database Port"
-  default     = "5432"
-}
-
-variable "db_name" {
-  description = "Database name"
-  default     = "metabase"
 }
 
 variable "key_name" {
@@ -78,4 +56,9 @@ variable "elb_security_groups" {
 variable "instance_type" {
   description = "Instance type Launch Configuration"
   default     = "t2.small"
+}
+
+// Fundraising app variables
+variable "database_url" {
+  description = "Postgres database URL"
 }

@@ -1,5 +1,6 @@
 variable "remote_state_organization" {
-  type = string
+  default = "debtcollective"
+  type    = string
 }
 
 variable "vpc_remote_state_workspace" {
