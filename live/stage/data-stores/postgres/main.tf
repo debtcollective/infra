@@ -19,6 +19,9 @@ module "postgres" {
   source      = "../../../../modules/data-stores/postgres"
   environment = "stage"
 
-  db_username = var.db_username
-  db_password = var.db_password
+  db_password            = var.db_password
+  db_username            = var.db_username
+  subnet_ids             = local.subnet_ids
+  vpc_id                 = local.vpc_id
+  vpc_security_group_ids = local.vpc_security_group_ids
 }
