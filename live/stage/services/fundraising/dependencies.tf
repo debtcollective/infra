@@ -60,7 +60,7 @@ locals {
   db_address   = data.terraform_remote_state.postgres.outputs.db_address
   db_port      = data.terraform_remote_state.postgres.outputs.db_port
   db_name      = data.terraform_remote_state.postgres_setup.outputs.fundraising_db_name
-  database_url = "postgres://${local.db_user}:${local.db_pass}@${local.db_address}:${local.db_port}/${local.db_name}"
+  database_url = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
 
   acm_certificate_domain                = "*.debtcollective.org"
   ec2_security_group_id                 = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
@@ -76,5 +76,3 @@ locals {
   iam_remote_state_workspace            = "global-iam"
   vpc_remote_state_workspace            = "stage-network"
 }
-
-***REMOVED***

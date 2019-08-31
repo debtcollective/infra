@@ -1,14 +1,14 @@
 // Generate random username and password
 resource "random_string" "fundraising_db_user" {
-  length           = 16
-  override_special = "/@\" "
+  length  = 16
+  special = false
 }
 
 resource "random_password" "fundraising_db_pass" {
   length           = 20
   special          = true
   min_special      = 1
-  override_special = "/@\" "
+  override_special = "~*$^\\"
 }
 
 // Store both in SSM

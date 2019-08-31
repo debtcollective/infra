@@ -123,10 +123,17 @@ module "container_definitions" {
   essential                    = true
   container_image              = var.container_image
 
+  environment = [
+    {
+      name : "RAILS_ENV",
+      value : var.database_url
+    }
+  ]
+
   secrets = [
     {
       name : "DATABASE_URL",
-      value : var.database_url
+      value : var.environment
     }
   ]
 
