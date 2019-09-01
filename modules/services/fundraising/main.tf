@@ -119,21 +119,20 @@ module "container_definitions" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.15.0"
 
   container_name               = local.container_name
-  container_memory_reservation = 512
+  container_cpu                = 512
+  container_memory             = 1024
+  container_memory_reservation = 500
   essential                    = true
   container_image              = var.container_image
 
   environment = [
     {
-      name : "RAILS_ENV",
-      value : var.database_url
-    }
-  ]
-
-  secrets = [
+      name  = "RAILS_ENV",
+      value = "staging"
+    },
     {
-      name : "DATABASE_URL",
-      value : var.environment
+      name  = "DATABASE_URL",
+      value = var.database_url
     }
   ]
 
