@@ -67,7 +67,7 @@ locals {
   elb_security_group_id                 = data.terraform_remote_state.vpc.outputs.elb_security_group_id
   iam_instance_profile_id               = data.terraform_remote_state.iam.outputs.instance_profile_id
   ssh_key_pair_name                     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
-  subnet_ids                            = data.terraform_remote_state.vpc.outputs.private_subnet_ids
+  subnet_ids                            = data.terraform_remote_state.vpc.outputs.public_subnet_ids
   vpc_id                                = data.terraform_remote_state.vpc.outputs.vpc_id
   vpc_security_group_ids                = [data.terraform_remote_state.vpc.outputs.rds_security_group_id]
   postgres_remote_state_workspace       = "stage-postgres"

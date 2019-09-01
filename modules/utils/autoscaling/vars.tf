@@ -31,7 +31,7 @@ variable "asg_min_size" {
 
 variable "asg_max_size" {
   description = "Auto Scaling Group maximum size for the cluster"
-  default     = 1
+  default     = 2
 }
 
 variable "asg_desired_count" {
