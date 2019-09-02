@@ -33,9 +33,11 @@
  */
 locals {
   container_name = "fundraising"
-  container_port = "3000"
+  container_port = "5000"
   name_prefix    = "fr-${substr(var.environment, 0, 2)}-"
 }
+
+data "aws_region" "current" {}
 
 // Load balancer
 data "aws_acm_certificate" "domain" {
@@ -115,6 +117,16 @@ module "autoscaling" {
   subnet_ids              = var.subnet_ids
 }
 
+resource "aws_cloudwatch_log_group" "fundraising" {
+  name = "${var.environment}-fundraising-lg"
+
+  tags = {
+    Environment = var.environment
+    Application = "fundraising"
+    Terraform   = true
+  }
+}
+
 module "container_definitions" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.15.0"
 
@@ -124,8 +136,6 @@ module "container_definitions" {
   container_memory_reservation = 479
   essential                    = true
   container_image              = var.container_image
-  log_driver                   = "none"
-  log_options                  = {}
 
   environment = [
     {
@@ -143,6 +153,12 @@ module "container_definitions" {
       containerPort = local.container_port
     }
   ]
+
+  log_driver = "awslogs"
+  log_options = {
+    "awslogs-region" = data.aws_region.current.name
+    "awslogs-group"  = aws_cloudwatch_log_group.fundraising.name
+  }
 }
 
 // Create ECS cluster
