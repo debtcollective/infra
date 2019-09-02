@@ -8,4 +8,5 @@ output "fundraising_db_pass_ssm_key" {
 
 output "fundraising_db_name" {
   value = "fundraising_${local.environment}"
+
 }

@@ -119,11 +119,13 @@ module "container_definitions" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.15.0"
 
   container_name               = local.container_name
-  container_cpu                = 512
-  container_memory             = 1024
-  container_memory_reservation = 500
+  container_cpu                = 0
+  container_memory             = 0
+  container_memory_reservation = 479
   essential                    = true
   container_image              = var.container_image
+  log_driver                   = "none"
+  log_options                  = {}
 
   environment = [
     {

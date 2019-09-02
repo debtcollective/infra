@@ -55,7 +55,7 @@ variable "elb_security_groups" {
 
 variable "instance_type" {
   description = "Instance type Launch Configuration"
-  default     = "t2.small"
+  default     = "t3.micro"
 }
 
 // Fundraising app variables
