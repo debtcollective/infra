@@ -36,3 +36,11 @@ resource "postgresql_database" "fundraising" {
   name  = "fundraising_${local.environment}"
   owner = aws_ssm_parameter.fundraising_db_user.value
 }
+
+resource postgresql_grant "all" {
+  database    = postgresql_database.fundraising.name
+  role        = postgresql_role.fundraising.name
+  schema      = "public"
+  object_type = "table"
+  privileges  = ["ALL"]
+}
