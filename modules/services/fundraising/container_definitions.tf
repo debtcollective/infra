@@ -32,7 +32,10 @@ module "container_definitions" {
       name  = "RAILS_LOG_TO_STDOUT",
       value = true
     },
-
+    {
+      name  = "RAILS_SERVE_STATIC_FILES",
+      value = true
+    },
     {
       name  = "DATABASE_URL",
       value = var.database_url
