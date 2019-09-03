@@ -6,7 +6,7 @@ terraform {
     organization = "debtcollective"
 
     workspaces {
-      name = "stage-network"
+      name = "stage-bastion"
     }
   }
 }
@@ -19,15 +19,11 @@ locals {
   environment = "stage"
 }
 
-module "vpc" {
-  source = "../../../modules/network/vpc"
-
-  name        = "next"
+module "bastion" {
+  source      = "../../../../modules/services/bastion"
   environment = local.environment
-}
 
-// create aws key pair to be used
-resource "aws_key_pair" "ssh" {
-  key_name   = "${local.environment}-kp"
-  public_key = var.ssh_public_key
+  key_name               = local.ssh_key_pair_name
+  subnet_id              = local.subnet_id
+  vpc_security_group_ids = [local.ec2_security_group_id]
 }
