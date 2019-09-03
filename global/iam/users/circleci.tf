@@ -29,15 +29,7 @@ data "aws_iam_policy_document" "circleci_policy_document" {
 
   statement {
     actions = [
-      "ecs:ListClusters",
-      "ecs:DescribeCluster",
-      "ecs:DescribeContainerInstances",
-      "ecs:DescribeTasks",
-      "ecs:ListTasks",
-      "ecs:UpdateContainerAgent",
-      "ecs:StartTask",
-      "ecs:StopTask",
-      "ecs:RunTask"
+      "ecs:*",
     ]
 
     resources = ["*"]

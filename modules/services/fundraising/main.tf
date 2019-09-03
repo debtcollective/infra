@@ -138,7 +138,7 @@ resource "aws_ecs_task_definition" "fundraising" {
 
 // Create ECS service
 resource "aws_ecs_service" "fundraising" {
-  name            = "fundraising-${var.environment}"
+  name            = "fundraising"
   cluster         = aws_ecs_cluster.fundraising.id
   task_definition = aws_ecs_task_definition.fundraising.arn
   desired_count   = var.desired_count
