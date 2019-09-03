@@ -43,3 +43,9 @@ variable "subnet_ids" {
   description = "VPC subnets id to deploy instance on"
   type        = "list"
 }
+
+variable "tags" {
+  description = "Tags to be passed to autoscaling group"
+  default     = []
+  type        = "list"
+}

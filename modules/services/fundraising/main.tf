@@ -115,6 +115,14 @@ module "autoscaling" {
   security_groups         = var.security_groups
   instance_type           = var.instance_type
   subnet_ids              = var.subnet_ids
+
+  tags = [
+    {
+      key                 = "Name"
+      value               = "fundraising-${var.environment}-instance"
+      propagate_at_launch = true
+    },
+  ]
 }
 
 // Create ECS cluster

@@ -26,8 +26,13 @@ module "container_definitions" {
   environment = [
     {
       name  = "RAILS_ENV",
-      value = "staging"
+      value = "production"
     },
+    {
+      name  = "RAILS_LOG_TO_STDOUT",
+      value = true
+    },
+
     {
       name  = "DATABASE_URL",
       value = var.database_url

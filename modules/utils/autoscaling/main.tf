@@ -15,9 +15,31 @@
  *  iam_instance_profile_id = var.iam_instance_profile_id
  *  security_groups         = var.security_groups
  *  instance_type           = var.instance_type
+ *  tags = [
+ *    {
+ *      key = "Terraform"
+ *      value = true
+ *      propagate_at_launch = true
+ *    }
+ *  ]
  *}
  *```
  */
+
+locals {
+  default_asg_tags = [
+    {
+      key                 = "Environment"
+      value               = var.environment
+      propagate_at_launch = true
+    },
+    {
+      key                 = "Terraform"
+      value               = true
+      propagate_at_launch = true
+    },
+  ]
+}
 
 data "aws_ami" "ecs_ami" {
   most_recent = true
@@ -63,4 +85,6 @@ resource "aws_autoscaling_group" "asg" {
   max_size             = var.asg_max_size
   health_check_type    = "ELB"
   vpc_zone_identifier  = var.subnet_ids
+
+  tags = concat(local.default_asg_tags, var.tags)
 }
