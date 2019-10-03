@@ -31,7 +31,7 @@
 locals {
   container_name = "disputes_api"
   container_port = "4000"
-  name_prefix    = "dapi-${substr(var.environment, 0, 2)}-"
+  name_prefix    = "da-${substr(var.environment, 0, 2)}-"
 }
 
 data "aws_region" "current" {}
