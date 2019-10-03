@@ -37,7 +37,7 @@ resource "postgresql_database" "fundraising" {
   owner = aws_ssm_parameter.fundraising_db_user.value
 }
 
-resource postgresql_grant "all" {
+resource postgresql_grant "fundraising" {
   database    = postgresql_database.fundraising.name
   role        = postgresql_role.fundraising.name
   schema      = "public"
