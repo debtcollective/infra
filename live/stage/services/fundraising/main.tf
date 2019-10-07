@@ -24,6 +24,7 @@ module "fundraising" {
   environment = local.environment
 
   database_url = local.database_url
+  redis_url    = local.redis_url
 
   acm_certificate_domain = local.acm_certificate_domain
   elb_security_groups    = [local.elb_security_group_id]

@@ -43,7 +43,11 @@ module "container_definitions" {
     {
       name  = "SECRET_KEY_BASE",
       value = random_string.secret_key_base.result
-    }
+    },
+    {
+      name  = "REDIS_URL",
+      value = var.redis_url
+    },
   ]
 
   port_mappings = [
