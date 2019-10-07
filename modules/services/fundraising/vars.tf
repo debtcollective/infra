@@ -62,3 +62,7 @@ variable "instance_type" {
 variable "database_url" {
   description = "Postgres database URL"
 }
+
+variable "redis_url" {
+  description = "Redis URL used for cache and Sidekiq"
+}
