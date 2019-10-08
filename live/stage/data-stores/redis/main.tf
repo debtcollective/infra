@@ -24,6 +24,7 @@ module "redis" {
   stage  = "stage"
   name   = "redis"
 
+  # This is the security groups that will have access to Redis
   security_groups             = local.vpc_security_group_ids
   vpc_id                      = local.vpc_id
   subnets                     = local.subnet_ids
