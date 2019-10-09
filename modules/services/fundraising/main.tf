@@ -57,6 +57,10 @@ resource "aws_lb_target_group" "fundraising" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
+  health_check {
+    path = "/health-check"
+  }
+
   lifecycle {
     create_before_destroy = true
   }
