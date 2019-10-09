@@ -76,7 +76,7 @@ locals {
   redis_host   = data.terraform_remote_state.redis.outputs.host
   redis_port   = data.terraform_remote_state.redis.outputs.port
   database_url = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
-  redis_url    = "redis://${local.redis_host}:${local.redis_port}"
+  redis_url    = "redis://${local.redis_host}:${local.redis_port}/0"
 
   acm_certificate_domain                = "*.debtcollective.org"
   ec2_security_group_id                 = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
@@ -91,5 +91,4 @@ locals {
   subnet_ids                            = data.terraform_remote_state.vpc.outputs.public_subnet_ids
   vpc_id                                = data.terraform_remote_state.vpc.outputs.vpc_id
   vpc_remote_state_workspace            = "stage-network"
-  vpc_security_group_ids                = [data.terraform_remote_state.vpc.outputs.rds_security_group_id]
 }

@@ -26,21 +26,36 @@ resource "aws_ssm_parameter" "fundraising_db_pass" {
 
 // Create postgres role and db
 resource "postgresql_role" "fundraising" {
-  name                = aws_ssm_parameter.fundraising_db_user.value
-  login               = true
-  password            = aws_ssm_parameter.fundraising_db_pass.value
-  skip_reassign_owned = true
+  login    = true
+  name     = aws_ssm_parameter.fundraising_db_user.value
+  password = aws_ssm_parameter.fundraising_db_pass.value
+  roles    = [local.master_db_user]
 }
 
 resource "postgresql_database" "fundraising" {
-  name  = "fundraising_${local.environment}"
-  owner = aws_ssm_parameter.fundraising_db_user.value
+  name       = "fundraising_${local.environment}"
+  owner      = local.master_db_user
+  lc_collate = "en_US.UTF-8"
+  lc_ctype   = "en_US.UTF-8"
+  encoding   = "UTF8"
 }
 
-resource postgresql_grant "fundraising" {
+resource "postgresql_default_privileges" "fundraising_tables" {
   database    = postgresql_database.fundraising.name
+  depends_on  = ["postgresql_database.fundraising", "postgresql_role.fundraising"]
+  object_type = "table"
+  owner       = local.master_db_user
+  privileges  = local.table_privileges
   role        = postgresql_role.fundraising.name
   schema      = "public"
-  object_type = "table"
-  privileges  = ["ALL"]
+}
+
+resource "postgresql_default_privileges" "fundraising_sequence" {
+  database    = postgresql_database.fundraising.name
+  depends_on  = ["postgresql_database.fundraising", "postgresql_role.fundraising"]
+  object_type = "sequence"
+  owner       = local.master_db_user
+  privileges  = local.sequence_privileges
+  role        = postgresql_role.fundraising.name
+  schema      = "public"
 }

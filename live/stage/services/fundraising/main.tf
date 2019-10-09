@@ -23,17 +23,16 @@ module "fundraising" {
   source      = "../../../../modules/services/fundraising"
   environment = local.environment
 
-  database_url = local.database_url
-  redis_url    = local.redis_url
-
-  acm_certificate_domain = local.acm_certificate_domain
-  elb_security_groups    = [local.elb_security_group_id]
-  vpc_id                 = local.vpc_id
-
+  acm_certificate_domain  = local.acm_certificate_domain
+  elb_security_groups     = [local.elb_security_group_id]
+  vpc_id                  = local.vpc_id
   key_name                = local.ssh_key_pair_name
   iam_instance_profile_id = local.iam_instance_profile_id
   subnet_ids              = local.subnet_ids
   security_groups         = [local.ec2_security_group_id]
+
+  database_url = local.database_url
+  redis_url    = local.redis_url
 }
 
 data "aws_route53_zone" "primary" {
