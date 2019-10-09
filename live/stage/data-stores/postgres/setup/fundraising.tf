@@ -26,8 +26,8 @@ resource "aws_ssm_parameter" "fundraising_db_pass" {
 
 // Create postgres role and db
 resource "postgresql_role" "fundraising" {
-  name     = aws_ssm_parameter.fundraising_db_user.value
   login    = true
+  name     = aws_ssm_parameter.fundraising_db_user.value
   password = aws_ssm_parameter.fundraising_db_pass.value
   roles    = [local.master_db_user]
 }
@@ -45,7 +45,7 @@ resource "postgresql_default_privileges" "fundraising_tables" {
   depends_on  = ["postgresql_database.fundraising", "postgresql_role.fundraising"]
   object_type = "table"
   owner       = local.master_db_user
-  privileges  = ["ALL"]
+  privileges  = local.table_privileges
   role        = postgresql_role.fundraising.name
   schema      = "public"
 }
@@ -55,7 +55,7 @@ resource "postgresql_default_privileges" "fundraising_sequence" {
   depends_on  = ["postgresql_database.fundraising", "postgresql_role.fundraising"]
   object_type = "sequence"
   owner       = local.master_db_user
-  privileges  = ["ALL"]
+  privileges  = local.sequence_privileges
   role        = postgresql_role.fundraising.name
   schema      = "public"
 }

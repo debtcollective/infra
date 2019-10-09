@@ -29,18 +29,34 @@ resource "postgresql_role" "disputes_api" {
   name                = aws_ssm_parameter.disputes_api_db_user.value
   login               = true
   password            = aws_ssm_parameter.disputes_api_db_pass.value
+  roles               = [local.master_db_user]
   skip_reassign_owned = true
 }
 
 resource "postgresql_database" "disputes_api" {
-  name  = "disputes_api_${local.environment}"
-  owner = aws_ssm_parameter.disputes_api_db_user.value
+  name       = "disputes_api_${local.environment}"
+  owner      = local.master_db_user
+  lc_collate = "en_US.UTF-8"
+  lc_ctype   = "en_US.UTF-8"
+  encoding   = "UTF8"
 }
 
-resource postgresql_grant "disputes_api" {
+resource "postgresql_default_privileges" "disputes_api_tables" {
   database    = postgresql_database.disputes_api.name
+  depends_on  = ["postgresql_database.disputes_api", "postgresql_role.disputes_api"]
+  object_type = "table"
+  owner       = local.master_db_user
+  privileges  = local.table_privileges
   role        = postgresql_role.disputes_api.name
   schema      = "public"
-  object_type = "table"
-  privileges  = ["ALL"]
+}
+
+resource "postgresql_default_privileges" "disputes_api_sequence" {
+  database    = postgresql_database.disputes_api.name
+  depends_on  = ["postgresql_database.disputes_api", "postgresql_role.disputes_api"]
+  object_type = "sequence"
+  owner       = local.master_db_user
+  privileges  = local.sequence_privileges
+  role        = postgresql_role.disputes_api.name
+  schema      = "public"
 }
