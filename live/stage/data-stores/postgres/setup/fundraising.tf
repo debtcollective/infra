@@ -34,13 +34,25 @@ resource "postgresql_role" "fundraising" {
 
 resource "postgresql_database" "fundraising" {
   name  = "fundraising_${local.environment}"
-  owner = aws_ssm_parameter.fundraising_db_user.value
+  owner = local.master_db_user
 }
 
-resource postgresql_grant "fundraising" {
-  database    = postgresql_database.fundraising.name
-  role        = postgresql_role.fundraising.name
-  schema      = "public"
+resource "postgresql_default_privileges" "fundraising_tables" {
+  role     = postgresql_role.fundraising.name
+  database = postgresql_database.fundraising.name
+  schema   = "public"
+
+  owner       = local.master_db_user
   object_type = "table"
+  privileges  = ["ALL"]
+}
+
+resource "postgresql_default_privileges" "fundraising_sequence" {
+  role     = postgresql_role.fundraising.name
+  database = postgresql_database.fundraising.name
+  schema   = "public"
+
+  owner       = local.master_db_user
+  object_type = "sequence"
   privileges  = ["ALL"]
 }

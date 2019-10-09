@@ -48,6 +48,10 @@ module "container_definitions" {
       name  = "REDIS_URL",
       value = var.redis_url
     },
+    {
+      name  = "PORT",
+      value = local.container_port
+    }
   ]
 
   port_mappings = [

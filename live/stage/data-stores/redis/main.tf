@@ -31,8 +31,8 @@ module "redis" {
   instance_type               = "cache.t2.micro"
   engine_version              = "4.0.10"
   alarm_cpu_threshold_percent = 90
-  # https://github.com/cloudposse/terraform-aws-elasticache-redis/pull/42#issuecomment-525342971
-  auth_token         = null
-  availability_zones = data.aws_availability_zones.available.names
-  automatic_failover = false
+  transit_encryption_enabled  = false
+  auth_token                  = null
+  availability_zones          = data.aws_availability_zones.available.names
+  automatic_failover          = false
 }
