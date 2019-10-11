@@ -41,12 +41,28 @@ module "container_definitions" {
       value = var.database_url
     },
     {
+      name  = "DISCOURSE_LOGIN_URL",
+      value = var.discourse_login_url
+    },
+    {
+      name  = "DISCOURSE_SIGNUP_URL",
+      value = var.discourse_signup_url
+    },
+    {
       name  = "SECRET_KEY_BASE",
       value = random_string.secret_key_base.result
     },
     {
       name  = "REDIS_URL",
       value = var.redis_url
+    },
+    {
+      name  = "SSO_COOKIE_NAME",
+      value = var.sso_cookie_name
+    },
+    {
+      name  = "SSO_JWT_SECRET",
+      value = var.sso_jwt_secret
     },
     {
       name  = "PORT",
