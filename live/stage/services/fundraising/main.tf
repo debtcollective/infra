@@ -31,8 +31,12 @@ module "fundraising" {
   subnet_ids              = local.subnet_ids
   security_groups         = [local.ec2_security_group_id]
 
-  database_url = local.database_url
-  redis_url    = local.redis_url
+  database_url         = local.database_url
+  discourse_login_url  = local.discourse_login_url
+  discourse_signup_url = local.discourse_signup_url
+  redis_url            = local.redis_url
+  sso_cookie_name      = local.sso_cookie_name
+  sso_jwt_secret       = local.sso_jwt_secret
 }
 
 data "aws_route53_zone" "primary" {
