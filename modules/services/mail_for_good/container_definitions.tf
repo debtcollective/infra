@@ -54,19 +54,19 @@ module "container_definitions" {
     },
     {
       name  = "PSQL_HOST",
-      value = var.database_host
+      value = var.db_host
     },
     {
       name  = "PSQL_USERNAME",
-      value = var.database_username
+      value = var.db_user
     },
     {
       name  = "PSQL_PASSWORD",
-      value = var.database_password
+      value = var.db_pass
     },
     {
       name  = "PSQL_DATABASE",
-      value = var.database_name
+      value = var.db_name
     },
     {
       name  = "REDIS_HOST",

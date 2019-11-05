@@ -63,7 +63,7 @@ variable "db_user" {
   description = "Postgres database user"
 }
 
-variable "db_password" {
+variable "db_pass" {
   description = "Postgres database password"
 }
 
@@ -92,7 +92,7 @@ variable "google_consumer_key" {
   description = "Consumer key for oauth login"
 }
 
-variable "google_secret_key" {
+variable "google_consumer_secret" {
   description = "Secret key for oauth login"
 }
 

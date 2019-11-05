@@ -21,6 +21,44 @@ locals {
   fqdn        = "mfg.debtcollective.org"
 }
 
+// Create user and access key
+resource "aws_iam_user" "mfg" {
+  name = "mfg_${local.environment}"
+  path = "/service_accounts/${local.environment}/"
+
+  tags = {
+    Terraform = true
+  }
+}
+
+resource "aws_iam_access_key" "mfg" {
+  user    = aws_iam_user.mfg.name
+  pgp_key = "keybase:orlando"
+}
+
+
+resource "aws_iam_user_policy" "mfg" {
+  name = "mail_for_good"
+  user = "${aws_iam_user.mfg.name}"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "sqs:*",
+        "ses:*",
+        "sns:*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
 module "mail_for_good" {
   source      = "../../../../modules/services/mail_for_good"
   environment = local.environment
@@ -34,14 +72,14 @@ module "mail_for_good" {
   security_groups         = [local.ec2_security_group_id]
 
   db_user                  = local.db_user
-  db_password              = local.db_pass
+  db_pass                  = local.db_pass
   db_host                  = local.db_address
   db_name                  = local.db_name
   domain                   = local.domain
   google_consumer_key      = local.google_consumer_key
-  google_secret_key        = local.google_secret_key
-  amazon_access_key_id     = local.amazon_access_key_id
-  amazon_secret_access_key = local.amazon_secret_access_key
+  google_consumer_secret   = local.google_consumer_secret
+  amazon_access_key_id     = aws_iam_access_key.mfg.id
+  amazon_secret_access_key = aws_iam_access_key.mfg.secret
   redis_host               = local.redis_host
   redis_port               = local.redis_port
 }

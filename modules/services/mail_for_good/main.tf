@@ -17,7 +17,7 @@
  *  image       = "${var.image}"
  *
  *  db_username = "${var.db_username}"
- *  db_password = "${var.db_password}"
+ *  db_pass     = "${var.db_pass}"
  *  db_host     = "${var.db_host}"
  *  db_port     = "${var.db_port}"
  *  db_name     = "${var.db_name}"
@@ -34,7 +34,7 @@
 locals {
   container_name = "mail_for_good"
   container_port = "8080"
-  name_prefix    = "mfg-${substr(var.environment, 0, 2)}-"
+  name_prefix    = "mg-${substr(var.environment, 0, 2)}-"
 }
 
 data "aws_region" "current" {}
