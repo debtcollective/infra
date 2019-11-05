@@ -59,24 +59,29 @@ variable "instance_type" {
 }
 
 // Mail for good app variables
-variable "database_user" {
+variable "db_user" {
   description = "Postgres database user"
 }
 
-variable "database_password" {
+variable "db_password" {
   description = "Postgres database password"
 }
 
-variable "database_name" {
+variable "db_name" {
   description = "Postgres database name"
 }
 
-variable "database_host" {
+variable "db_host" {
   description = "Postgres database host"
 }
 
-variable "redis_url" {
-  description = "Redis URL"
+variable "redis_host" {
+  description = "Redis host"
+}
+
+variable "redis_port" {
+  description = "Redis port"
+  default     = "6379"
 }
 
 variable "domain" {

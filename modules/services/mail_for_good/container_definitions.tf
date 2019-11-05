@@ -69,6 +69,14 @@ module "container_definitions" {
       value = var.database_name
     },
     {
+      name  = "REDIS_HOST",
+      value = var.redis_host
+    },
+    {
+      name  = "REDIS_PORT",
+      value = var.redis_port
+    },
+    {
       name  = "ENCRYPTION_PASSWORD",
       value = random_string.encryption_password.result
     },

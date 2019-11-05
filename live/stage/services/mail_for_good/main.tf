@@ -33,16 +33,17 @@ module "mail_for_good" {
   subnet_ids              = local.subnet_ids
   security_groups         = [local.ec2_security_group_id]
 
-  database_user            = local.database_user
-  database_password        = local.database_password
-  database_host            = local.database_host
-  database_name            = local.database_name
+  db_user                  = local.db_user
+  db_password              = local.db_password
+  db_host                  = local.db_address
+  db_name                  = local.db_name
   domain                   = local.domain
   google_consumer_key      = local.google_consumer_key
   google_secret_key        = local.google_secret_key
   amazon_access_key_id     = local.amazon_access_key_id
   amazon_secret_access_key = local.amazon_secret_access_key
-  redis_url                = local.redis_url
+  redis_host               = local.redis_host
+  redis_port               = local.redis_port
 }
 
 data "aws_route53_zone" "primary" {
