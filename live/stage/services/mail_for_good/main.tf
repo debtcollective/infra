@@ -34,7 +34,7 @@ module "mail_for_good" {
   security_groups         = [local.ec2_security_group_id]
 
   db_user                  = local.db_user
-  db_password              = local.db_password
+  db_password              = local.db_pass
   db_host                  = local.db_address
   db_name                  = local.db_name
   domain                   = local.domain
