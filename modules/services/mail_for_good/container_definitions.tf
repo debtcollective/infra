@@ -37,18 +37,6 @@ module "container_definitions" {
       value = "https://${var.domain}"
     },
     {
-      name  = "GOOGLE_CONSUMER_KEY",
-      value = var.google_consumer_key
-    },
-    {
-      name  = "GOOGLE_CONSUMER_SECRET",
-      value = var.google_consumer_secret
-    },
-    {
-      name  = "GOOGLE_CALLBACK",
-      value = "https://${var.domain}/auth/google/callback"
-    },
-    {
       name  = "AMAZON_ACCESS_KEY_ID",
       value = var.amazon_access_key_id
     },

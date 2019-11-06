@@ -58,7 +58,7 @@ resource "aws_lb_target_group" "mail_for_good" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/"
+    path = "/login"
   }
 
   lifecycle {

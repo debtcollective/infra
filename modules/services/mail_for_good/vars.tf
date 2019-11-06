@@ -88,14 +88,6 @@ variable "domain" {
   description = "Fully Qualified Domain Name"
 }
 
-variable "google_consumer_key" {
-  description = "Consumer key for oauth login"
-}
-
-variable "google_consumer_secret" {
-  description = "Secret key for oauth login"
-}
-
 variable "amazon_access_key_id" {
   description = "AWS SES access key"
 }

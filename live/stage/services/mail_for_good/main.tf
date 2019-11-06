@@ -76,8 +76,6 @@ module "mail_for_good" {
   db_pass                  = local.db_pass
   db_user                  = local.db_user
   domain                   = aws_route53_record.mail_for_good.fqdn
-  google_consumer_key      = local.google_consumer_key
-  google_consumer_secret   = local.google_consumer_secret
   redis_host               = local.redis_host
   redis_port               = local.redis_port
 }

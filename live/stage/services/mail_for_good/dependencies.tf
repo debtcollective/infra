@@ -68,15 +68,13 @@ data "aws_ssm_parameter" "db_pass" {
 }
 
 locals {
-  db_address             = data.terraform_remote_state.postgres.outputs.db_address
-  db_name                = data.terraform_remote_state.postgres_setup.outputs.mail_for_good_db_name
-  db_pass                = data.aws_ssm_parameter.db_pass.value
-  db_port                = data.terraform_remote_state.postgres.outputs.db_port
-  db_user                = data.aws_ssm_parameter.db_user.value
-  google_consumer_key    = var.google_consumer_key
-  google_consumer_secret = var.google_consumer_secret
-  redis_host             = data.terraform_remote_state.redis.outputs.host
-  redis_port             = data.terraform_remote_state.redis.outputs.port
+  db_address = data.terraform_remote_state.postgres.outputs.db_address
+  db_name    = data.terraform_remote_state.postgres_setup.outputs.mail_for_good_db_name
+  db_pass    = data.aws_ssm_parameter.db_pass.value
+  db_port    = data.terraform_remote_state.postgres.outputs.db_port
+  db_user    = data.aws_ssm_parameter.db_user.value
+  redis_host = data.terraform_remote_state.redis.outputs.host
+  redis_port = data.terraform_remote_state.redis.outputs.port
 
   acm_certificate_domain                = "*.debtcollective.org"
   ec2_security_group_id                 = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
