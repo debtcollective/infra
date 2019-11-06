@@ -8,14 +8,14 @@ resource "random_password" "mail_for_good_db_pass" {
   length           = 20
   special          = true
   min_special      = 1
-  override_special = "~*$^\\"
+  override_special = "~*^+"
 }
 
 // Store both in SSM
 resource "aws_ssm_parameter" "mail_for_good_db_user" {
   name  = "/${local.environment}/services/mail_for_good/db_user"
   type  = "String"
-  value = "mail_for_good_${random_string.mail_for_good_db_user.result}"
+  value = "mfg_${random_string.mail_for_good_db_user.result}"
 }
 
 resource "aws_ssm_parameter" "mail_for_good_db_pass" {
@@ -29,7 +29,6 @@ resource "postgresql_role" "mail_for_good" {
   login    = true
   name     = aws_ssm_parameter.mail_for_good_db_user.value
   password = aws_ssm_parameter.mail_for_good_db_pass.value
-  roles    = [local.master_db_user]
 }
 
 resource "postgresql_database" "mail_for_good" {

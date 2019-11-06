@@ -67,21 +67,16 @@ data "aws_ssm_parameter" "db_pass" {
   name = data.terraform_remote_state.postgres_setup.outputs.mail_for_good_db_pass_ssm_key
 }
 
-// hard coded until we migrate Discourse to this repo
-data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name = "/production/services/discourse/sso_jwt_secret"
-}
-
 locals {
   db_address             = data.terraform_remote_state.postgres.outputs.db_address
   db_name                = data.terraform_remote_state.postgres_setup.outputs.mail_for_good_db_name
   db_pass                = data.aws_ssm_parameter.db_pass.value
   db_port                = data.terraform_remote_state.postgres.outputs.db_port
   db_user                = data.aws_ssm_parameter.db_user.value
-  redis_host             = data.terraform_remote_state.redis.outputs.host
-  redis_port             = data.terraform_remote_state.redis.outputs.port
   google_consumer_key    = var.google_consumer_key
   google_consumer_secret = var.google_consumer_secret
+  redis_host             = data.terraform_remote_state.redis.outputs.host
+  redis_port             = data.terraform_remote_state.redis.outputs.port
 
   acm_certificate_domain                = "*.debtcollective.org"
   ec2_security_group_id                 = data.terraform_remote_state.vpc.outputs.ec2_security_group_id

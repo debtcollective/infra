@@ -33,6 +33,10 @@ module "container_definitions" {
       value = var.domain
     },
     {
+      name  = "PUBLIC_HOSTNAME",
+      value = "https://${var.domain}"
+    },
+    {
       name  = "GOOGLE_CONSUMER_KEY",
       value = var.google_consumer_key
     },
@@ -42,7 +46,7 @@ module "container_definitions" {
     },
     {
       name  = "GOOGLE_CALLBACK",
-      value = "${var.domain}${var.google_callback}"
+      value = "https://${var.domain}/auth/google/callback"
     },
     {
       name  = "AMAZON_ACCESS_KEY_ID",
@@ -79,7 +83,7 @@ module "container_definitions" {
     {
       name  = "ENCRYPTION_PASSWORD",
       value = random_string.encryption_password.result
-    },
+    }
   ]
 
   port_mappings = [

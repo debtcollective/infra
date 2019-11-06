@@ -18,7 +18,6 @@ provider "aws" {
 locals {
   environment = "stage"
   domain      = "mfg"
-  fqdn        = "mfg.debtcollective.org"
 }
 
 // Create user and access key
@@ -32,8 +31,7 @@ resource "aws_iam_user" "mfg" {
 }
 
 resource "aws_iam_access_key" "mfg" {
-  user    = aws_iam_user.mfg.name
-  pgp_key = "keybase:orlando"
+  user = aws_iam_user.mfg.name
 }
 
 
@@ -71,15 +69,15 @@ module "mail_for_good" {
   subnet_ids              = local.subnet_ids
   security_groups         = [local.ec2_security_group_id]
 
-  db_user                  = local.db_user
-  db_pass                  = local.db_pass
-  db_host                  = local.db_address
-  db_name                  = local.db_name
-  domain                   = local.domain
-  google_consumer_key      = local.google_consumer_key
-  google_consumer_secret   = local.google_consumer_secret
   amazon_access_key_id     = aws_iam_access_key.mfg.id
   amazon_secret_access_key = aws_iam_access_key.mfg.secret
+  db_host                  = local.db_address
+  db_name                  = local.db_name
+  db_pass                  = local.db_pass
+  db_user                  = local.db_user
+  domain                   = aws_route53_record.mail_for_good.fqdn
+  google_consumer_key      = local.google_consumer_key
+  google_consumer_secret   = local.google_consumer_secret
   redis_host               = local.redis_host
   redis_port               = local.redis_port
 }

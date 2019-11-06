@@ -96,11 +96,6 @@ variable "google_consumer_secret" {
   description = "Secret key for oauth login"
 }
 
-variable "google_callback" {
-  description = "callback for oauth"
-  default     = "/auth/google/callback"
-}
-
 variable "amazon_access_key_id" {
   description = "AWS SES access key"
 }
