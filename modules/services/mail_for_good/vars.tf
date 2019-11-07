@@ -55,7 +55,7 @@ variable "elb_security_groups" {
 
 variable "instance_type" {
   description = "Instance type Launch Configuration"
-  default     = "t3.micro"
+  default     = "t3a.nano"
 }
 
 // Mail for good app variables
