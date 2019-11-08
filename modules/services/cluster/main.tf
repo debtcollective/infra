@@ -4,8 +4,7 @@
  *
  *This module creates all the necessary pieces that are needed to run a cluster, including:
  *
- ** Auto Scaling Groups
- ** EC2 Launch Configurations
+ ** ECS Cluster
  ** Application load balancer (ALB)
  *
  *## Usage:
@@ -36,5 +35,51 @@ resource "aws_lb" "lb" {
   tags = {
     Environment = var.environment
     Terraform   = true
+  }
+}
+
+// SSL certificate
+data "aws_acm_certificate" "domain" {
+  domain   = var.acm_certificate_domain
+  statuses = ["ISSUED"]
+}
+
+
+// This is the default HTTP listener
+// We assume all routes will serve HTTPS and redirect there
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.lb.id
+  port              = "80"
+  protocol          = "HTTP"
+
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+// This is the default HTTPS listener
+// Users shouldn't reach this route
+resource "aws_lb_listener" "fundraising_https" {
+  load_balancer_arn = aws_lb.lb.id
+  port              = "443"
+  protocol          = "HTTPS"
+  certificate_arn   = data.aws_acm_certificate.domain.arn
+  ssl_policy        = "ELBSecurityPolicy-2015-05"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Here Be Dragons"
+      status_code  = "200"
+    }
   }
 }

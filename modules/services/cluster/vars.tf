@@ -9,3 +9,7 @@ variable "subnet_ids" {
 variable "security_group_ids" {
   type = list
 }
+
+variable "acm_certificate_domain" {
+  type = string
+}

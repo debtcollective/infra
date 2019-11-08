@@ -23,6 +23,7 @@ module "cluster" {
   source      = "../../../../modules/services/cluster"
   environment = local.environment
 
-  security_group_ids = local.security_group_ids
-  subnet_ids         = local.subnet_ids
+  acm_certificate_domain = "*.debtcollective.org"
+  security_group_ids     = local.security_group_ids
+  subnet_ids             = local.subnet_ids
 }
