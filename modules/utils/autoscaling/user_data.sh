@@ -1,7 +1,3 @@
-# Update ECS agent on init
-sudo yum update -y ecs-init
-sudo service docker restart && sudo start ecs
-
 #!/bin/bash
 # Register instance with ECS cluster
 echo ECS_CLUSTER=${cluster_name} > /etc/ecs/ecs.config

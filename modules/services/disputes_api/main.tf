@@ -31,23 +31,12 @@
 locals {
   container_name = "disputes_api"
   container_port = "4000"
-  name_prefix    = "da-${substr(var.environment, 0, 2)}-"
+  name_prefix    = substr(var.environment, 0, 2)
 }
 
 data "aws_region" "current" {}
 
 // Load balancer
-data "aws_acm_certificate" "domain" {
-  domain   = var.acm_certificate_domain
-  statuses = ["ISSUED"]
-}
-
-resource "aws_lb" "disputes_api" {
-  name_prefix     = local.name_prefix
-  security_groups = var.elb_security_groups
-  subnets         = var.subnet_ids
-}
-
 resource "aws_lb_target_group" "disputes_api" {
   name_prefix = local.name_prefix
   port        = 80
@@ -59,46 +48,18 @@ resource "aws_lb_target_group" "disputes_api" {
   }
 }
 
-resource "aws_lb_listener" "disputes_api_http" {
-  load_balancer_arn = aws_lb.disputes_api.id
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    target_group_arn = aws_lb_target_group.disputes_api.arn
-    type             = "forward"
-  }
-}
-
-resource "aws_lb_listener" "disputes_api_https" {
-  load_balancer_arn = aws_lb.disputes_api.id
-  port              = "443"
-  protocol          = "HTTPS"
-  certificate_arn   = data.aws_acm_certificate.domain.arn
-  ssl_policy        = "ELBSecurityPolicy-2015-05"
-
-  default_action {
-    target_group_arn = aws_lb_target_group.disputes_api.arn
-    type             = "forward"
-  }
-}
-
-resource "aws_lb_listener_rule" "redirect_http_to_https" {
-  listener_arn = aws_lb_listener.disputes_api_http.arn
+// Services only should define this to work correctly
+resource "aws_lb_listener_rule" "disputes_api" {
+  listener_arn = var.lb_listener_id
 
   action {
-    type = "redirect"
-
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.disputes_api.arn}"
   }
 
   condition {
     field  = "host-header"
-    values = [var.acm_certificate_domain]
+    values = [var.domain]
   }
 }
 
@@ -106,7 +67,7 @@ module "autoscaling" {
   source      = "../../utils/autoscaling"
   environment = var.environment
 
-  cluster_name            = aws_ecs_cluster.disputes_api.name
+  cluster_name            = var.ecs_cluster_name
   key_name                = var.key_name
   iam_instance_profile_id = var.iam_instance_profile_id
   security_groups         = var.security_groups
@@ -116,15 +77,10 @@ module "autoscaling" {
   tags = [
     {
       key                 = "Name"
-      value               = "disputes_api-${var.environment}-instance"
+      value               = "disputes_api_${var.environment}"
       propagate_at_launch = true
     },
   ]
-}
-
-// Create ECS cluster
-resource "aws_ecs_cluster" "disputes_api" {
-  name = "disputes_api-${var.environment}"
 }
 
 // Create ECS task definition
@@ -136,7 +92,7 @@ resource "aws_ecs_task_definition" "disputes_api" {
 // Create ECS service
 resource "aws_ecs_service" "disputes_api" {
   name            = "disputes_api"
-  cluster         = aws_ecs_cluster.disputes_api.id
+  cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.disputes_api.arn
   desired_count   = var.desired_count
 

@@ -32,7 +32,7 @@ variable "asg_min_size" {
 
 variable "asg_max_size" {
   description = "Auto Scaling Group maximum size for the cluster"
-  default     = 1
+  default     = 2
 }
 
 variable "desired_count" {
@@ -40,22 +40,29 @@ variable "desired_count" {
   default     = 1
 }
 
-variable "acm_certificate_domain" {
-  description = "ACM certificate domain name to be used for SSL"
-  default     = "*.debtcollective.org"
-}
-
 variable "vpc_id" {
-  description = "VPC Id to be used by the LB"
+  description = "VPC id to be used by the LB"
 }
 
-variable "elb_security_groups" {
-  description = "VPC Security Groups IDs to be used by the load balancer"
+variable "lb_listener_id" {
+  description = "LB listener id"
+}
+
+variable "ecs_cluster_id" {
+  description = "ECS cluster id where the app will run"
+}
+
+variable "ecs_cluster_name" {
+  description = "ECS cluster name where the app will run"
+}
+
+variable "domain" {
+  description = "FQDN where app will be available"
 }
 
 variable "instance_type" {
   description = "Instance type Launch Configuration"
-  default     = "t3.micro"
+  default     = "t3a.micro"
 }
 
 // disputes-api variables
