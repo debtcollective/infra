@@ -66,7 +66,7 @@ resource "aws_lb_listener" "http" {
 
 // This is the default HTTPS listener
 // Users shouldn't reach this route
-resource "aws_lb_listener" "fundraising_https" {
+resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.lb.id
   port              = "443"
   protocol          = "HTTPS"
@@ -78,7 +78,7 @@ resource "aws_lb_listener" "fundraising_https" {
 
     fixed_response {
       content_type = "text/plain"
-      message_body = "Here Be Dragons"
+      message_body = "Here Be Dragons."
       status_code  = "200"
     }
   }

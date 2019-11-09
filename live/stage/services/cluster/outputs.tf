@@ -18,7 +18,17 @@ output "lb_zone_id" {
   value       = module.cluster.lb_zone_id
 }
 
-output "cluster_id" {
+output "lb_listener_id" {
+  description = "ALB HTTPS listener id"
+  value       = module.cluster.lb_listener_id
+}
+
+output "ecs_cluster_id" {
   description = "ECS cluster ID/ARN"
-  value       = module.cluster.cluster_id
+  value       = module.cluster.ecs_cluster_id
+}
+
+output "ecs_cluster_name" {
+  description = "ECS cluster name"
+  value       = module.cluster.ecs_cluster_name
 }
