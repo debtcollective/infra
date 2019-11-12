@@ -16,13 +16,6 @@
  *  environment = "${var.environment}"
  *  image       = "${var.image}"
  *
- *  key_name                = "${var.key_name}"
- *  iam_instance_profile_id = "${var.iam_instance_profile_id}"
- *  subnet_ids              = ["${var.subnet_ids}"]
- *  security_groups         = ["${var.security_groups}"]
- *  asg_min_size            = "${var.asg_min_size}"
- *  asg_max_size            = "${var.asg_max_size}"
- *
  *  database_url = "${var.database_url}"
  *  introspection = true
  *}
@@ -54,33 +47,13 @@ resource "aws_lb_listener_rule" "disputes_api" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.disputes_api.arn}"
+    target_group_arn = aws_lb_target_group.disputes_api.arn
   }
 
   condition {
     field  = "host-header"
     values = [var.domain]
   }
-}
-
-module "autoscaling" {
-  source      = "../../utils/autoscaling"
-  environment = var.environment
-
-  cluster_name            = var.ecs_cluster_name
-  key_name                = var.key_name
-  iam_instance_profile_id = var.iam_instance_profile_id
-  security_groups         = var.security_groups
-  instance_type           = var.instance_type
-  subnet_ids              = var.subnet_ids
-
-  tags = [
-    {
-      key                 = "Name"
-      value               = "disputes_api_${var.environment}"
-      propagate_at_launch = true
-    },
-  ]
 }
 
 // Create ECS task definition

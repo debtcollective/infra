@@ -35,15 +35,10 @@ module "disputes_api" {
   source      = "../../../../modules/services/disputes_api"
   environment = local.environment
 
-  vpc_id                  = local.vpc_id
-  lb_listener_id          = local.lb_listener_id
-  ecs_cluster_id          = local.ecs_cluster_id
-  ecs_cluster_name        = local.ecs_cluster_name
-  key_name                = local.ssh_key_pair_name
-  iam_instance_profile_id = local.iam_instance_profile_id
-  subnet_ids              = local.subnet_ids
-  security_groups         = [local.ec2_security_group_id]
-  domain                  = aws_route53_record.disputes_api.fqdn
+  domain         = aws_route53_record.disputes_api.fqdn
+  ecs_cluster_id = local.ecs_cluster_id
+  lb_listener_id = local.lb_listener_id
+  vpc_id         = local.vpc_id
 
   database_url  = local.database_url
   introspection = local.introspection
