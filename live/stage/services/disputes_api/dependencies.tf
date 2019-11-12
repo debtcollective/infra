@@ -10,14 +10,14 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-data "terraform_remote_state" "iam" {
+data "terraform_remote_state" "cluster" {
   backend = "remote"
 
   config = {
     organization = local.remote_state_organization
 
     workspaces = {
-      name = local.iam_remote_state_workspace
+      name = local.cluster_remote_state_workspace
     }
   }
 }
@@ -55,25 +55,26 @@ data "aws_ssm_parameter" "db_pass" {
 }
 
 locals {
-  db_user       = data.aws_ssm_parameter.db_user.value
-  db_pass       = data.aws_ssm_parameter.db_pass.value
+  environment = "stage"
+
   db_address    = data.terraform_remote_state.postgres.outputs.db_address
-  db_port       = data.terraform_remote_state.postgres.outputs.db_port
   db_name       = data.terraform_remote_state.postgres_setup.outputs.disputes_api_db_name
+  db_pass       = data.aws_ssm_parameter.db_pass.value
+  db_port       = data.terraform_remote_state.postgres.outputs.db_port
+  db_user       = data.aws_ssm_parameter.db_user.value
   database_url  = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
   introspection = true
 
-  acm_certificate_domain                = "*.debtcollective.org"
-  ec2_security_group_id                 = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
-  elb_security_group_id                 = data.terraform_remote_state.vpc.outputs.elb_security_group_id
-  iam_instance_profile_id               = data.terraform_remote_state.iam.outputs.instance_profile_id
-  ssh_key_pair_name                     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
-  subnet_ids                            = data.terraform_remote_state.vpc.outputs.public_subnet_ids
-  vpc_id                                = data.terraform_remote_state.vpc.outputs.vpc_id
-  vpc_security_group_ids                = [data.terraform_remote_state.vpc.outputs.rds_security_group_id]
-  postgres_remote_state_workspace       = "stage-postgres"
-  postgres_setup_remote_state_workspace = "stage-postgres-setup"
-  remote_state_organization             = "debtcollective"
+  ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
+  lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
+  lb_listener_id = data.terraform_remote_state.cluster.outputs.lb_listener_id
+  lb_zone_id     = data.terraform_remote_state.cluster.outputs.lb_zone_id
+  vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
+
+  cluster_remote_state_workspace        = "${local.environment}-cluster"
   iam_remote_state_workspace            = "global-iam"
-  vpc_remote_state_workspace            = "stage-network"
+  postgres_remote_state_workspace       = "${local.environment}-postgres"
+  postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
+  remote_state_organization             = "debtcollective"
+  vpc_remote_state_workspace            = "${local.environment}-network"
 }

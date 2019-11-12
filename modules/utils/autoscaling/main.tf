@@ -85,6 +85,7 @@ resource "aws_autoscaling_group" "asg" {
   max_size             = var.asg_max_size
   health_check_type    = "ELB"
   vpc_zone_identifier  = var.subnet_ids
+  desired_capacity     = var.asg_desired_count
 
   tags = concat(local.default_asg_tags, var.tags)
 }
