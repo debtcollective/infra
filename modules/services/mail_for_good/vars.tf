@@ -46,7 +46,7 @@ variable "acm_certificate_domain" {
 }
 
 variable "vpc_id" {
-  description = "VPC Id to be used by the LB"
+  description = "VPC id to be used by the LB"
 }
 
 variable "elb_security_groups" {

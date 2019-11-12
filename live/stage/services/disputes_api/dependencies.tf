@@ -57,21 +57,20 @@ data "aws_ssm_parameter" "db_pass" {
 locals {
   environment = "stage"
 
-  db_address     = data.terraform_remote_state.postgres.outputs.db_address
-  db_name        = data.terraform_remote_state.postgres_setup.outputs.disputes_api_db_name
-  db_pass        = data.aws_ssm_parameter.db_pass.value
-  db_port        = data.terraform_remote_state.postgres.outputs.db_port
-  db_user        = data.aws_ssm_parameter.db_user.value
+  db_address    = data.terraform_remote_state.postgres.outputs.db_address
+  db_name       = data.terraform_remote_state.postgres_setup.outputs.disputes_api_db_name
+  db_pass       = data.aws_ssm_parameter.db_pass.value
+  db_port       = data.terraform_remote_state.postgres.outputs.db_port
+  db_user       = data.aws_ssm_parameter.db_user.value
+  database_url  = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
+  introspection = true
+
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
   lb_listener_id = data.terraform_remote_state.cluster.outputs.lb_listener_id
   lb_zone_id     = data.terraform_remote_state.cluster.outputs.lb_zone_id
   vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
 
-  database_url  = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
-  introspection = true
-
-  acm_certificate_domain                = "*.debtcollective.org"
   cluster_remote_state_workspace        = "${local.environment}-cluster"
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
