@@ -44,3 +44,23 @@ module "autoscaling" {
     },
   ]
 }
+
+// server working hours
+resource "aws_autoscaling_schedule" "working_hours" {
+  scheduled_action_name  = "working hours"
+  min_size               = 1
+  max_size               = 2
+  desired_capacity       = 1
+  recurrence             = "00 12 * * 1-5" #Mon-Fri at 7AM EST
+  autoscaling_group_name = module.autoscaling.autoscaling_group_name
+}
+
+// turn off servers at night
+resource "aws_autoscaling_schedule" "off_working_hours" {
+  scheduled_action_name  = "off working hours"
+  min_size               = 0
+  max_size               = 0
+  desired_capacity       = 0
+  recurrence             = "00 03 * * 1-5" #Mon-Fri at 10PM EST
+  autoscaling_group_name = module.autoscaling.autoscaling_group_name
+}
