@@ -1,23 +1,22 @@
 /**
  *disputes_api module creates a ECS deployment serving the disputes-api app
- *The cluster is created inside a VPC.
  *
- *This module creates all the necessary pieces that are needed to run a cluster, including:
- *
- ** Auto Scaling Groups
- ** EC2 Launch Configurations
- ** Application load balancer (ELB)
+ *This module creates a ECS service to run inside a ECS cluster.
  *
  *## Usage:
  *
  *```hcl
  *module "disputes_api" {
- *  source      = "../services/disputes_api"
- *  environment = "${var.environment}"
- *  image       = "${var.image}"
+ *  source      = "../../../../modules/services/disputes_api"
+ *  environment = local.environment
  *
- *  database_url = "${var.database_url}"
- *  introspection = true
+ *  domain         = aws_route53_record.disputes_api.fqdn
+ *  ecs_cluster_id = local.ecs_cluster_id
+ *  lb_listener_id = local.lb_listener_id
+ *  vpc_id         = local.vpc_id
+ *
+ *  database_url  = local.database_url
+ *  introspection = local.introspection
  *}
  *```
  */
@@ -58,7 +57,7 @@ resource "aws_lb_listener_rule" "disputes_api" {
 
 // Create ECS task definition
 resource "aws_ecs_task_definition" "disputes_api" {
-  family                = "disputes_api-${var.environment}"
+  family                = "disputes_api_${var.environment}"
   container_definitions = module.container_definitions.json
 }
 
