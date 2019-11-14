@@ -65,7 +65,7 @@ resource "aws_lb_listener_rule" "fundraising" {
 
 // Create ECS task definition
 resource "aws_ecs_task_definition" "fundraising" {
-  family                = "fundraising-${var.environment}"
+  family                = "fundraising_${var.environment}"
   container_definitions = module.container_definitions.json
 }
 

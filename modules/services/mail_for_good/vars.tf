@@ -7,6 +7,11 @@ variable "container_image" {
   default     = "freecodecamp/mail-for-good:latest"
 }
 
+variable "container_memory_reservation" {
+  description = "Memory reservation for containers"
+  default     = 115
+}
+
 variable "key_name" {
   description = "SSH Key Pair to be assigned to the Launch Configuration for the instances running in this cluster"
 }

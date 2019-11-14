@@ -7,6 +7,11 @@ variable "container_image" {
   default     = "debtcollective/fundraising:latest"
 }
 
+variable "container_memory_reservation" {
+  description = "Memory reservation for containers"
+  default     = 115
+}
+
 variable "vpc_id" {
   description = "VPC Id to be used by the LB"
 }
