@@ -35,6 +35,10 @@ resource "aws_lb_target_group" "campaign_api" {
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
 
+  health_check {
+    path = "/.well-known/apollo/server-health"
+  }
+
   lifecycle {
     create_before_destroy = true
   }
