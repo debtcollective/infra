@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "debtcollective/fundraising:latest"
+  default     = "debtcollective/campaign-api:latest"
 }
 
 variable "container_memory_reservation" {
@@ -13,7 +13,7 @@ variable "container_memory_reservation" {
 }
 
 variable "vpc_id" {
-  description = "VPC Id to be used by the LB"
+  description = "VPC id to be used by the LB"
 }
 
 variable "lb_listener_id" {
@@ -33,27 +33,15 @@ variable "desired_count" {
   default     = 1
 }
 
-// Fundraising app variables
+// campaign-api variables
 variable "database_url" {
   description = "Postgres database URL"
 }
 
-variable "redis_url" {
-  description = "Redis URL used for cache and Sidekiq"
+variable "introspection" {
+  description = "GraphQL introspection"
 }
 
-variable "sso_cookie_name" {
-  description = "SSO cookie name as defined in Discourse"
-}
-
-variable "sso_jwt_secret" {
-  description = "SSO JWT secret as defined in Discourse"
-}
-
-variable "discourse_login_url" {
-  description = "SSO login URL"
-}
-
-variable "discourse_signup_url" {
-  description = "SSO signup URL"
+variable "playground" {
+  description = "GraphQL playground"
 }

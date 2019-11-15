@@ -1,9 +1,9 @@
-resource "aws_cloudwatch_log_group" "disputes_api" {
-  name = "/${var.environment}/services/disputes_api"
+resource "aws_cloudwatch_log_group" "campaign_api" {
+  name = "/${var.environment}/services/campaign_api"
 
   tags = {
     Environment = var.environment
-    Application = "disputes_api"
+    Application = "campaign_api"
     Terraform   = true
   }
 }
@@ -31,6 +31,10 @@ module "container_definitions" {
       name  = "INTROSPECTION",
       value = var.introspection
     },
+    {
+      name  = "PLAYGROUND",
+      value = var.playground
+    }
   ]
 
   port_mappings = [
@@ -42,6 +46,6 @@ module "container_definitions" {
   log_driver = "awslogs"
   log_options = {
     "awslogs-region" = data.aws_region.current.name
-    "awslogs-group"  = aws_cloudwatch_log_group.disputes_api.name
+    "awslogs-group"  = aws_cloudwatch_log_group.campaign_api.name
   }
 }
