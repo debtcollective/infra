@@ -42,4 +42,5 @@ module "campaign_api" {
 
   database_url  = local.database_url
   introspection = local.introspection
+  playground    = local.playground
 }

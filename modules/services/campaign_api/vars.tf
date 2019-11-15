@@ -41,3 +41,7 @@ variable "database_url" {
 variable "introspection" {
   description = "GraphQL introspection"
 }
+
+variable "playground" {
+  description = "GraphQL playground"
+}

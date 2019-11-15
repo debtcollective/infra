@@ -31,6 +31,10 @@ module "container_definitions" {
       name  = "INTROSPECTION",
       value = var.introspection
     },
+    {
+      name  = "PLAYGROUND",
+      value = var.playground
+    }
   ]
 
   port_mappings = [

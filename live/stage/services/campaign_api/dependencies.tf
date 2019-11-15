@@ -64,6 +64,7 @@ locals {
   db_user       = data.aws_ssm_parameter.db_user.value
   database_url  = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
   introspection = true
+  playground    = true
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
