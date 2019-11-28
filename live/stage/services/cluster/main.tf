@@ -47,6 +47,8 @@ module "autoscaling" {
 
 // server working hours
 resource "aws_autoscaling_schedule" "working_hours" {
+  // disable it for now
+  count                  = 0
   scheduled_action_name  = "working hours"
   min_size               = 1
   max_size               = 2
@@ -57,6 +59,8 @@ resource "aws_autoscaling_schedule" "working_hours" {
 
 // turn off servers at night
 resource "aws_autoscaling_schedule" "off_working_hours" {
+  // disable it for now
+  count                  = 0
   scheduled_action_name  = "off working hours"
   min_size               = 0
   max_size               = 0
