@@ -45,3 +45,19 @@ variable "introspection" {
 variable "playground" {
   description = "GraphQL playground"
 }
+
+variable "sso_cookie_name" {
+  description = "SSO cookie name as defined in Discourse"
+}
+
+variable "sso_jwt_secret" {
+  description = "SSO JWT secret as defined in Discourse"
+}
+
+variable "discourse_login_url" {
+  description = "SSO login URL"
+}
+
+variable "discourse_signup_url" {
+  description = "SSO signup URL"
+}
