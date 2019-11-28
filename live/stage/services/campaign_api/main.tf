@@ -47,4 +47,5 @@ module "campaign_api" {
   playground           = local.playground
   sso_cookie_name      = local.sso_cookie_name
   sso_jwt_secret       = local.sso_jwt_secret
+  cors_origin          = local.cors_origin
 }

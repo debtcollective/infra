@@ -44,6 +44,10 @@ module "container_definitions" {
       value = var.sso_jwt_secret
     },
     {
+      name  = "CORS_ORIGIN",
+      value = var.cors_origin
+    },
+    {
       name  = "INTROSPECTION",
       value = var.introspection
     },

@@ -61,3 +61,7 @@ variable "discourse_login_url" {
 variable "discourse_signup_url" {
   description = "SSO signup URL"
 }
+
+variable "cors_origin" {
+  description = "Host allowed to query the API using CORS"
+}

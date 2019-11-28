@@ -75,6 +75,7 @@ locals {
   playground           = true
   sso_cookie_name      = "tdc_auth_production"
   sso_jwt_secret       = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
+  cors_origin          = "https://campaign.debtcollective.org"
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
