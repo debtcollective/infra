@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "fundraising" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "fundraising-${local.environment}"
+  name    = "fundraising"
   type    = "A"
 
   alias {
@@ -46,4 +46,6 @@ module "fundraising" {
   redis_url            = local.redis_url
   sso_cookie_name      = local.sso_cookie_name
   sso_jwt_secret       = local.sso_jwt_secret
+  recaptcha_site_key   = var.recaptcha_site_key
+  recaptcha_secret_key = var.recaptcha_secret_key
 }
