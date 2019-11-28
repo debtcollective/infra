@@ -70,3 +70,11 @@ variable "discourse_admin_role" {
   description = "Role with access to the admin backend"
   default     = "dispute_pro"
 }
+
+variable "stripe_secret_key" {
+  description = "Stripe secret key"
+}
+
+variable "stripe_publishable_key" {
+  description = "Stripe publishable key"
+}

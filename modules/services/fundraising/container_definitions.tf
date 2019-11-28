@@ -77,6 +77,14 @@ module "container_definitions" {
       value = var.recaptcha_secret_key
     },
     {
+      name  = "STRIPE_SECRET_KEY",
+      value = var.stripe_secret_key
+    },
+    {
+      name  = "STRIPE_PUBLISHABLE_KEY",
+      value = var.stripe_publishable_key
+    },
+    {
       name  = "PORT",
       value = local.container_port
     },
