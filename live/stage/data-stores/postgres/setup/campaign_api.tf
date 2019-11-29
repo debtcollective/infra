@@ -26,8 +26,8 @@ resource "aws_ssm_parameter" "campaign_api_db_pass" {
 
 // Create postgres role and db
 resource "postgresql_role" "campaign_api" {
-  name                = aws_ssm_parameter.campaign_api_db_user.value
   login               = true
+  name                = aws_ssm_parameter.campaign_api_db_user.value
   password            = aws_ssm_parameter.campaign_api_db_pass.value
   roles               = [local.master_db_user]
   skip_reassign_owned = true
