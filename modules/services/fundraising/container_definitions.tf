@@ -49,6 +49,10 @@ module "container_definitions" {
       value = var.discourse_signup_url
     },
     {
+      name  = "DISCOURSE_ADMIN_ROLE",
+      value = var.discourse_admin_role
+    },
+    {
       name  = "SECRET_KEY_BASE",
       value = random_string.secret_key_base.result
     },
@@ -65,9 +69,25 @@ module "container_definitions" {
       value = var.sso_jwt_secret
     },
     {
+      name  = "RECAPTCHA_SITE_KEY",
+      value = var.recaptcha_site_key
+    },
+    {
+      name  = "RECAPTCHA_SECRET_KEY",
+      value = var.recaptcha_secret_key
+    },
+    {
+      name  = "STRIPE_SECRET_KEY",
+      value = var.stripe_secret_key
+    },
+    {
+      name  = "STRIPE_PUBLISHABLE_KEY",
+      value = var.stripe_publishable_key
+    },
+    {
       name  = "PORT",
       value = local.container_port
-    }
+    },
   ]
 
   port_mappings = [

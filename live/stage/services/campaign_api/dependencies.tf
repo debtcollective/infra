@@ -54,17 +54,28 @@ data "aws_ssm_parameter" "db_pass" {
   name = data.terraform_remote_state.postgres_setup.outputs.campaign_api_db_pass_ssm_key
 }
 
+// hard coded until we migrate Discourse to this repo
+data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
+  name = "/production/services/discourse/sso_jwt_secret"
+}
+
 locals {
   environment = "stage"
 
-  db_address    = data.terraform_remote_state.postgres.outputs.db_address
-  db_name       = data.terraform_remote_state.postgres_setup.outputs.campaign_api_db_name
-  db_pass       = data.aws_ssm_parameter.db_pass.value
-  db_port       = data.terraform_remote_state.postgres.outputs.db_port
-  db_user       = data.aws_ssm_parameter.db_user.value
-  database_url  = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
-  introspection = true
-  playground    = true
+  database_url         = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
+  db_address           = data.terraform_remote_state.postgres.outputs.db_address
+  db_name              = data.terraform_remote_state.postgres_setup.outputs.campaign_api_db_name
+  db_pass              = data.aws_ssm_parameter.db_pass.value
+  db_port              = data.terraform_remote_state.postgres.outputs.db_port
+  db_user              = data.aws_ssm_parameter.db_user.value
+  discourse_login_url  = "${local.discourse_uri}/session/sso_cookies"
+  discourse_signup_url = "${local.discourse_uri}/session/sso_cookies/signup"
+  discourse_uri        = "https://community.debtcollective.org"
+  introspection        = true
+  playground           = true
+  sso_cookie_name      = "tdc_auth_production"
+  sso_jwt_secret       = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
+  cors_origin          = "https://campaign.debtcollective.org"
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name

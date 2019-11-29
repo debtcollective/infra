@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "campaign_api" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "campaign-api-${local.environment}"
+  name    = "campaign-api"
   type    = "A"
 
   alias {
@@ -40,7 +40,12 @@ module "campaign_api" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
-  database_url  = local.database_url
-  introspection = local.introspection
-  playground    = local.playground
+  database_url         = local.database_url
+  discourse_login_url  = local.discourse_login_url
+  discourse_signup_url = local.discourse_signup_url
+  introspection        = local.introspection
+  playground           = local.playground
+  sso_cookie_name      = local.sso_cookie_name
+  sso_jwt_secret       = local.sso_jwt_secret
+  cors_origin          = local.cors_origin
 }

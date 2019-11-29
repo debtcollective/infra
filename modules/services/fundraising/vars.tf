@@ -57,3 +57,24 @@ variable "discourse_login_url" {
 variable "discourse_signup_url" {
   description = "SSO signup URL"
 }
+
+variable "recaptcha_site_key" {
+  description = "reCAPTCHA site key"
+}
+
+variable "recaptcha_secret_key" {
+  description = "reCAPTCHA secret key"
+}
+
+variable "discourse_admin_role" {
+  description = "Role with access to the admin backend"
+  default     = "dispute_pro"
+}
+
+variable "stripe_secret_key" {
+  description = "Stripe secret key"
+}
+
+variable "stripe_publishable_key" {
+  description = "Stripe publishable key"
+}

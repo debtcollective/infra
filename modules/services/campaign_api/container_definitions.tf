@@ -28,6 +28,26 @@ module "container_definitions" {
       value = var.database_url
     },
     {
+      name  = "DISCOURSE_LOGIN_URL",
+      value = var.discourse_login_url
+    },
+    {
+      name  = "DISCOURSE_SIGNUP_URL",
+      value = var.discourse_signup_url
+    },
+    {
+      name  = "SSO_COOKIE_NAME",
+      value = var.sso_cookie_name
+    },
+    {
+      name  = "SSO_JWT_SECRET",
+      value = var.sso_jwt_secret
+    },
+    {
+      name  = "CORS_ORIGIN",
+      value = var.cors_origin
+    },
+    {
       name  = "INTROSPECTION",
       value = var.introspection
     },
