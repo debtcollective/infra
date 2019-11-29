@@ -78,3 +78,7 @@ variable "stripe_secret_key" {
 variable "stripe_publishable_key" {
   description = "Stripe publishable key"
 }
+
+variable "sentry_dsn" {
+  description = "Sentry DSN"
+}

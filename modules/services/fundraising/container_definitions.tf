@@ -85,6 +85,10 @@ module "container_definitions" {
       value = var.stripe_publishable_key
     },
     {
+      name  = "SENTRY_DSN",
+      value = var.sentry_dsn
+    },
+    {
       name  = "PORT",
       value = local.container_port
     },

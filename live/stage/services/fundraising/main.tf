@@ -50,4 +50,5 @@ module "fundraising" {
   recaptcha_secret_key   = var.recaptcha_secret_key
   stripe_secret_key      = var.stripe_secret_key
   stripe_publishable_key = var.stripe_publishable_key
+  sentry_dsn             = var.sentry_dsn
 }
