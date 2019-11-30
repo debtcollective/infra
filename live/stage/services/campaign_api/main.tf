@@ -48,4 +48,5 @@ module "campaign_api" {
   sso_cookie_name      = local.sso_cookie_name
   sso_jwt_secret       = local.sso_jwt_secret
   cors_origin          = local.cors_origin
+  sentry_dsn           = var.sentry_dsn
 }

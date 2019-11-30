@@ -48,6 +48,10 @@ module "container_definitions" {
       value = var.cors_origin
     },
     {
+      name  = "SENTRY_DSN",
+      value = var.sentry_dsn
+    },
+    {
       name  = "INTROSPECTION",
       value = var.introspection
     },

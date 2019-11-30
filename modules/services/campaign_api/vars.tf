@@ -65,3 +65,7 @@ variable "discourse_signup_url" {
 variable "cors_origin" {
   description = "Host allowed to query the API using CORS"
 }
+
+variable "sentry_dsn" {
+  description = "Sentry DSN"
+}
