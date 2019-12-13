@@ -82,3 +82,11 @@ variable "stripe_publishable_key" {
 variable "sentry_dsn" {
   description = "Sentry DSN"
 }
+
+variable "amplitude_api_key" {
+  description = "Amplitude API key"
+}
+
+variable "ga_measurement_id" {
+  description = "Google Analytics UA-XXXXX-Y"
+}

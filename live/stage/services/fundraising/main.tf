@@ -51,4 +51,6 @@ module "fundraising" {
   stripe_secret_key      = var.stripe_secret_key
   stripe_publishable_key = var.stripe_publishable_key
   sentry_dsn             = var.sentry_dsn
+  amplitude_api_key      = var.amplitude_api_key
+  ga_measurement_id      = var.ga_measurement_id
 }

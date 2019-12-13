@@ -92,6 +92,14 @@ module "container_definitions" {
       name  = "PORT",
       value = local.container_port
     },
+    {
+      name  = "GA_MEASUREMENT_ID",
+      value = var.ga_measurement_id
+    },
+    {
+      name  = "AMPLITUDE_API_KEY",
+      value = var.amplitude_api_key
+    },
   ]
 
   port_mappings = [
