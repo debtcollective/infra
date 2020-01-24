@@ -51,9 +51,13 @@ module "container_definitions" {
     }
   ]
 
-  log_driver = "awslogs"
-  log_options = {
-    "awslogs-region" = data.aws_region.current.name
-    "awslogs-group"  = aws_cloudwatch_log_group.metabase.name
+  log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      "awslogs-region" = data.aws_region.current.name
+      "awslogs-group"  = aws_cloudwatch_log_group.metabase.name
+      "max-size"       = "10m"
+      "max-file"       = "3"
+    }
   }
 }
