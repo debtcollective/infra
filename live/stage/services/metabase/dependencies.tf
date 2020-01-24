@@ -57,11 +57,11 @@ data "aws_ssm_parameter" "db_pass" {
 locals {
   environment = "stage"
 
-  db_host = data.terraform_remote_state.postgres.outputs.db_address
-  db_name = data.terraform_remote_state.postgres_setup.outputs.metabase_db_name
-  db_pass = data.aws_ssm_parameter.db_pass.value
-  db_port = data.terraform_remote_state.postgres.outputs.db_port
-  db_user = data.aws_ssm_parameter.db_user.value
+  db_host     = data.terraform_remote_state.postgres.outputs.db_address
+  db_name     = data.terraform_remote_state.postgres_setup.outputs.metabase_db_name
+  db_password = data.aws_ssm_parameter.db_pass.value
+  db_port     = data.terraform_remote_state.postgres.outputs.db_port
+  db_username = data.aws_ssm_parameter.db_user.value
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name

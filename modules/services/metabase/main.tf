@@ -44,8 +44,8 @@ resource "aws_ecs_task_definition" "metabase" {
 
 // Create ECS service
 resource "aws_ecs_service" "metabase" {
-  name            = "metabase-${var.environment}"
-  cluster         = aws_ecs_cluster.metabase.id
+  name            = "metabase"
+  cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.metabase.arn
   desired_count   = var.desired_count
 

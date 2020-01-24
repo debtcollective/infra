@@ -40,9 +40,9 @@ module "metabase" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
-  db_host = local.db_host
-  db_name = local.db_name
-  db_pass = local.db_pass
-  db_port = local.db_port
-  db_user = local.db_user
+  db_host     = local.db_host
+  db_name     = local.db_name
+  db_password = local.db_password
+  db_port     = local.db_port
+  db_username = local.db_username
 }

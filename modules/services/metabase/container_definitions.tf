@@ -48,6 +48,8 @@ module "container_definitions" {
   port_mappings = [
     {
       containerPort = local.container_port
+      hostPort      = null
+      protocol      = "tcp"
     }
   ]
 
@@ -59,5 +61,6 @@ module "container_definitions" {
       "max-size"       = "10m"
       "max-file"       = "3"
     }
+    secretOptions = null
   }
 }
