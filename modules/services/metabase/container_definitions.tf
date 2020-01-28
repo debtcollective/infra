@@ -12,8 +12,8 @@ module "container_definitions" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = local.container_name
-  container_cpu                = 0
-  container_memory             = 0
+  container_cpu                = null
+  container_memory             = null
   container_memory_reservation = var.container_memory_reservation
   essential                    = true
   container_image              = var.container_image
