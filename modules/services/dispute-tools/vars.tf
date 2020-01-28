@@ -34,6 +34,14 @@ variable "desired_count" {
 }
 
 // dispute-tools variables
+variable "redis_host" {
+  description = "Redis host"
+}
+
+variable "redis_port" {
+  description = "Redis port"
+}
+
 variable "sso_endpoint" {
   description = "SSO authentication endpoint"
 }
@@ -148,6 +156,27 @@ variable "sentry_endpoint" {
 variable "static_assets_bucket_url" {
   description = "Debtcollective static assets bucket url"
   default     = "https://s3.amazonaws.com/tds-static"
+}
+
+variable "aws_upload_bucket" {
+  description = "S3 bucket name to store uploads"
+}
+
+variable "aws_upload_bucket_region" {
+  description = "Upload bucket region"
+}
+
+variable "aws_access_key_id" {
+  description = "Access key to upload files to bucket defined in aws_upload_bucket"
+}
+
+variable "aws_secret_access_key" {
+  description = "Access key to upload files to bucket defined in aws_upload_bucket"
+}
+
+variable "log_retention_in_days" {
+  description = "Cloudwatch logs retention"
+  default     = 3
 }
 
 variable "recaptcha_site_key" {

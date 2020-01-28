@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_log_group" "dispute_tools" {
-  name = "/${var.environment}/services/dispute_tools"
+  name              = "/${var.environment}/services/dispute_tools"
+  retention_in_days = var.log_retention_in_days
 
   tags = {
     Environment = var.environment
@@ -21,15 +22,15 @@ module "container_definitions" {
   environment = [
     {
       name  = "REDIS_HOST",
-      value = local.redis_host
+      value = var.redis_host
     },
     {
       name  = "REDIS_PORT",
-      value = local.redis_port
+      value = var.redis_port
     },
     {
       name  = "SSO_ENDPOINT",
-      value = local.sso_endpoint
+      value = var.sso_endpoint
     },
     {
       name  = "SSO_SECRET",
@@ -53,19 +54,19 @@ module "container_definitions" {
     },
     {
       name  = "LANDING_PAGE_URL",
-      value = local.landing_page_url
+      value = var.landing_page_url
     },
     {
       name  = "EMAIL_CONTACT",
-      value = local.contact_email
+      value = var.contact_email
     },
     {
       name  = "EMAIL_NO_REPLY",
-      value = local.sender_email
+      value = var.sender_email
     },
     {
       name  = "EMAIL_DISPUTES_BCC",
-      value = local.disputes_bcc_address
+      value = var.disputes_bcc_address
     },
     {
       name  = "EMAIL_HOST",
@@ -93,7 +94,7 @@ module "container_definitions" {
     },
     {
       name  = "STATIC_ASSETS_BUCKET_URL",
-      value = local.static_assets_bucket_url
+      value = var.static_assets_bucket_url
     },
     {
       name  = "SENTRY_ENDPOINT",
@@ -113,35 +114,35 @@ module "container_definitions" {
     },
     {
       name  = "AWS_UPLOAD_BUCKET",
-      value = local.aws_bucket_name
+      value = var.aws_upload_bucket
     },
     {
       name  = "AWS_ACCESS_KEY_ID",
-      value = var.aws_access_id
+      value = var.aws_access_key_id
     },
     {
       name  = "AWS_SECRET_ACCESS_KEY",
-      value = var.aws_access_secret
+      value = var.aws_secret_access_key
     },
     {
       name  = "AWS_DEFAULT_REGION",
-      value = var.aws_region
+      value = var.aws_upload_bucket_region
     },
     {
       name  = "DB_CONNECTION_STRING",
-      value = local.db_connection_string
+      value = var.db_connection_string
     },
     {
       name  = "DB_POOL_MIN",
-      value = local.db_pool_min
+      value = var.db_pool_min
     },
     {
       name  = "DB_POOL_MAX",
-      value = local.db_pool_max
+      value = var.db_pool_max
     },
     {
       name  = "DISCOURSE_API_BASE_URL",
-      value = local.discourse_base_url
+      value = var.discourse_base_url
     },
     {
       name  = "DISCOURSE_API_KEY",
@@ -153,31 +154,31 @@ module "container_definitions" {
     },
     {
       name  = "DOE_DISCLOSURE_REPRESENTATIVES",
-      value = local.doe_disclosure_representatives
+      value = var.doe_disclosure_representatives
     },
     {
       name  = "DOE_DISCLOSURE_PHONES",
-      value = local.doe_disclosure_phones
+      value = var.doe_disclosure_phones
     },
     {
       name  = "DOE_DISCLOSURE_RELATIONSHIP",
-      value = local.doe_disclosure_relationship
+      value = var.doe_disclosure_relationship
     },
     {
       name  = "DOE_DISCLOSURE_ADDRESS",
-      value = local.doe_disclosure_address
+      value = var.doe_disclosure_address
     },
     {
       name  = "DOE_DISCLOSURE_CITY",
-      value = local.doe_disclosure_city
+      value = var.doe_disclosure_city
     },
     {
       name  = "DOE_DISCLOSURE_STATE",
-      value = local.doe_disclosure_state
+      value = var.doe_disclosure_state
     },
     {
       name  = "DOE_DISCLOSURE_ZIP",
-      value = local.doe_disclosure_zip
+      value = var.doe_disclosure_zip
     },
     {
       name  = "RECAPTCHA_SITE_KEY",
