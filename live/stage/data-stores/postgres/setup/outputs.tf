@@ -1,3 +1,17 @@
+# Metabase
+output "metabase_db_user_ssm_key" {
+  value = aws_ssm_parameter.metabase_db_user.name
+}
+
+output "metabase_db_pass_ssm_key" {
+  value = aws_ssm_parameter.metabase_db_pass.name
+}
+
+output "metabase_db_name" {
+  value = "metabase_${local.environment}"
+
+}
+
 # Fundraising
 output "fundraising_db_user_ssm_key" {
   value = aws_ssm_parameter.fundraising_db_user.name

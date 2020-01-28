@@ -1,3 +1,5 @@
+data "aws_region" "current" {}
+
 locals {
   container_name = "metabase"
   container_port = 3000
