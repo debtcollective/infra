@@ -112,13 +112,13 @@ variable "db_connection_string" {
 }
 
 variable "db_pool_min" {
-  description = "Databse pool minimum"
-  default     = 5
+  description = "Database pool minimum"
+  default     = 1
 }
 
 variable "db_pool_max" {
   description = "Database pool maximum"
-  default     = 30
+  default     = 20
 }
 
 variable "discourse_base_url" {
