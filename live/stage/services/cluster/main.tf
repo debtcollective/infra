@@ -35,6 +35,8 @@ module "autoscaling" {
   key_name                = local.key_name
   security_groups         = local.ec2_security_group_ids
   subnet_ids              = local.subnet_ids
+  asg_max_size            = local.asg_max_size
+  asg_desired_count       = local.asg_desired_count
 
   tags = [
     {

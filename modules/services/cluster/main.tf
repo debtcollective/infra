@@ -20,7 +20,7 @@
  *```
  */
 locals {
-  name = "${var.environment}-alb"
+  alb_name = "${var.environment}-alb"
 }
 
 resource "aws_ecs_cluster" "cluster" {
@@ -28,7 +28,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 resource "aws_lb" "lb" {
-  name            = local.name
+  name            = local.alb_name
   security_groups = var.security_group_ids
   subnets         = var.subnet_ids
 
