@@ -58,8 +58,6 @@ module "container_definitions" {
     options = {
       "awslogs-region" = data.aws_region.current.name
       "awslogs-group"  = aws_cloudwatch_log_group.metabase.name
-      "max-size"       = "10m"
-      "max-file"       = "3"
     }
     secretOptions = null
   }
