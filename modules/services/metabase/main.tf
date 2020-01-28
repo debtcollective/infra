@@ -1,11 +1,11 @@
-data "aws_region" "current" {}
-
 locals {
   container_name = "metabase"
   container_port = 3000
   name_prefix    = "mb-${substr(var.environment, 0, 2)}-"
 
 }
+
+data "aws_region" "current" {}
 
 // Load balancer
 resource "aws_lb_target_group" "metabase" {
