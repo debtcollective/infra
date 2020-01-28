@@ -66,11 +66,6 @@ data "aws_ssm_parameter" "db_pass" {
   name = data.terraform_remote_state.postgres_setup.outputs.dispute_tools_db_pass_ssm_key
 }
 
-// hard coded until we migrate Discourse to this repo
-data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name = "/production/services/discourse/sso_jwt_secret"
-}
-
 
 locals {
   environment = "stage"
@@ -81,9 +76,8 @@ locals {
   db_port     = data.terraform_remote_state.postgres.outputs.db_port
   db_username = data.aws_ssm_parameter.db_user.value
 
-  redis_host     = data.terraform_remote_state.redis.outputs.host
-  redis_port     = data.terraform_remote_state.redis.outputs.port
-  sso_jwt_secret = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
+  redis_host = data.terraform_remote_state.redis.outputs.host
+  redis_port = data.terraform_remote_state.redis.outputs.port
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name

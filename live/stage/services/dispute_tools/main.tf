@@ -41,7 +41,7 @@ module "dispute_tools" {
   vpc_id         = local.vpc_id
 
   db_connection_string = "postgres://${local.db_username}:${local.db_password}@${local.db_host}:${local.db_port}/${local.db_name}"
-  sso_secret           = local.sso_jwt_secret
+  sso_secret           = var.sso_secret
 
   smtp_host            = var.smtp_host
   smtp_pass            = var.smtp_pass
