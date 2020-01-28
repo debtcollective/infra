@@ -95,11 +95,11 @@ locals {
   lb_zone_id     = data.terraform_remote_state.cluster.outputs.lb_zone_id
   vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
 
+  cluster_remote_state_workspace        = "${local.environment}-cluster"
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
   redis_remote_state_workspace          = "${local.environment}-redis"
   remote_state_organization             = "debtcollective"
   vpc_remote_state_workspace            = "${local.environment}-network"
-  cluster_remote_state_workspace        = "${local.environment}-cluster"
 }
