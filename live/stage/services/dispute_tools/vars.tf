@@ -55,10 +55,6 @@ variable "google_maps_api_key" {
   description = "Google maps API key"
 }
 
-variable "db_connection_string" {
-  description = "Connection string to DB instance"
-}
-
 variable "db_pool_min" {
   description = "Database pool minimum"
   default     = 1
@@ -67,10 +63,6 @@ variable "db_pool_min" {
 variable "db_pool_max" {
   description = "Database pool maximum"
   default     = 20
-}
-
-variable "discourse_base_url" {
-  description = "Discourse instance base url"
 }
 
 variable "discourse_api_key" {
@@ -88,14 +80,6 @@ variable "doe_disclosure_address" {}
 variable "doe_disclosure_city" {}
 variable "doe_disclosure_state" {}
 variable "doe_disclosure_zip" {}
-
-variable "site_url" {
-  description = "URL where the application is hosted"
-}
-
-variable "landing_page_url" {
-  description = "URL where the landing page is hosted"
-}
 
 variable "sentry_endpoint" {
   description = "Sentry DNS for error reporting"
