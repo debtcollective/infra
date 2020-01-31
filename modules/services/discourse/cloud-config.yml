@@ -57,3 +57,5 @@ runcmd:
   - sudo ./launcher bootstrap web
   - sudo ./launcher start web
   - sleep 60
+  - docker cp /opt/discourse/settings.yml web:/var/www/discourse
+  - docker exec -w /var/www/discourse web bash -c 'rake site_settings:import < settings.yml'

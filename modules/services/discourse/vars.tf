@@ -117,7 +117,7 @@ variable "instance_type" {
 
 variable "volume_size" {
   description = "EBS block size"
-  default     = 25
+  default     = 20
 }
 
 variable "acm_certificate_domain" {
