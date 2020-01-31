@@ -37,7 +37,62 @@ resource "aws_instance" "discourse" {
   vpc_security_group_ids = [var.security_groups]
   ami                    = data.aws_ami.ubuntu.id
   subnet_id              = var.subnet_id
-  user_data              = templatefile("${path.module}/user_data.sh", {})
+  user_data = templatefile("${path.module}/cloud-config.yml", {
+    # web.yml file
+    web_yml_b64 = base64encode(
+      templatefile("${path.module}/web.yml", {
+        discourse_smtp_port             = var.discourse_smtp_port
+        discourse_smtp_username         = var.discourse_smtp_user_name
+        discourse_smtp_password         = var.discourse_smtp_password
+        discourse_smtp_address          = var.discourse_smtp_address
+        discourse_smtp_enable_start_tls = var.discourse_smtp_enable_start_tls
+        discourse_smtp_authentication   = var.discourse_smtp_authentication
+
+        discourse_db_host     = var.discourse_db_host
+        discourse_db_port     = var.discourse_db_port
+        discourse_db_name     = var.discourse_db_name
+        discourse_db_username = var.discourse_db_username
+        discourse_db_password = var.discourse_db_password
+
+        discourse_developer_emails          = var.discourse_developer_emails
+        discourse_hostname                  = var.discourse_hostname
+        discourse_maxmind_license_key       = var.discourse_maxmind_license_key
+        discourse_letsencrypt_account_email = var.discourse_letsencrypt_account_email
+        discourse_sso_jwt_secret            = aws_ssm_parameter.discourse_sso_jwt_secret.value
+        discourse_sso_cookie_name           = "tdc_auth_${var.environment}"
+        discourse_sso_cookie_domain         = ".${var.domain}"
+
+        discourse_s3_region            = aws_s3_bucket.uploads.region
+        discourse_s3_access_key_id     = aws_iam_access_key.discourse.id
+        discourse_s3_secret_access_key = aws_iam_access_key.discourse.secret
+        discourse_s3_bucket            = aws_s3_bucket.uploads.id
+        discourse_s3_cdn_url           = "https://${aws_route53_record.cdn.fqdn}"
+      })
+
+    )
+    # settings.yml file
+    settings_yml_b64 = base64encode(
+      templatefile("${path.module}/settings.yml", {
+        sso_secret = "${var.discourse_sso_secret}"
+
+        reply_by_email_address = var.discourse_reply_by_email_address
+        pop3_polling_host      = var.discourse_pop3_polling_host
+        pop3_polling_port      = var.discourse_pop3_polling_port
+        pop3_polling_username  = var.discourse_pop3_polling_username
+        pop3_polling_password  = var.discourse_pop3_polling_password
+
+        ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
+
+        s3_access_key_id     = aws_iam_access_key.discourse.id
+        s3_secret_access_key = aws_iam_access_key.discourse.secret
+        s3_upload_bucket     = aws_s3_bucket.uploads.id
+        s3_cdn_url           = "https://${aws_route53_record.cdn.fqdn}"
+
+        backup_frequency = "3"
+        s3_backup_bucket = aws_s3_bucket.backups.id
+      })
+    )
+  })
 
   tags = {
     Name        = "discourse_${var.environment}"
@@ -105,21 +160,21 @@ resource "aws_instance" "discourse" {
     content = templatefile("${path.module}/settings.yml", {
       sso_secret = "${var.discourse_sso_secret}"
 
-      reply_by_email_address = "${var.discourse_reply_by_email_address}"
-      pop3_polling_host      = "${var.discourse_pop3_polling_host}"
-      pop3_polling_port      = "${var.discourse_pop3_polling_port}"
-      pop3_polling_username  = "${var.discourse_pop3_polling_username}"
-      pop3_polling_password  = "${var.discourse_pop3_polling_password}"
+      reply_by_email_address = var.discourse_reply_by_email_address
+      pop3_polling_host      = var.discourse_pop3_polling_host
+      pop3_polling_port      = var.discourse_pop3_polling_port
+      pop3_polling_username  = var.discourse_pop3_polling_username
+      pop3_polling_password  = var.discourse_pop3_polling_password
 
-      ga_universal_tracking_code = "${var.discourse_ga_universal_tracking_code}"
+      ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
 
-      s3_access_key_id     = "${aws_iam_access_key.discourse.id}"
-      s3_secret_access_key = "${aws_iam_access_key.discourse.secret}"
-      s3_upload_bucket     = "${aws_s3_bucket.uploads.id}"
+      s3_access_key_id     = aws_iam_access_key.discourse.id
+      s3_secret_access_key = aws_iam_access_key.discourse.secret
+      s3_upload_bucket     = aws_s3_bucket.uploads.id
       s3_cdn_url           = "https://${aws_route53_record.cdn.fqdn}"
 
       backup_frequency = "3"
-      s3_backup_bucket = "${aws_s3_bucket.backups.id}"
+      s3_backup_bucket = aws_s3_bucket.backups.id
     })
     destination = "~/settings.yml"
 
