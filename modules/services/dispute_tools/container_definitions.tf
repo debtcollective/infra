@@ -50,7 +50,7 @@ module "container_definitions" {
     },
     {
       name  = "SITE_URL",
-      value = var.domain
+      value = "https://${var.domain}"
     },
     {
       name  = "LANDING_PAGE_URL",
