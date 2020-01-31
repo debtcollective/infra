@@ -1,3 +1,17 @@
+# Dispute tools
+output "dispute_tools_db_user_ssm_key" {
+  value = aws_ssm_parameter.dispute_tools_db_user.name
+}
+
+output "dispute_tools_db_pass_ssm_key" {
+  value = aws_ssm_parameter.dispute_tools_db_pass.name
+}
+
+output "dispute_tools_db_name" {
+  value = "dispute_tools_${local.environment}"
+
+}
+
 # Metabase
 output "metabase_db_user_ssm_key" {
   value = aws_ssm_parameter.metabase_db_user.name
