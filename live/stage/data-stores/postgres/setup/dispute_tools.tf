@@ -8,7 +8,7 @@ resource "random_password" "dispute_tools_db_pass" {
   length           = 24
   special          = true
   min_special      = 1
-  override_special = "~*$^\\"
+  override_special = "~*^+"
 }
 
 // Store both in SSM
