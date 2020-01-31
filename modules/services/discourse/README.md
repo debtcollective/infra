@@ -12,7 +12,7 @@ module "discourse" {
   discourse_hostname = "community-staging.debtcollective.org"
 
   discourse_smtp_address   = var.smtp_address
-  discourse_smtp_user_name = var.smtp_username
+  discourse_smtp_username = var.smtp_username
   discourse_smtp_password  = var.smtp_password
 
   discourse_db_host     = aws_db_instance.discourse.address

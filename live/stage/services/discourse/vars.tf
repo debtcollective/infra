@@ -1,7 +1,3 @@
-variable "environment" {
-  description = "Environment name"
-}
-
 variable "discourse_hostname" {
   description = "Discourse hostname"
 }

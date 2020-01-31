@@ -42,7 +42,7 @@ resource "aws_instance" "discourse" {
     web_yml_b64 = base64encode(
       templatefile("${path.module}/web.yml", {
         discourse_smtp_port             = var.discourse_smtp_port
-        discourse_smtp_username         = var.discourse_smtp_user_name
+        discourse_smtp_username         = var.discourse_smtp_username
         discourse_smtp_password         = var.discourse_smtp_password
         discourse_smtp_address          = var.discourse_smtp_address
         discourse_smtp_enable_start_tls = var.discourse_smtp_enable_start_tls

@@ -1,3 +1,7 @@
+locals {
+  cdn_alias = "community-cdn-${substr(var.environment, 0, 4)}"
+}
+
 data "aws_acm_certificate" "domain" {
   domain   = var.acm_certificate_domain
   statuses = ["ISSUED"]

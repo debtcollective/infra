@@ -1,6 +1,5 @@
 locals {
   s3_origin_id = "community${title(var.environment)}"
-  cdn_alias    = "community-cdn-${substr(var.environment, 0, 4)}"
 }
 
 resource "aws_cloudfront_origin_access_identity" "uploads" {
