@@ -120,9 +120,10 @@ variable "volume_size" {
   default     = 20
 }
 
-variable "acm_certificate_domain" {
-  description = "ACM certificate domain name to be used for CDN SSL"
-  default     = "*.debtcollective.org"
+variable "domain" {
+  description "Fully Qualified Domain Name"
 }
 
-variable "domain" {}
+variable "cdn_url" {
+  description "Fully Qualified Domain Name for CDN"
+}

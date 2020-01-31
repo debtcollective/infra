@@ -121,4 +121,10 @@ variable "acm_certificate_domain" {
   default     = "*.debtcollective.org"
 }
 
-variable "domain" {}
+variable "domain" {
+  description "Fully Qualified Domain Name"
+}
+
+variable "cdn_url" {
+  description "Fully Qualified Domain Name for CDN"
+}

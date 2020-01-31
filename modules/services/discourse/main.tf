@@ -66,7 +66,7 @@ resource "aws_instance" "discourse" {
         discourse_s3_access_key_id     = aws_iam_access_key.discourse.id
         discourse_s3_secret_access_key = aws_iam_access_key.discourse.secret
         discourse_s3_bucket            = aws_s3_bucket.uploads.id
-        discourse_s3_cdn_url           = "https://${aws_route53_record.cdn.fqdn}"
+        discourse_s3_cdn_url           = "https://${var.cdn_url}"
       })
     )
 
@@ -86,7 +86,7 @@ resource "aws_instance" "discourse" {
         s3_access_key_id     = aws_iam_access_key.discourse.id
         s3_secret_access_key = aws_iam_access_key.discourse.secret
         s3_upload_bucket     = aws_s3_bucket.uploads.id
-        s3_cdn_url           = "https://${aws_route53_record.cdn.fqdn}"
+        s3_cdn_url           = "https://${var.cdn_url}"
 
         backup_frequency = "3"
         s3_backup_bucket = aws_s3_bucket.backups.id
