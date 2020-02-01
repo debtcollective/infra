@@ -4,7 +4,8 @@ resource "aws_iam_user" "discourse" {
   path = "/terraform/${local.environment}/"
 
   tags = {
-    Terraform = true
+    Terraform   = true
+    Environment = local.environment
   }
 }
 
