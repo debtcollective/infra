@@ -71,10 +71,11 @@ locals {
   db_port    = data.terraform_remote_state.postgres.outputs.db_port
   db_user    = data.aws_ssm_parameter.db_user.value
 
-  ssh_key_pair_name     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
+  key_pair_name         = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
   vpc_id                = data.terraform_remote_state.vpc.outputs.vpc_id
   subnet_id             = data.terraform_remote_state.vpc.outputs.public_subnet_ids[0]
   ec2_security_group_id = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
+  instance_type         = "t3a.small"
 
   cluster_remote_state_workspace        = "${local.environment}-cluster"
   iam_remote_state_workspace            = "global-iam"
