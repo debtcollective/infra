@@ -63,8 +63,8 @@ resource "aws_instance" "discourse" {
         discourse_sso_cookie_domain         = ".${var.domain}"
 
         discourse_s3_region            = var.uploads_bucket_region
-        discourse_s3_access_key_id     = aws_iam_access_key.discourse.id
-        discourse_s3_secret_access_key = aws_iam_access_key.discourse.secret
+        discourse_s3_access_key_id     = var.discourse_aws_access_key_id
+        discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
         discourse_s3_bucket            = var.uploads_bucket_name
         discourse_s3_cdn_url           = "https://${var.cdn_url}"
       })
@@ -83,8 +83,8 @@ resource "aws_instance" "discourse" {
 
         ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
 
-        s3_access_key_id     = aws_iam_access_key.discourse.id
-        s3_secret_access_key = aws_iam_access_key.discourse.secret
+        s3_access_key_id     = var.discourse_aws_access_key_id
+        s3_secret_access_key = var.discourse_aws_secret_access_key
         s3_upload_bucket     = var.uploads_bucket_name
         s3_cdn_url           = "https://${var.cdn_url}"
 

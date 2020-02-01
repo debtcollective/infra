@@ -143,3 +143,11 @@ variable "discourse_backups_bucket_name" {
 variable "discourse_backups_bucket_region" {
   description = "Backups S3 bucket region"
 }
+
+variable "discourse_aws_access_key_id" {
+  description = "AWS access key id for S3 uploads"
+}
+
+variable "discourse_aws_secret_access_key" {
+  description = "AWS access key secret for S3 uploads"
+}

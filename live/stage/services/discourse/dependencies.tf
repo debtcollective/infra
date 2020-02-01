@@ -57,7 +57,7 @@ data "aws_ssm_parameter" "db_pass" {
 locals {
   environment = "stage"
 
-  subdomain           = "discourse-${local.environment}"
+  subdomain           = "discourse-infra"
   domain              = "debtcollective.org"
   fqdn                = "${local.subdomain}.debtcollective.org"
   s3_origin_id        = "${local.subdomain}"

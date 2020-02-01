@@ -54,10 +54,13 @@ module "discourse" {
   discourse_ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
   discourse_maxmind_license_key        = var.discourse_maxmind_license_key
 
-  discourse_uploads_bucket_name   = local.uploads_bucket_name
+  discourse_uploads_bucket_name   = aws_s3_bucket.uploads.name
   discourse_uploads_bucket_region = aws_s3_bucket.uploads.region
-  discourse_backups_bucket_name   = local.backups_bucket_name
+  discourse_backups_bucket_name   = aws_s3_bucket.backups.name
   discourse_backups_bucket_region = aws_s3_bucket.backups.region
+
+  discourse_aws_access_key_id     = aws_iam_access_key.discourse.id
+  discourse_aws_secret_access_key = aws_iam_access_key.discourse.secret
 
   key_name        = local.ssh_key_pair_name
   subnet_id       = local.subnet_id

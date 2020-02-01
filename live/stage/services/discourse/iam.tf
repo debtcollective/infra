@@ -1,6 +1,11 @@
 // User for Discourse s3 uploads
 resource "aws_iam_user" "discourse" {
-  name = "community-${var.environment}"
+  name = "discourse_uploads"
+  path = "/terraform/${var.environment}/"
+
+  tags = {
+    Terraform = true
+  }
 }
 
 data "aws_iam_policy_document" "discourse" {
@@ -37,7 +42,7 @@ data "aws_iam_policy_document" "discourse" {
 }
 
 resource "aws_iam_user_policy" "user_policy" {
-  name_prefix = "CommunityPolicy${title(var.environment)}"
+  name_prefix = "DiscoursePolicy${title(var.environment)}"
   user        = aws_iam_user.discourse.name
 
   policy = data.aws_iam_policy_document.discourse.json
