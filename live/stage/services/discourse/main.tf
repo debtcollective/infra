@@ -24,7 +24,7 @@ resource "aws_route53_record" "discourse" {
   name    = local.subdomain
   type    = "A"
   ttl     = 300
-  records = module.discourse.public_ip
+  records = [module.discourse.public_ip]
 }
 
 module "discourse" {

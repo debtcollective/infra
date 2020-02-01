@@ -64,7 +64,7 @@ locals {
   s3_origin_id           = "${local.subdomain}"
   uploads_bucket_name    = "discourse-uploads-${local.environment}"
   backups_bucket_name    = "discourse-backups-${local.environment}"
-  cdn_url                = ""
+  cdn_url                = "discourse-cdn"
 
   db_address = data.terraform_remote_state.postgres.outputs.db_address
   db_name    = data.terraform_remote_state.postgres_setup.outputs.discourse_db_name

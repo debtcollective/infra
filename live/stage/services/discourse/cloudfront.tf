@@ -20,6 +20,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
+  price_class         = "PriceClass_200"
 
   aliases = ["${local.cdn_url}.${local.domain}"]
 
