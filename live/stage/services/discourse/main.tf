@@ -16,31 +16,24 @@ provider "aws" {
 }
 
 data "aws_route53_zone" "primary" {
-  name = "debtcollective.org"
+  name = local.domain
 }
 
 resource "aws_route53_record" "discourse" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "discourse-${local.environment}"
+  name    = local.subdomain
   type    = "A"
-
-  alias {
-    name                   = local.lb_dns_name
-    zone_id                = local.lb_zone_id
-    evaluate_target_health = true
-  }
-}
-
-locals {
-  domain = aws_route53_record.discourse.fqdn
+  ttl     = 300
+  records = module.discourse.public_ip
 }
 
 module "discourse" {
   source      = "../../../../modules/services/discourse"
   environment = local.environment
 
-  domain             = local.domain
-  discourse_hostname = local.domain
+  domain             = local.fqdn
+  cdn_url            = local.cdn_url
+  discourse_hostname = local.fqdn
 
   discourse_smtp_address  = var.discourse_smtp_address
   discourse_smtp_username = var.discourse_smtp_username
@@ -61,7 +54,10 @@ module "discourse" {
   discourse_ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
   discourse_maxmind_license_key        = var.discourse_maxmind_license_key
 
-  acm_certificate_domain = "*.${local.domain}"
+  discourse_uploads_bucket_name   = local.uploads_bucket_name
+  discourse_uploads_bucket_region = aws_s3_bucket.uploads.region
+  discourse_backups_bucket_name   = local.backups_bucket_name
+  discourse_backups_bucket_region = aws_s3_bucket.backups.region
 
   key_name        = local.ssh_key_pair_name
   subnet_id       = local.subnet_id

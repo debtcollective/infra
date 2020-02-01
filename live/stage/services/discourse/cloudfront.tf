@@ -1,7 +1,3 @@
-locals {
-  s3_origin_id = "community${title(var.environment)}"
-}
-
 resource "aws_cloudfront_origin_access_identity" "uploads" {
   comment = "Community uploads bucket origin"
 }
@@ -58,5 +54,17 @@ resource "aws_cloudfront_distribution" "cdn" {
   viewer_certificate {
     ssl_support_method  = "sni-only"
     acm_certificate_arn = data.aws_acm_certificate.domain.arn
+  }
+}
+
+resource "aws_route53_record" "cdn" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = local.cdn_alias
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.cdn.domain_name
+    zone_id                = aws_cloudfront_distribution.cdn.hosted_zone_id
+    evaluate_target_health = false
   }
 }

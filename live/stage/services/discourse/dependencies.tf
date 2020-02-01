@@ -57,15 +57,20 @@ data "aws_ssm_parameter" "db_pass" {
 locals {
   environment = "stage"
 
+  subdomain           = "discourse-${local.environment}"
+  domain              = "debtcollective.org"
+  fqdn                = "${local.subdomain}.debtcollective.org"
+  s3_origin_id        = "${local.subdomain}"
+  uploads_bucket_name = "discourse-uploads-${local.environment}"
+  backups_bucket_name = "discourse-backups-${local.environment}"
+  cdn_url             = ""
+
   db_address = data.terraform_remote_state.postgres.outputs.db_address
   db_name    = data.terraform_remote_state.postgres_setup.outputs.discourse_db_name
   db_pass    = data.aws_ssm_parameter.db_pass.value
   db_port    = data.terraform_remote_state.postgres.outputs.db_port
   db_user    = data.aws_ssm_parameter.db_user.value
 
-  lb_dns_name           = data.terraform_remote_state.cluster.outputs.lb_dns_name
-  lb_listener_id        = data.terraform_remote_state.cluster.outputs.lb_listener_id
-  lb_zone_id            = data.terraform_remote_state.cluster.outputs.lb_zone_id
   ssh_key_pair_name     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
   vpc_id                = data.terraform_remote_state.vpc.outputs.vpc_id
   subnet_id             = data.terraform_remote_state.vpc.outputs.public_subnet_ids[0]

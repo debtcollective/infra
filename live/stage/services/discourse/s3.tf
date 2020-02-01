@@ -1,6 +1,6 @@
 // S3 buckets and permissions
 resource "aws_s3_bucket" "uploads" {
-  bucket = "community-uploads-${var.environment}"
+  bucket = local.uploads_bucket_name
   acl    = "public-read"
 
   cors_rule {
@@ -24,17 +24,17 @@ resource "aws_s3_bucket" "uploads" {
 
   tags = {
     Terraform   = true
-    Name        = "community-uploads-${var.environment}"
-    Environment = var.environment
+    Name        = local.uploads_bucket_name
+    Environment = local.environment
   }
 }
 
 resource "aws_s3_bucket" "backups" {
-  bucket = "community-backups-${var.environment}"
+  bucket = local.backups_bucket_name
 
   tags = {
     Terraform   = true
-    Name        = "community-backups-${var.environment}"
-    Environment = var.environment
+    Name        = local.backups_bucket_name
+    Environment = local.environment
   }
 }

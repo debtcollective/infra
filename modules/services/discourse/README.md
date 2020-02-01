@@ -2,32 +2,6 @@
 
 Discourse module creates a EC2 instance with Discourse.
 
-## Usage:
-
-```hcl
-module "discourse" {
-  source      = "."
-  environment = var.environment
-
-  discourse_hostname = "community-staging.debtcollective.org"
-
-  discourse_smtp_address   = var.smtp_address
-  discourse_smtp_username = var.smtp_username
-  discourse_smtp_password  = var.smtp_password
-
-  discourse_db_host     = aws_db_instance.discourse.address
-  discourse_db_name     = "discourse_${var.environment
-  discourse_db_username = var.discourse_db_username
-  discourse_db_password = var.discourse_db_password
-
-  discourse_redis_host = aws_elasticache_cluster.discourse.cache_nodes.0.address
-
-  key_name        = aws_key_pair.development.key_name
-  subnet_id       = element(module.vpc.public_subnet_ids, 0)
-  security_groups = module.vpc.ec2_security_group_id
-}
-```
-
 ## Setup steps
 
 In order to enable some features in Discourse, we need to do some manual

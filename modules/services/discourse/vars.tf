@@ -121,9 +121,25 @@ variable "volume_size" {
 }
 
 variable "domain" {
-  description "Fully Qualified Domain Name"
+  description = "Fully Qualified Domain Name"
 }
 
 variable "cdn_url" {
-  description "Fully Qualified Domain Name for CDN"
+  description = "Fully Qualified Domain Name for CDN"
+}
+
+variable "discourse_uploads_bucket_name" {
+  description = "Uploads S3 bucket name"
+}
+
+variable "discourse_uploads_bucket_region" {
+  description = "Uploads S3 bucket region"
+}
+
+variable "discourse_backups_bucket_name" {
+  description = "Backups S3 bucket name"
+}
+
+variable "discourse_backups_bucket_region" {
+  description = "Backups S3 bucket region"
 }
