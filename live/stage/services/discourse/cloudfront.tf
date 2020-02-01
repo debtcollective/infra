@@ -1,3 +1,8 @@
+data "aws_acm_certificate" "domain" {
+  domain   = local.acm_certificate_domain
+  statuses = ["ISSUED"]
+}
+
 resource "aws_cloudfront_origin_access_identity" "uploads" {
   comment = "discourse-${local.environment} uploads origin"
 }
@@ -16,7 +21,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
-  aliases = ["${local.cdn_url}.${var.domain}"]
+  aliases = ["${local.cdn_url}.${local.domain}"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -46,7 +51,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   tags = {
     Terraform   = true
     Name        = local.s3_origin_id
-    Environment = var.environment
+    Environment = local.environment
   }
 
   // We are using a custom alias

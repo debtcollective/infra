@@ -57,13 +57,14 @@ data "aws_ssm_parameter" "db_pass" {
 locals {
   environment = "stage"
 
-  subdomain           = "discourse-infra"
-  domain              = "debtcollective.org"
-  fqdn                = "${local.subdomain}.debtcollective.org"
-  s3_origin_id        = "${local.subdomain}"
-  uploads_bucket_name = "discourse-uploads-${local.environment}"
-  backups_bucket_name = "discourse-backups-${local.environment}"
-  cdn_url             = ""
+  acm_certificate_domain = "*.debtcollective.org"
+  subdomain              = "discourse-infra"
+  domain                 = "debtcollective.org"
+  fqdn                   = "${local.subdomain}.debtcollective.org"
+  s3_origin_id           = "${local.subdomain}"
+  uploads_bucket_name    = "discourse-uploads-${local.environment}"
+  backups_bucket_name    = "discourse-backups-${local.environment}"
+  cdn_url                = ""
 
   db_address = data.terraform_remote_state.postgres.outputs.db_address
   db_name    = data.terraform_remote_state.postgres_setup.outputs.discourse_db_name
@@ -71,7 +72,7 @@ locals {
   db_port    = data.terraform_remote_state.postgres.outputs.db_port
   db_user    = data.aws_ssm_parameter.db_user.value
 
-  key_pair_name         = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
+  ssh_key_pair_name     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
   vpc_id                = data.terraform_remote_state.vpc.outputs.vpc_id
   subnet_id             = data.terraform_remote_state.vpc.outputs.public_subnet_ids[0]
   ec2_security_group_id = data.terraform_remote_state.vpc.outputs.ec2_security_group_id

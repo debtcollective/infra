@@ -1,7 +1,3 @@
-variable "discourse_hostname" {
-  description = "Discourse hostname"
-}
-
 variable "discourse_developer_emails" {
   description = "Discourse developer emails for notifications"
   default     = "orlando@debtcollective.org"
