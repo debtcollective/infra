@@ -1,10 +1,6 @@
-#include https://get.docker.com
-
+#cloud-config
 repo_update: true
 repo_upgrade: security
-
-packages:
-  - htop
 
 ssh_authorized_keys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNmbm3AR92kE0igfVUJ9ZpY48oVS4Po+qH/3Jb6gF5NkHju+67Rf2MDkWQ4NzNp9yjlxL7LQk7c0dNuIR++GSS6dOLxixPXnLcYadqJF2h5qPV8RMNkOTuHR/zWPPEh77Xur8NoFtroBaCEMulfmGNUauyaNcV/KoK4/lxN53JItJaUt7OzdMU12jOdLsN985Neu2rPVIFv3eYty/rSEtTWkmIwVvVXkpFzoRTuNM+hYTPiAniHiON/h+wfNG5Ei4Lu/dGhy0NZRavF9TQTvLv/vsXQta6q+HzvF4IYsj2Dt0YBvNNL/uyO4mfA08U0jjnJCh7sjIHHrju9Q/i6r2sjNOoiynDnorUXAlUn++gkyFlksnRMLTxAKgvwYVsiQMjoOdIacp3Xwn11BaO6VsGf/9ub+P9B5XbG6gfwtVEWaag2FkWuIeFLF6qMwMAqpZFSG+lFO0iqFwxTO7MnwRTDxmiE13tfl3QHdciTc+qjtnNEPIhbJR0pQmtwZnnOmFdrxcb8phwdZOvUFA0OSXEL0VwvM6NaORpVxfotdWyZJ/JIhv1Jre0h+folgd1FIuNjZ7dVGQvbEwwVZDbsPHZNKbacHjD/sj9sK+rEll1RKTS8ReDBPWek1aoA9V80FSV6aMtI4/pVOXP6/1CBYEgB4nzZUBlzlS3uiCx9C6s4Q== orlando@hashlabs.com
@@ -13,7 +9,7 @@ ssh_authorized_keys:
 #  the null route can be removed (by root) with:
 #    route del -host 169.254.169.254 reject
 # default: false (service available)
-disable_ec2_metadata: true
+disable_ec2_metadata: false
 
 # copy discourse settings
 write_files:
@@ -25,18 +21,16 @@ write_files:
     encoding: b64
     content: ${settings_yml_b64}
 
-# Add ssh keys for ubuntu user (/home/ubuntu/.ssh/authorized_keys)
 runcmd:
+  # Add ssh keys for ubuntu user (/home/ubuntu/.ssh/authorized_keys)
   - mkdir -p /home/ubuntu/.ssh
   - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNmbm3AR92kE0igfVUJ9ZpY48oVS4Po+qH/3Jb6gF5NkHju+67Rf2MDkWQ4NzNp9yjlxL7LQk7c0dNuIR++GSS6dOLxixPXnLcYadqJF2h5qPV8RMNkOTuHR/zWPPEh77Xur8NoFtroBaCEMulfmGNUauyaNcV/KoK4/lxN53JItJaUt7OzdMU12jOdLsN985Neu2rPVIFv3eYty/rSEtTWkmIwVvVXkpFzoRTuNM+hYTPiAniHiON/h+wfNG5Ei4Lu/dGhy0NZRavF9TQTvLv/vsXQta6q+HzvF4IYsj2Dt0YBvNNL/uyO4mfA08U0jjnJCh7sjIHHrju9Q/i6r2sjNOoiynDnorUXAlUn++gkyFlksnRMLTxAKgvwYVsiQMjoOdIacp3Xwn11BaO6VsGf/9ub+P9B5XbG6gfwtVEWaag2FkWuIeFLF6qMwMAqpZFSG+lFO0iqFwxTO7MnwRTDxmiE13tfl3QHdciTc+qjtnNEPIhbJR0pQmtwZnnOmFdrxcb8phwdZOvUFA0OSXEL0VwvM6NaORpVxfotdWyZJ/JIhv1Jre0h+folgd1FIuNjZ7dVGQvbEwwVZDbsPHZNKbacHjD/sj9sK+rEll1RKTS8ReDBPWek1aoA9V80FSV6aMtI4/pVOXP6/1CBYEgB4nzZUBlzlS3uiCx9C6s4Q== orlando@hashlabs.com" >> /home/ubuntu/.ssh/authorized_keys
 
-# change ssh port
-runcmd:
+  # change ssh port
   - perl -pi -e 's/^#?Port 22$/Port 12345/' /etc/ssh/sshd_config
   - service sshd restart || service ssh restart
 
-# enable swap
-runcmd:
+  # enable swap
   - sudo fallocate -l 4G /swapfile
   - ls -lh /swapfile
   - sudo chmod 600 /swapfile
@@ -46,8 +40,7 @@ runcmd:
   - echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
   - echo 'vm.vfs_cache_pressure=50' | sudo tee -a /etc/sysctl.conf
 
-# install discourse
-runcmd:
+  # install discourse
   - sudo mkdir -p /opt/discourse
   - sudo chown ubuntu.ubuntu /opt/discourse
   - git clone https://github.com/discourse/discourse_docker.git /opt/discourse
@@ -59,3 +52,7 @@ runcmd:
   - sleep 60
   - docker cp /opt/discourse/settings.yml web:/var/www/discourse
   - docker exec -w /var/www/discourse web bash -c 'rake site_settings:import < settings.yml'
+
+packages:
+  - htop
+#include https://get.docker.com
