@@ -42,7 +42,7 @@ module "discourse" {
   discourse_db_host     = local.db_address
   discourse_db_name     = local.db_name
   discourse_db_username = local.db_user
-  discourse_db_password = local.db_user
+  discourse_db_password = local.db_pass
   discourse_sso_secret  = var.discourse_sso_secret
 
   discourse_reply_by_email_address = var.discourse_reply_by_email_address
