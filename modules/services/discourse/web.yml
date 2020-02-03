@@ -29,11 +29,16 @@ expose:
   - '80:80'
   - '443:443'
 hooks:
-  after_assets_precompile:
-    - exec:
-        cd: $home
-        cmd:
-          - 'bundle exec rake s3:upload_assets'
+  # uncomment code below after install and configuration
+  # discourse complains on bootstrap that s3 settings are not set
+  # which is true when building for the first time
+
+  #after_assets_precompile:
+  #  - exec:
+  #      cd: $home
+  #      cmd:
+  #        - 'bundle exec rake s3:upload_assets'
+
   after_code:
     - exec:
         cd: $home/plugins
@@ -54,8 +59,8 @@ hooks:
     - exec:
         cd: $home
         cmd:
-          - 'apt-get update && apt-get -y install postgresql-client-10'
-          - 'ln -s -f /usr/lib/postgresql/10/bin/pg_dump /usr/bin/pg_dump'
+          - 'apt-get update && apt-get -y install postgresql-client-11'
+          - 'ln -s -f /usr/lib/postgresql/11/bin/pg_dump /usr/bin/pg_dump'
 templates:
   - templates/redis.template.yml
   - templates/web.template.yml
