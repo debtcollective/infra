@@ -1,0 +1,76 @@
+---
+env:
+  DISCOURSE_DB_HOST: '${discourse_db_host}'
+  DISCOURSE_DB_NAME: '${discourse_db_name}'
+  DISCOURSE_DB_PASSWORD: '${discourse_db_password}'
+  DISCOURSE_DB_PORT: '${discourse_db_port}'
+  DISCOURSE_DB_USERNAME: '${discourse_db_username}'
+  DISCOURSE_DEVELOPER_EMAILS: '${discourse_developer_emails}'
+  DISCOURSE_ENABLE_CORS: true
+  DISCOURSE_HOSTNAME: '${discourse_hostname}'
+  DISCOURSE_MAXMIND_LICENSE_KEY: '${discourse_maxmind_license_key}'
+  DISCOURSE_S3_ACCESS_KEY_ID: '${discourse_s3_access_key_id}'
+  DISCOURSE_S3_BUCKET: '${discourse_s3_bucket}'
+  DISCOURSE_S3_CDN_URL: '${discourse_s3_cdn_url}'
+  DISCOURSE_S3_REGION: '${discourse_s3_region}'
+  DISCOURSE_S3_SECRET_ACCESS_KEY: '${discourse_s3_secret_access_key}'
+  DISCOURSE_SMTP_ADDRESS: '${discourse_smtp_address}'
+  DISCOURSE_SMTP_AUTHENTICATION: '${discourse_smtp_authentication}'
+  DISCOURSE_SMTP_PASSWORD: '${discourse_smtp_password}'
+  DISCOURSE_SMTP_PORT: '${discourse_smtp_port}'
+  DISCOURSE_SMTP_USER_NAME: '${discourse_smtp_username}'
+  DISCOURSE_SSO_COOKIE_DOMAIN: '${discourse_sso_cookie_domain}'
+  DISCOURSE_SSO_COOKIE_NAME: '${discourse_sso_cookie_name}'
+  DISCOURSE_SSO_JWT_SECRET: '${discourse_sso_jwt_secret}'
+  LANG: en_US.UTF-8
+  LETSENCRYPT_ACCOUNT_EMAIL: '${discourse_letsencrypt_account_email}'
+  USE_DB_S3_CONFIG: true
+expose:
+  - '80:80'
+  - '443:443'
+hooks:
+  # uncomment code below after install and configuration
+  # discourse complains on bootstrap that s3 settings are not set
+  # which is true when building for the first time
+
+  #after_assets_precompile:
+  #  - exec:
+  #      cd: $home
+  #      cmd:
+  #        - 'bundle exec rake s3:upload_assets'
+
+  after_code:
+    - exec:
+        cd: $home/plugins
+        cmd:
+          - 'git clone https://github.com/discourse/docker_manager.git'
+          - 'git clone https://github.com/discourse/discourse-assign.git'
+          - 'git clone https://github.com/discourse/discourse-staff-notes.git'
+          - 'git clone https://github.com/angusmcleod/discourse-events.git'
+          - 'git clone https://github.com/angusmcleod/discourse-locations.git'
+          - 'git clone https://github.com/angusmcleod/discourse-custom-wizard.git'
+          - 'git clone https://github.com/debtcollective/discourse-debtcollective-theme.git'
+          - 'git clone https://github.com/debtcollective/discourse-debtcollective-wizards.git'
+          - 'git clone https://github.com/debtcollective/discourse-debtcollective-private-message.git'
+          - 'git clone https://github.com/debtcollective/discourse-debtcollective-sso.git'
+          - 'git clone https://github.com/debtcollective/discourse-debtcollective-signup-fields.git'
+          - 'git clone https://github.com/debtcollective/discourse-debtcollective-collectives.git'
+          - 'git clone https://github.com/debtcollective/discourse-sentry.git'
+    - exec:
+        cd: $home
+        cmd:
+          - 'apt-get update && apt-get -y install postgresql-client-11'
+          - 'ln -s -f /usr/lib/postgresql/11/bin/pg_dump /usr/bin/pg_dump'
+templates:
+  - templates/redis.template.yml
+  - templates/web.template.yml
+  - templates/web.ratelimited.template.yml
+  - templates/web.ssl.template.yml
+  - templates/web.letsencrypt.ssl.template.yml
+volumes:
+  - volume:
+      guest: /shared
+      host: /opt/discourse/shared/web
+  - volume:
+      guest: /var/log
+      host: /opt/discourse/shared/web/log/var-log

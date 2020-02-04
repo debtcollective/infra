@@ -1,3 +1,17 @@
+# Discourse
+output "discourse_db_user_ssm_key" {
+  value = aws_ssm_parameter.discourse_db_user.name
+}
+
+output "discourse_db_pass_ssm_key" {
+  value = aws_ssm_parameter.discourse_db_pass.name
+}
+
+output "discourse_db_name" {
+  value = "discourse_${local.environment}"
+
+}
+
 # Dispute tools
 output "dispute_tools_db_user_ssm_key" {
   value = aws_ssm_parameter.dispute_tools_db_user.name
