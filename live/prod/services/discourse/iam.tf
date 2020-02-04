@@ -1,6 +1,6 @@
 // User for Discourse s3 uploads
 resource "aws_iam_user" "discourse" {
-  name = "discourse_uploads"
+  name = "discourse_uploads_${local.environment}"
   path = "/terraform/${local.environment}/"
 
   tags = {

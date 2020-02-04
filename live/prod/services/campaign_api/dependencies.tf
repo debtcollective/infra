@@ -55,7 +55,7 @@ data "aws_ssm_parameter" "db_pass" {
 }
 
 data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name = "/prod/services/discourse/sso_jwt_secret"
+  name = "/${local.environment}/services/discourse/sso_jwt_secret"
 }
 
 locals {

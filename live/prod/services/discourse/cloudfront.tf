@@ -1,4 +1,12 @@
+# cloudfront requires certificate from us-east-1
+provider "aws" {
+  version = "~> 2.0"
+  region  = "us-east-1"
+  alias   = "use1"
+}
+
 data "aws_acm_certificate" "domain" {
+  provider = aws.use1
   domain   = local.acm_certificate_domain
   statuses = ["ISSUED"]
 }

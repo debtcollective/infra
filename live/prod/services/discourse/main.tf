@@ -62,6 +62,8 @@ module "discourse" {
   discourse_aws_access_key_id     = aws_iam_access_key.discourse.id
   discourse_aws_secret_access_key = aws_iam_access_key.discourse.secret
 
+  volume_size = 30
+
   key_name        = local.ssh_key_pair_name
   subnet_id       = local.subnet_id
   security_groups = local.ec2_security_group_id

@@ -4,9 +4,10 @@ resource "random_string" "discourse_sso_jwt_secret" {
 }
 
 resource "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name  = "/${var.environment}/services/discourse/sso_jwt_secret"
-  type  = "SecureString"
-  value = random_string.discourse_sso_jwt_secret.result
+  name      = "/${var.environment}/services/discourse/sso_jwt_secret"
+  type      = "SecureString"
+  value     = random_string.discourse_sso_jwt_secret.result
+  overwrite = true
 }
 
 // ec2 instance
@@ -108,11 +109,7 @@ resource "aws_instance" "discourse" {
     delete_on_termination = true
   }
 
-  timeouts {
-    create = "30m"
-  }
-
   lifecycle {
-    ignore_changes = ["user_data"]
+    ignore_changes = [user_data]
   }
 }
