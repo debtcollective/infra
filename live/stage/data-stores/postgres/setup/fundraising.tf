@@ -43,7 +43,7 @@ resource "postgresql_database" "fundraising" {
 
 resource "postgresql_default_privileges" "fundraising_tables" {
   database    = postgresql_database.fundraising.name
-  depends_on  = ["postgresql_database.fundraising", "postgresql_role.fundraising"]
+  depends_on  = [postgresql_database.fundraising, postgresql_role.fundraising]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -53,7 +53,7 @@ resource "postgresql_default_privileges" "fundraising_tables" {
 
 resource "postgresql_default_privileges" "fundraising_sequence" {
   database    = postgresql_database.fundraising.name
-  depends_on  = ["postgresql_database.fundraising", "postgresql_role.fundraising"]
+  depends_on  = [postgresql_database.fundraising, postgresql_role.fundraising]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges

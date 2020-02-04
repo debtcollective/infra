@@ -43,7 +43,7 @@ resource "postgresql_database" "disputes_api" {
 
 resource "postgresql_default_privileges" "disputes_api_tables" {
   database    = postgresql_database.disputes_api.name
-  depends_on  = ["postgresql_database.disputes_api", "postgresql_role.disputes_api"]
+  depends_on  = [postgresql_database.disputes_api, postgresql_role.disputes_api]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -53,7 +53,7 @@ resource "postgresql_default_privileges" "disputes_api_tables" {
 
 resource "postgresql_default_privileges" "disputes_api_sequence" {
   database    = postgresql_database.disputes_api.name
-  depends_on  = ["postgresql_database.disputes_api", "postgresql_role.disputes_api"]
+  depends_on  = [postgresql_database.disputes_api, postgresql_role.disputes_api]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges

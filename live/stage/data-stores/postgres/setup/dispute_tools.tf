@@ -43,7 +43,7 @@ resource "postgresql_database" "dispute_tools" {
 
 resource "postgresql_default_privileges" "dispute_tools_tables" {
   database    = postgresql_database.dispute_tools.name
-  depends_on  = ["postgresql_database.dispute_tools", "postgresql_role.dispute_tools"]
+  depends_on  = [postgresql_database.dispute_tools, postgresql_role.dispute_tools]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -53,7 +53,7 @@ resource "postgresql_default_privileges" "dispute_tools_tables" {
 
 resource "postgresql_default_privileges" "dispute_tools_sequence" {
   database    = postgresql_database.dispute_tools.name
-  depends_on  = ["postgresql_database.dispute_tools", "postgresql_role.dispute_tools"]
+  depends_on  = [postgresql_database.dispute_tools, postgresql_role.dispute_tools]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges
