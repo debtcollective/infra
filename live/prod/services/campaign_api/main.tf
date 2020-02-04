@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "campaign_api" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "campaign-api"
+  name    = "campaign-api-prod"
   type    = "A"
 
   alias {

@@ -33,6 +33,11 @@ variable "desired_count" {
   default     = 1
 }
 
+variable "log_retention_in_days" {
+  description = "Cloudwatch logs retention"
+  default     = 3
+}
+
 // Fundraising app variables
 variable "database_url" {
   description = "Postgres database URL"

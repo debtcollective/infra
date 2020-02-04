@@ -54,9 +54,8 @@ data "aws_ssm_parameter" "db_pass" {
   name = data.terraform_remote_state.postgres_setup.outputs.campaign_api_db_pass_ssm_key
 }
 
-// hard coded until we migrate Discourse to this repo
 data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name = "/production/services/discourse/sso_jwt_secret"
+  name = "/prod/services/discourse/sso_jwt_secret"
 }
 
 locals {
