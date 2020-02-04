@@ -8,7 +8,7 @@ variable "key_name" {
 
 variable "instance_type" {
   description = "EC2 instance type for Bastion"
-  default     = "t3.nano"
+  default     = "t3a.nano"
 }
 
 variable "subnet_id" {
@@ -17,5 +17,5 @@ variable "subnet_id" {
 
 variable "vpc_security_group_ids" {
   description = "VPC Security Groups IDs to be used in the Launch Configuration for the instances running in this cluster"
-  type        = "list"
+  type        = list
 }

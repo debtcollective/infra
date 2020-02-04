@@ -43,7 +43,7 @@ resource "postgresql_database" "discourse" {
 
 resource "postgresql_default_privileges" "discourse_tables" {
   database    = postgresql_database.discourse.name
-  depends_on  = ["postgresql_database.discourse", "postgresql_role.discourse"]
+  depends_on  = [postgresql_database.discourse, postgresql_role.discourse]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -53,7 +53,7 @@ resource "postgresql_default_privileges" "discourse_tables" {
 
 resource "postgresql_default_privileges" "discourse_sequence" {
   database    = postgresql_database.discourse.name
-  depends_on  = ["postgresql_database.discourse", "postgresql_role.discourse"]
+  depends_on  = [postgresql_database.discourse, postgresql_role.discourse]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges

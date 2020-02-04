@@ -43,7 +43,7 @@ resource "postgresql_database" "campaign_api" {
 
 resource "postgresql_default_privileges" "campaign_api_tables" {
   database    = postgresql_database.campaign_api.name
-  depends_on  = ["postgresql_database.campaign_api", "postgresql_role.campaign_api"]
+  depends_on  = [postgresql_database.campaign_api, postgresql_role.campaign_api]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -53,7 +53,7 @@ resource "postgresql_default_privileges" "campaign_api_tables" {
 
 resource "postgresql_default_privileges" "campaign_api_sequence" {
   database    = postgresql_database.campaign_api.name
-  depends_on  = ["postgresql_database.campaign_api", "postgresql_role.campaign_api"]
+  depends_on  = [postgresql_database.campaign_api, postgresql_role.campaign_api]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges

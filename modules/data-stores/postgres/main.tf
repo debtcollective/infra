@@ -1,19 +1,18 @@
 locals {
-  environment = "stage"
-  db_name     = "postgres_${var.environment}"
+  db_name = "postgres_${var.environment}"
 }
 
 // Generate random username and password
 resource "random_string" "master_user" {
-  length           = 16
+  length           = 18
   special          = false
-  override_special = "/@\" "
+  override_special = "~*^+"
 }
 
 resource "random_password" "master_pass" {
-  length           = 16
+  length           = 24
   special          = true
-  override_special = "/@\" "
+  override_special = "~*^+"
 }
 
 resource "random_string" "final_snapshot_identifier" {
@@ -24,13 +23,13 @@ resource "random_string" "final_snapshot_identifier" {
 
 // Store both in SSM
 resource "aws_ssm_parameter" "master_user" {
-  name  = "/${local.environment}/data-stores/postgres/master_user"
+  name  = "/${var.environment}/data-stores/postgres/master_user"
   type  = "String"
   value = random_string.master_user.result
 }
 
 resource "aws_ssm_parameter" "master_pass" {
-  name  = "/${local.environment}/data-stores/postgres/master_pass"
+  name  = "/${var.environment}/data-stores/postgres/master_pass"
   type  = "SecureString"
   value = random_password.master_pass.result
 }
@@ -47,7 +46,7 @@ resource "aws_db_instance" "pg" {
   allocated_storage = "20"
   engine            = "postgres"
   engine_version    = "11.4"
-  instance_class    = "db.t2.micro"
+  instance_class    = var.instance_class
   name              = local.db_name
   username          = aws_ssm_parameter.master_user.value
   password          = aws_ssm_parameter.master_pass.value

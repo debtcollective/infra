@@ -22,7 +22,7 @@ locals {
 module "vpc" {
   source = "../../../modules/network/vpc"
 
-  name        = "next"
+  name        = "network"
   environment = local.environment
 }
 
