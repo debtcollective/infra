@@ -6,7 +6,7 @@ terraform {
     organization = "debtcollective"
 
     workspaces {
-      name = "prod-app-metabase"
+      name = "prod-services-metabase"
     }
   }
 }
@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "metabase" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "data"
+  name    = "metabase-prod"
   type    = "A"
 
   alias {
