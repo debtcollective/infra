@@ -63,10 +63,10 @@ module "dispute_tools" {
   discourse_api_key        = var.discourse_api_key
   discourse_api_username   = var.discourse_api_username
 
-  aws_upload_bucket        = var.aws_upload_bucket
-  aws_upload_bucket_region = var.aws_upload_bucket_region
-  aws_access_key_id        = var.aws_access_key_id
-  aws_secret_access_key    = var.aws_secret_access_key
+  aws_upload_bucket        = aws_s3_bucket.disputes.id
+  aws_upload_bucket_region = aws_s3_bucket.disputes.region
+  aws_access_key_id        = aws_iam_access_key.disputes_tools_uploader.id
+  aws_secret_access_key    = aws_iam_access_key.disputes_tools_uploader.secret
 
   doe_disclosure_representatives = var.doe_disclosure_representatives
   doe_disclosure_phones          = var.doe_disclosure_phones

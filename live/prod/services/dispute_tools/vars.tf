@@ -85,22 +85,6 @@ variable "sentry_endpoint" {
   description = "Sentry DNS for error reporting"
 }
 
-variable "aws_upload_bucket" {
-  description = "S3 bucket name to store uploads"
-}
-
-variable "aws_upload_bucket_region" {
-  description = "Upload bucket region"
-}
-
-variable "aws_access_key_id" {
-  description = "Access key to upload files to bucket defined in aws_upload_bucket"
-}
-
-variable "aws_secret_access_key" {
-  description = "Access key to upload files to bucket defined in aws_upload_bucket"
-}
-
 variable "log_retention_in_days" {
   description = "Cloudwatch logs retention"
   default     = 3

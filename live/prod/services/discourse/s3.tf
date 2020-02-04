@@ -22,6 +22,10 @@ resource "aws_s3_bucket" "uploads" {
     }
   }
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = {
     Terraform   = true
     Name        = local.uploads_bucket_name
