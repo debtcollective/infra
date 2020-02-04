@@ -9,7 +9,7 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 115
+  default     = 256
 }
 
 variable "key_name" {
