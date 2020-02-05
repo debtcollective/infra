@@ -14,6 +14,10 @@ write_files:
     encoding: b64
     content: ${web_yml_b64}
 
+  - path: /home/ubuntu/settings.yml
+    encoding: b64
+    content: ${settings_yml_b64}
+
 runcmd:
   # change ssh port
   - perl -pi -e 's/^#?Port 22$/Port 12345/' /etc/ssh/sshd_config
@@ -48,10 +52,15 @@ runcmd:
   - sudo chown ubuntu.ubuntu /opt/discourse
   - git clone https://github.com/discourse/discourse_docker.git /opt/discourse
   - mv /home/ubuntu/web.yml /opt/discourse/containers/web.yml
+  - mv /home/ubuntu/settings.yml /opt/discourse/settings.yml
   - cd /opt/discourse
   - sudo ./launcher bootstrap web
   - sudo ./launcher start web
   - sleep 60
+
+  # apply discourse settings
+  - docker cp /opt/discourse/settings.yml web:/var/www/discourse
+  - docker exec -w /var/www/discourse web bash -c 'rake site_settings:import < settings.yml'
 
 packages:
   - htop

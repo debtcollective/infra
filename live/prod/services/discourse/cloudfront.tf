@@ -30,7 +30,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_root_object = "index.html"
   price_class         = "PriceClass_200"
 
-  aliases = ["${local.cdn_alias}.${local.domain}"]
+  aliases = ["${local.cdn_url}.${local.domain}"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -73,7 +73,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
 resource "aws_route53_record" "cdn" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = local.cdn_alias
+  name    = local.cdn_url
   type    = "A"
 
   alias {
