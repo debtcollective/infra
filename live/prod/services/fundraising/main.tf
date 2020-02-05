@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "fundraising" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "membership-prod"
+  name    = "membership"
   type    = "A"
 
   alias {
