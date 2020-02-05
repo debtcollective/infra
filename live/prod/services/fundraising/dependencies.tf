@@ -98,7 +98,7 @@ locals {
   redis_host           = data.terraform_remote_state.redis.outputs.host
   redis_port           = data.terraform_remote_state.redis.outputs.port
   redis_url            = "redis://${local.redis_host}:${local.redis_port}/0"
-  sso_cookie_name      = "tdc_auth_production"
+  sso_cookie_name      = data.terraform_remote_state.discourse.outputs.sso_cookie_name
   sso_jwt_secret       = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id

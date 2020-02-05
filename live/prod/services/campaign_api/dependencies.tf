@@ -84,7 +84,7 @@ locals {
   discourse_uri        = "https://${data.terraform_remote_state.discourse.outputs.domain}"
   introspection        = true
   playground           = true
-  sso_cookie_name      = "tdc_auth_production"
+  sso_cookie_name      = data.terraform_remote_state.discourse.outputs.sso_cookie_name
   sso_jwt_secret       = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
   cors_origin          = "https://campaign.debtcollective.org,https://strike.debtcollective.org"
 
