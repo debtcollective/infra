@@ -57,8 +57,8 @@ module "dispute_tools" {
   sso_cookie_name          = "_dispute_tools__${local.environment}"
   landing_page_url         = "https://debtcollective.org"
   site_url                 = "https://${aws_route53_record.dispute_tools.fqdn}"
-  sso_endpoint             = "https://community.debtcollective.org/session/sso_provider"
-  discourse_base_url       = "https://community.debtcollective.org"
+  sso_endpoint             = "https://${local.discourse_domain}/session/sso_provider"
+  discourse_base_url       = "https://${local.discourse_domain}"
   static_assets_bucket_url = "https://s3.amazonaws.com/tds-static"
   discourse_api_key        = var.discourse_api_key
   discourse_api_username   = var.discourse_api_username

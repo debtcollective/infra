@@ -58,6 +58,18 @@ data "terraform_remote_state" "redis" {
   }
 }
 
+data "terraform_remote_state" "discourse" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.discourse_remote_state_workspace
+    }
+  }
+}
+
 data "aws_ssm_parameter" "db_user" {
   name = data.terraform_remote_state.postgres_setup.outputs.dispute_tools_db_user_ssm_key
 }
@@ -79,6 +91,8 @@ locals {
   redis_host = data.terraform_remote_state.redis.outputs.host
   redis_port = data.terraform_remote_state.redis.outputs.port
 
+  discourse_domain = data.terraform_remote_state.discourse.outputs.domain
+
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
   lb_listener_id = data.terraform_remote_state.cluster.outputs.lb_listener_id
@@ -86,6 +100,7 @@ locals {
   vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
 
   cluster_remote_state_workspace        = "${local.environment}-cluster"
+  discourse_remote_state_workspace      = "${local.environment}-app-discourse"
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
