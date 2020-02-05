@@ -62,6 +62,8 @@ module "discourse" {
   discourse_aws_access_key_id     = aws_iam_access_key.discourse.id
   discourse_aws_secret_access_key = aws_iam_access_key.discourse.secret
 
+  discourse_sso_cookie_name = local.sso_cookie_name
+
   volume_size = 30
 
   key_name        = local.ssh_key_pair_name

@@ -70,6 +70,15 @@ variable "discourse_sso_secret" {
   description = "SSO secret for Discourse"
 }
 
+variable "discourse_sso_cookie_name" {
+  description = "SSO cookie name"
+}
+
+variable "discourse_sso_cookie_domain" {
+  description = "SSO cookie domain"
+  default     = ".debtcollective.org"
+}
+
 variable "discourse_reply_by_email_address" {
   description = "Reply by email address, needs %%{reply_key} variable to be in the value"
 }

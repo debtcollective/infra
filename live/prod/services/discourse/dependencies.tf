@@ -66,7 +66,7 @@ locals {
   backups_bucket_name    = "discourse-backups-${local.environment}"
   cdn_alias              = "community-cdn-${local.environment}"
   cdn_url                = "https://${aws_route53_record.cdn.fqdn}"
-
+  sso_cookie_name        = "tdc_auth_production"
 
   db_address = data.terraform_remote_state.postgres.outputs.db_address
   db_name    = data.terraform_remote_state.postgres_setup.outputs.discourse_db_name

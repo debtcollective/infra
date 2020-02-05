@@ -60,8 +60,8 @@ resource "aws_instance" "discourse" {
         discourse_maxmind_license_key       = var.discourse_maxmind_license_key
         discourse_letsencrypt_account_email = var.discourse_letsencrypt_account_email
         discourse_sso_jwt_secret            = aws_ssm_parameter.discourse_sso_jwt_secret.value
-        discourse_sso_cookie_name           = "tdc_auth_${var.environment}"
-        discourse_sso_cookie_domain         = ".${var.domain}"
+        discourse_sso_cookie_name           = var.discourse_sso_cookie_name
+        discourse_sso_cookie_domain         = var.discourse_sso_cookie_domain
 
         discourse_s3_region            = var.discourse_uploads_bucket_region
         discourse_s3_access_key_id     = var.discourse_aws_access_key_id
