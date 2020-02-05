@@ -17,7 +17,7 @@ resource "aws_cloudfront_origin_access_identity" "uploads" {
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.uploads.bucket_regional_domain_name
+    domain_name = aws_s3_bucket.uploads.bucket_domain_name
     origin_id   = local.s3_origin_id
 
     s3_origin_config {

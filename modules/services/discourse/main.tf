@@ -106,11 +106,10 @@ resource "aws_instance" "discourse" {
     volume_size = var.volume_size
     volume_type = "gp2"
 
-    # this is safe since we keep uploads in s3
-    delete_on_termination = true
+    delete_on_termination = false
   }
 
   lifecycle {
-    ignore_changes = [ami]
+    ignore_changes = [user_data, ami]
   }
 }

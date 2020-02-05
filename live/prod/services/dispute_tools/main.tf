@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "dispute_tools" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "tools-prod"
+  name    = "tools"
   type    = "A"
 
   alias {

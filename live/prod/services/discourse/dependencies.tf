@@ -58,13 +58,13 @@ locals {
   environment = "prod"
 
   acm_certificate_domain = "*.debtcollective.org"
-  subdomain              = "discourse-prod"
+  subdomain              = "community"
   domain                 = "debtcollective.org"
   fqdn                   = "${local.subdomain}.debtcollective.org"
-  s3_origin_id           = "${local.subdomain}"
+  s3_origin_id           = "discourse-${local.environment}"
   uploads_bucket_name    = "discourse-uploads-${local.environment}"
   backups_bucket_name    = "discourse-backups-${local.environment}"
-  cdn_alias              = "discourse-cdn-${local.environment}"
+  cdn_alias              = "community-cdn-${local.environment}"
   cdn_url                = "https://${aws_route53_record.cdn.fqdn}"
 
 
