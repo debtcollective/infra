@@ -67,30 +67,7 @@ resource "aws_instance" "discourse" {
         discourse_s3_access_key_id     = var.discourse_aws_access_key_id
         discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
         discourse_s3_bucket            = var.discourse_uploads_bucket_name
-        discourse_s3_cdn_url           = "https://${var.cdn_url}"
-      })
-    )
-
-    # settings.yml file
-    settings_yml_b64 = base64encode(
-      templatefile("${path.module}/settings.yml", {
-        sso_secret = var.discourse_sso_secret
-
-        reply_by_email_address = var.discourse_reply_by_email_address
-        pop3_polling_host      = var.discourse_pop3_polling_host
-        pop3_polling_port      = var.discourse_pop3_polling_port
-        pop3_polling_username  = var.discourse_pop3_polling_username
-        pop3_polling_password  = var.discourse_pop3_polling_password
-
-        ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
-
-        s3_access_key_id     = var.discourse_aws_access_key_id
-        s3_secret_access_key = var.discourse_aws_secret_access_key
-        s3_upload_bucket     = var.discourse_uploads_bucket_name
-        s3_cdn_url           = "https://${var.cdn_url}"
-
-        backup_frequency = "3"
-        s3_backup_bucket = var.discourse_backups_bucket_name
+        discourse_s3_cdn_url           = var.cdn_url
       })
     )
   })
