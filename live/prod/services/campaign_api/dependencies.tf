@@ -46,6 +46,18 @@ data "terraform_remote_state" "postgres_setup" {
   }
 }
 
+data "terraform_remote_state" "discourse" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.discourse_remote_state_workspace
+    }
+  }
+}
+
 data "aws_ssm_parameter" "db_user" {
   name = data.terraform_remote_state.postgres_setup.outputs.campaign_api_db_user_ssm_key
 }
@@ -69,7 +81,7 @@ locals {
   db_user              = data.aws_ssm_parameter.db_user.value
   discourse_login_url  = "${local.discourse_uri}/session/sso_cookies"
   discourse_signup_url = "${local.discourse_uri}/session/sso_cookies/signup"
-  discourse_uri        = "https://community.debtcollective.org"
+  discourse_uri        = "https://${data.terraform_remote_state.discourse.outputs.domain}"
   introspection        = true
   playground           = true
   sso_cookie_name      = "tdc_auth_production"
@@ -83,6 +95,7 @@ locals {
   vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
 
   cluster_remote_state_workspace        = "${local.environment}-cluster"
+  discourse_remote_state_workspace      = "${local.environment}-app-discourse"
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
