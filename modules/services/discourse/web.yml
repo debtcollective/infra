@@ -49,7 +49,7 @@ hooks:
           - 'git clone https://github.com/angusmcleod/discourse-events.git'
           - 'git clone https://github.com/angusmcleod/discourse-locations.git'
           - 'git clone https://github.com/angusmcleod/discourse-custom-wizard.git'
-          - 'git clone https://github.com/debtcollective/discourse-debtcollective-theme.git'
+          - 'git clone -b master --single-branch https://github.com/debtcollective/discourse-debtcollective-theme.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-wizards.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-private-message.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-sso.git'
