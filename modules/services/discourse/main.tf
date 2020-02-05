@@ -66,8 +66,9 @@ resource "aws_instance" "discourse" {
         discourse_s3_region            = var.discourse_uploads_bucket_region
         discourse_s3_access_key_id     = var.discourse_aws_access_key_id
         discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
-        discourse_s3_bucket            = var.discourse_uploads_bucket_name
-        discourse_s3_cdn_url           = "https://${var.cdn_url}"
+        discourse_s3_upload_bucket     = var.discourse_uploads_bucket_name
+        discourse_s3_backup_bucket     = var.discourse_backups_bucket_name
+        discourse_s3_cdn_url           = var.cdn_url
       })
     )
 
@@ -87,7 +88,7 @@ resource "aws_instance" "discourse" {
         s3_access_key_id     = var.discourse_aws_access_key_id
         s3_secret_access_key = var.discourse_aws_secret_access_key
         s3_upload_bucket     = var.discourse_uploads_bucket_name
-        s3_cdn_url           = "https://${var.cdn_url}"
+        s3_cdn_url           = var.cdn_url
 
         backup_frequency = "3"
         s3_backup_bucket = var.discourse_backups_bucket_name
@@ -110,6 +111,6 @@ resource "aws_instance" "discourse" {
   }
 
   lifecycle {
-    ignore_changes = [user_data, ami]
+    ignore_changes = [ami]
   }
 }

@@ -125,7 +125,7 @@ variable "domain" {
 }
 
 variable "cdn_url" {
-  description = "Fully Qualified Domain Name for CDN"
+  description = "ex: https://cdn.debtcollective.org"
 }
 
 variable "discourse_uploads_bucket_name" {
