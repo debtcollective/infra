@@ -43,7 +43,7 @@ resource "postgresql_database" "metabase" {
 
 resource "postgresql_default_privileges" "metabase_tables" {
   database    = postgresql_database.metabase.name
-  depends_on  = ["postgresql_database.metabase", "postgresql_role.metabase"]
+  depends_on  = [postgresql_database.metabase, postgresql_role.metabase]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -53,7 +53,7 @@ resource "postgresql_default_privileges" "metabase_tables" {
 
 resource "postgresql_default_privileges" "metabase_sequence" {
   database    = postgresql_database.metabase.name
-  depends_on  = ["postgresql_database.metabase", "postgresql_role.metabase"]
+  depends_on  = [postgresql_database.metabase, postgresql_role.metabase]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges

@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_log_group" "metabase" {
-  name = "/${var.environment}/services/metabase"
+  name              = "/${var.environment}/services/metabase"
+  retention_in_days = var.log_retention_in_days
 
   tags = {
     Environment = var.environment

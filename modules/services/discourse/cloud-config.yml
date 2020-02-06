@@ -49,11 +49,11 @@ runcmd:
 
   # install discourse
   - sudo mkdir -p /opt/discourse
-  - sudo chown ubuntu.ubuntu /opt/discourse
   - git clone https://github.com/discourse/discourse_docker.git /opt/discourse
   - mv /home/ubuntu/web.yml /opt/discourse/containers/web.yml
   - mv /home/ubuntu/settings.yml /opt/discourse/settings.yml
   - cd /opt/discourse
+  - sudo chown -R ubuntu:ubuntu /opt/discourse
   - sudo ./launcher bootstrap web
   - sudo ./launcher start web
   - sleep 60

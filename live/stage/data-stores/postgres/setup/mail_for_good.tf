@@ -41,7 +41,7 @@ resource "postgresql_database" "mail_for_good" {
 
 resource "postgresql_default_privileges" "mail_for_good_tables" {
   database    = postgresql_database.mail_for_good.name
-  depends_on  = ["postgresql_database.mail_for_good", "postgresql_role.mail_for_good"]
+  depends_on  = [postgresql_database.mail_for_good, postgresql_role.mail_for_good]
   object_type = "table"
   owner       = local.master_db_user
   privileges  = local.table_privileges
@@ -51,7 +51,7 @@ resource "postgresql_default_privileges" "mail_for_good_tables" {
 
 resource "postgresql_default_privileges" "mail_for_good_sequence" {
   database    = postgresql_database.mail_for_good.name
-  depends_on  = ["postgresql_database.mail_for_good", "postgresql_role.mail_for_good"]
+  depends_on  = [postgresql_database.mail_for_good, postgresql_role.mail_for_good]
   object_type = "sequence"
   owner       = local.master_db_user
   privileges  = local.sequence_privileges

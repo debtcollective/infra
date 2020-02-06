@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_log_group" "fundraising" {
-  name = "/${var.environment}/services/fundraising"
+  name              = "/${var.environment}/services/fundraising"
+  retention_in_days = var.log_retention_in_days
 
   tags = {
     Environment = var.environment
@@ -14,11 +15,11 @@ resource "random_string" "secret_key_base" {
 }
 
 module "container_definitions" {
-  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.15.0"
+  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = local.container_name
-  container_cpu                = 0
-  container_memory             = 0
+  container_cpu                = null
+  container_memory             = null
   container_memory_reservation = var.container_memory_reservation
   essential                    = true
   container_image              = var.container_image
@@ -105,12 +106,17 @@ module "container_definitions" {
   port_mappings = [
     {
       containerPort = local.container_port
+      hostPort      = null
+      protocol      = "tcp"
     }
   ]
 
-  log_driver = "awslogs"
-  log_options = {
-    "awslogs-region" = data.aws_region.current.name
-    "awslogs-group"  = aws_cloudwatch_log_group.fundraising.name
+  log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      "awslogs-region" = data.aws_region.current.name
+      "awslogs-group"  = aws_cloudwatch_log_group.fundraising.name
+    }
+    secretOptions = null
   }
 }

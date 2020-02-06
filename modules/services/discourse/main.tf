@@ -4,9 +4,10 @@ resource "random_string" "discourse_sso_jwt_secret" {
 }
 
 resource "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name  = "/${var.environment}/services/discourse/sso_jwt_secret"
-  type  = "SecureString"
-  value = random_string.discourse_sso_jwt_secret.result
+  name      = "/${var.environment}/services/discourse/sso_jwt_secret"
+  type      = "SecureString"
+  value     = random_string.discourse_sso_jwt_secret.result
+  overwrite = true
 }
 
 // ec2 instance
@@ -59,14 +60,15 @@ resource "aws_instance" "discourse" {
         discourse_maxmind_license_key       = var.discourse_maxmind_license_key
         discourse_letsencrypt_account_email = var.discourse_letsencrypt_account_email
         discourse_sso_jwt_secret            = aws_ssm_parameter.discourse_sso_jwt_secret.value
-        discourse_sso_cookie_name           = "tdc_auth_${var.environment}"
-        discourse_sso_cookie_domain         = ".${var.domain}"
+        discourse_sso_cookie_name           = var.discourse_sso_cookie_name
+        discourse_sso_cookie_domain         = var.discourse_sso_cookie_domain
 
         discourse_s3_region            = var.discourse_uploads_bucket_region
         discourse_s3_access_key_id     = var.discourse_aws_access_key_id
         discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
-        discourse_s3_bucket            = var.discourse_uploads_bucket_name
-        discourse_s3_cdn_url           = "https://${var.cdn_url}"
+        discourse_s3_upload_bucket     = var.discourse_uploads_bucket_name
+        discourse_s3_backup_bucket     = var.discourse_backups_bucket_name
+        discourse_s3_cdn_url           = var.cdn_url
       })
     )
 
@@ -86,7 +88,7 @@ resource "aws_instance" "discourse" {
         s3_access_key_id     = var.discourse_aws_access_key_id
         s3_secret_access_key = var.discourse_aws_secret_access_key
         s3_upload_bucket     = var.discourse_uploads_bucket_name
-        s3_cdn_url           = "https://${var.cdn_url}"
+        s3_cdn_url           = var.cdn_url
 
         backup_frequency = "3"
         s3_backup_bucket = var.discourse_backups_bucket_name
@@ -104,15 +106,10 @@ resource "aws_instance" "discourse" {
     volume_size = var.volume_size
     volume_type = "gp2"
 
-    # this is safe since we keep uploads in s3
-    delete_on_termination = true
-  }
-
-  timeouts {
-    create = "30m"
+    delete_on_termination = false
   }
 
   lifecycle {
-    ignore_changes = ["user_data"]
+    ignore_changes = [user_data, ami]
   }
 }

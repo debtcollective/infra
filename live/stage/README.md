@@ -1,11 +1,3 @@
 # Stage env
 
-## Variables
-
-We are passing variables using environment variables. The idea is to keep all variables without collisions in a file called `tfvars.env` at the root of the environment.
-
-1. Copy example environment var file with `cp tfvars.env.sample tfvars.env`
-1. Replace variables in `tfvars.env`
-1. Run `source tfvars.env`
-
-Now you can run `terraform plan`
+Everything should run using Terraform cloud, except for the postgres/setup module. This needs to be run locally because we need to setup a ssh tunnel to access our RDS database, and this isn't supported by Terraform Cloud.

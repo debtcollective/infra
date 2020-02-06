@@ -16,12 +16,12 @@ variable "iam_instance_profile_id" {
 
 variable "instance_type" {
   description = "Instace type Launch Configuration for the instances running in this cluster"
-  default     = "t2.micro"
+  default     = "t3a.small"
 }
 
 variable "security_groups" {
   description = "VPC Security Groups IDs to be used in the Launch Configuration for the instances running in this cluster"
-  type        = "list"
+  type        = list
 }
 
 variable "asg_min_size" {
@@ -31,21 +31,21 @@ variable "asg_min_size" {
 
 variable "asg_max_size" {
   description = "Auto Scaling Group maximum size for the cluster"
-  default     = 2
+  default     = 3
 }
 
 variable "asg_desired_count" {
   description = "Number of instances to be run"
-  default     = 1
+  default     = 2
 }
 
 variable "subnet_ids" {
   description = "VPC subnets id to deploy instance on"
-  type        = "list"
+  type        = list
 }
 
 variable "tags" {
   description = "Tags to be passed to autoscaling group"
   default     = []
-  type        = "list"
+  type        = list
 }

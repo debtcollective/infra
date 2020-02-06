@@ -9,7 +9,7 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 115
+  default     = 256
 }
 
 variable "vpc_id" {
@@ -31,6 +31,11 @@ variable "domain" {
 variable "desired_count" {
   description = "Number of instances to be run"
   default     = 1
+}
+
+variable "log_retention_in_days" {
+  description = "Cloudwatch logs retention"
+  default     = 3
 }
 
 // disputes-api variables

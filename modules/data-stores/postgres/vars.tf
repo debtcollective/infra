@@ -16,6 +16,11 @@ variable "vpc_id" {
   type = string
 }
 
+variable "instance_class" {
+  type    = string
+  default = "db.t2.micro"
+}
+
 variable "subnet_ids" {
   type = list
 }
