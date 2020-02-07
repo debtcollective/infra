@@ -25,6 +25,11 @@ locals {
 
 resource "aws_ecs_cluster" "cluster" {
   name = var.environment
+
+  setting {
+    name  = "containerInsights"
+    value = var.monitoring == true ? "enabled" : "disabled"
+  }
 }
 
 resource "aws_lb" "lb" {

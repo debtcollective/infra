@@ -38,6 +38,8 @@ resource "aws_instance" "discourse" {
   vpc_security_group_ids = [var.security_groups]
   ami                    = data.aws_ami.ubuntu.id
   subnet_id              = var.subnet_id
+  monitoring             = var.monitoring
+
   user_data = templatefile("${path.module}/cloud-config.yml", {
     # web.yml file
     web_yml_b64 = base64encode(

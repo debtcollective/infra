@@ -13,3 +13,8 @@ variable "security_group_ids" {
 variable "acm_certificate_domain" {
   type = string
 }
+
+variable "monitoring" {
+  description = "If true, enables Cloudwatch Container Insights for this cluster"
+  default     = false
+}
