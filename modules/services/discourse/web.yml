@@ -1,5 +1,6 @@
 ---
 env:
+  DISCOURSE_CDN_URL: '${discourse_cdn_url}'
   DISCOURSE_DB_HOST: '${discourse_db_host}'
   DISCOURSE_DB_NAME: '${discourse_db_name}'
   DISCOURSE_DB_PASSWORD: '${discourse_db_password}'

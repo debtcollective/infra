@@ -133,8 +133,12 @@ variable "domain" {
   description = "Fully Qualified Domain Name"
 }
 
+variable "s3_cdn_url" {
+  description = "Uploads CDN URL. ex: https://cdn-uploads.debtcollective.org"
+}
+
 variable "cdn_url" {
-  description = "ex: https://cdn.debtcollective.org"
+  description = "Assets CDN URL. ex: https://cdn-assets.debtcollective.org"
 }
 
 variable "discourse_uploads_bucket_name" {

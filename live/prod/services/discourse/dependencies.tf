@@ -62,10 +62,11 @@ locals {
   domain                 = "debtcollective.org"
   fqdn                   = "${local.subdomain}.debtcollective.org"
   s3_origin_id           = "discourse-${local.environment}"
+  ec2_origin_id          = "discourse-assets-origin-${local.environment}"
   uploads_bucket_name    = "discourse-uploads-${local.environment}"
   backups_bucket_name    = "discourse-backups-${local.environment}"
   cdn_alias              = "community-cdn-${local.environment}"
-  cdn_url                = "https://${aws_route53_record.cdn.fqdn}"
+  s3_cdn_url             = "https://${aws_route53_record.cdn.fqdn}"
   sso_cookie_name        = "tdc_auth_production"
 
   db_address = data.terraform_remote_state.postgres.outputs.db_address

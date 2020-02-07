@@ -32,7 +32,8 @@ module "discourse" {
   environment = local.environment
 
   domain             = local.fqdn
-  cdn_url            = local.cdn_url
+  s3_cdn_url         = local.s3_cdn_url
+  cdn_url            = aws_cloudfront_distribution.assets.domain_name
   discourse_hostname = local.fqdn
 
   discourse_smtp_address  = var.discourse_smtp_address
