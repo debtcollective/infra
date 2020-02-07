@@ -35,6 +35,7 @@ module "discourse" {
   s3_cdn_url         = local.s3_cdn_url
   cdn_url            = aws_cloudfront_distribution.assets.domain_name
   discourse_hostname = local.fqdn
+  monitoring         = true
 
   discourse_smtp_address  = var.discourse_smtp_address
   discourse_smtp_username = var.discourse_smtp_username

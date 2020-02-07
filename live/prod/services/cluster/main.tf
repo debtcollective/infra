@@ -22,6 +22,7 @@ module "cluster" {
   acm_certificate_domain = "*.debtcollective.org"
   security_group_ids     = local.elb_security_group_ids
   subnet_ids             = local.subnet_ids
+  monitoring             = true
 }
 
 // Autoscaling and launch configurations for this cluster
