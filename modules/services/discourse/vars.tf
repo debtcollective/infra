@@ -129,6 +129,16 @@ variable "volume_size" {
   default     = 20
 }
 
+variable "monitoring" {
+  description = "If true, enables Cloudwatch Detailed Monitoring for the EC2 instance"
+  default     = false
+}
+
+variable "slack_topic_arn" {
+  description = "Slack SNS topic ARN used for Cloudwatch alerts"
+  default     = ""
+}
+
 variable "domain" {
   description = "Fully Qualified Domain Name"
 }

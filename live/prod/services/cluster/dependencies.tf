@@ -22,6 +22,18 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "notify_slack" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.notify_slack_remote_state_workspace
+    }
+  }
+}
+
 locals {
   environment = "prod"
 
@@ -35,8 +47,10 @@ locals {
   subnet_ids              = data.terraform_remote_state.vpc.outputs.public_subnet_ids
   vpc_id                  = data.terraform_remote_state.vpc.outputs.vpc_id
 
-  iam_remote_state_workspace = "global-iam"
-  remote_state_organization  = "debtcollective"
-  vpc_remote_state_workspace = "${local.environment}-network"
+  slack_topic_arn = data.terraform_remote_state.notify_slack.outputs.slack_topic_arn
 
+  iam_remote_state_workspace          = "global-iam"
+  remote_state_organization           = "debtcollective"
+  vpc_remote_state_workspace          = "${local.environment}-network"
+  notify_slack_remote_state_workspace = "${local.environment}-extras-notify-slack"
 }

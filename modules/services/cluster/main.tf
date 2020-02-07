@@ -25,6 +25,11 @@ locals {
 
 resource "aws_ecs_cluster" "cluster" {
   name = var.environment
+
+  setting {
+    name  = "containerInsights"
+    value = var.monitoring == true ? "enabled" : "disabled"
+  }
 }
 
 resource "aws_lb" "lb" {
@@ -82,4 +87,44 @@ resource "aws_lb_listener" "https" {
       status_code  = "200"
     }
   }
+}
+
+resource "aws_cloudwatch_metric_alarm" "high_cpu_usage" {
+  count = var.monitoring == true ? 1 : 0
+
+  alarm_name          = "${var.environment}-cluster-high-cpu-usage"
+  alarm_description   = "This metric monitors ec2 cpu utilization"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "3"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "80"
+
+  dimensions = {
+    ClusterName = aws_ecs_cluster.cluster.name
+  }
+
+  alarm_actions = [var.slack_topic_arn]
+}
+
+resource "aws_cloudwatch_metric_alarm" "high_memory_usage" {
+  count = var.monitoring == true ? 1 : 0
+
+  alarm_name          = "${var.environment}-cluster-high-memory-usage"
+  alarm_description   = "This metric monitors ec2 memory utilization"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "3"
+  metric_name         = "MemoryUtilization"
+  namespace           = "AWS/ECS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "80"
+
+  dimensions = {
+    ClusterName = aws_ecs_cluster.cluster.name
+  }
+
+  alarm_actions = [var.slack_topic_arn]
 }

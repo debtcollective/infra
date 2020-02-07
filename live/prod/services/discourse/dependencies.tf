@@ -46,6 +46,18 @@ data "terraform_remote_state" "postgres_setup" {
   }
 }
 
+data "terraform_remote_state" "notify_slack" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.notify_slack_remote_state_workspace
+    }
+  }
+}
+
 data "aws_ssm_parameter" "db_user" {
   name = data.terraform_remote_state.postgres_setup.outputs.discourse_db_user_ssm_key
 }
@@ -81,10 +93,13 @@ locals {
   ec2_security_group_id = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
   instance_type         = "t3a.small"
 
+  slack_topic_arn = data.terraform_remote_state.notify_slack.outputs.slack_topic_arn
+
   cluster_remote_state_workspace        = "${local.environment}-cluster"
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
   remote_state_organization             = "debtcollective"
   vpc_remote_state_workspace            = "${local.environment}-network"
+  notify_slack_remote_state_workspace   = "${local.environment}-extras-notify-slack"
 }
