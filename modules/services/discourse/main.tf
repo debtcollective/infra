@@ -38,7 +38,8 @@ resource "aws_instance" "discourse" {
   vpc_security_group_ids = [var.security_groups]
   ami                    = data.aws_ami.ubuntu.id
   subnet_id              = var.subnet_id
-  monitoring             = var.monitoring
+
+  monitoring = var.monitoring
 
   user_data = templatefile("${path.module}/cloud-config.yml", {
     # web.yml file
@@ -116,4 +117,24 @@ resource "aws_instance" "discourse" {
   lifecycle {
     ignore_changes = [user_data, ami]
   }
+}
+
+resource "aws_cloudwatch_metric_alarm" "high_cpu_usage" {
+  count = var.monitoring == true ? 1 : 0
+
+  alarm_name          = "discourse-${var.environment}-high-cpu-usage"
+  alarm_description   = "This metric monitors ec2 cpu utilization"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "3"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "80"
+
+  dimensions = {
+    InstanceId = aws_instance.discourse.id
+  }
+
+  alarm_actions = [var.slack_topic_arn]
 }

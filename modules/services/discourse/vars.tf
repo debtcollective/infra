@@ -134,6 +134,11 @@ variable "monitoring" {
   default     = false
 }
 
+variable "slack_topic_arn" {
+  description = "Slack SNS topic ARN used for Cloudwatch alerts"
+  default     = ""
+}
+
 variable "domain" {
   description = "Fully Qualified Domain Name"
 }
@@ -145,7 +150,6 @@ variable "s3_cdn_url" {
 variable "cdn_url" {
   description = "Assets CDN URL. ex: https://cdn-assets.debtcollective.org"
 }
-
 
 variable "discourse_uploads_bucket_name" {
   description = "Uploads S3 bucket name"

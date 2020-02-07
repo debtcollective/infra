@@ -18,3 +18,8 @@ variable "monitoring" {
   description = "If true, enables Cloudwatch Container Insights for this cluster"
   default     = false
 }
+
+variable "slack_topic_arn" {
+  description = "Slack SNS topic ARN used for Cloudwatch alerts"
+  default     = ""
+}

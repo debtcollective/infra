@@ -23,6 +23,7 @@ module "cluster" {
   security_group_ids     = local.elb_security_group_ids
   subnet_ids             = local.subnet_ids
   monitoring             = true
+  slack_topic_arn        = local.slack_topic_arn
 }
 
 // Autoscaling and launch configurations for this cluster
@@ -46,28 +47,4 @@ module "autoscaling" {
       propagate_at_launch = true
     },
   ]
-}
-
-// server working hours
-resource "aws_autoscaling_schedule" "working_hours" {
-  // disable it for now
-  count                  = 0
-  scheduled_action_name  = "working hours"
-  min_size               = 1
-  max_size               = 2
-  desired_capacity       = 1
-  recurrence             = "00 12 * * 1-5" #Mon-Fri at 7AM EST
-  autoscaling_group_name = module.autoscaling.autoscaling_group_name
-}
-
-// turn off servers at night
-resource "aws_autoscaling_schedule" "off_working_hours" {
-  // disable it for now
-  count                  = 0
-  scheduled_action_name  = "off working hours"
-  min_size               = 0
-  max_size               = 0
-  desired_capacity       = 0
-  recurrence             = "00 03 * * 1-5" #Mon-Fri at 10PM EST
-  autoscaling_group_name = module.autoscaling.autoscaling_group_name
 }

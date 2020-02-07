@@ -35,7 +35,9 @@ module "discourse" {
   s3_cdn_url         = local.s3_cdn_url
   cdn_url            = aws_cloudfront_distribution.assets.domain_name
   discourse_hostname = local.fqdn
-  monitoring         = true
+
+  monitoring      = true
+  slack_topic_arn = local.slack_topic_arn
 
   discourse_smtp_address  = var.discourse_smtp_address
   discourse_smtp_username = var.discourse_smtp_username
@@ -71,4 +73,5 @@ module "discourse" {
   key_name        = local.ssh_key_pair_name
   subnet_id       = local.subnet_id
   security_groups = local.ec2_security_group_id
+
 }
