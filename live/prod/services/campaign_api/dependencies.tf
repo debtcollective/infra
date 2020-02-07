@@ -82,8 +82,8 @@ locals {
   discourse_login_url  = "${local.discourse_uri}/session/sso_cookies"
   discourse_signup_url = "${local.discourse_uri}/session/sso_cookies/signup"
   discourse_uri        = "https://${data.terraform_remote_state.discourse.outputs.domain}"
-  introspection        = true
-  playground           = true
+  introspection        = false
+  playground           = false
   sso_cookie_name      = data.terraform_remote_state.discourse.outputs.sso_cookie_name
   sso_jwt_secret       = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
   cors_origin          = "https://campaign.debtcollective.org,https://strike.debtcollective.org"
