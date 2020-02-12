@@ -15,6 +15,11 @@ provider "aws" {
   version = "~> 2.0"
 }
 
+provider "statuscake" {
+  username = var.statuscake_username
+  apikey   = var.statuscake_apikey
+}
+
 data "aws_route53_zone" "primary" {
   name = local.domain
 }
@@ -25,6 +30,16 @@ resource "aws_route53_record" "discourse" {
   type    = "A"
   ttl     = 300
   records = [module.discourse.public_ip]
+}
+
+// Monitor website uptime
+resource "statuscake_test" "discourse" {
+  website_name  = local.fqdn
+  website_url   = "https://${local.fqdn}/srv/status"
+  test_type     = "HTTP"
+  check_rate    = 300
+  contact_group = [var.statuscake_contact_group_id]
+  find_string   = "ok"
 }
 
 module "discourse" {
@@ -73,5 +88,4 @@ module "discourse" {
   key_name        = local.ssh_key_pair_name
   subnet_id       = local.subnet_id
   security_groups = local.ec2_security_group_id
-
 }

@@ -67,3 +67,16 @@ variable "discourse_smtp_enable_start_tls" {
   description = "Discourse SMTP enable start TLS"
   default     = true
 }
+
+// StatusCake
+variable "statuscake_username" {
+  description = "StatusCake username"
+}
+
+variable "statuscake_apikey" {
+  description = "StatusCake API key"
+}
+
+variable "statuscake_contact_group_id" {
+  description = "StatusCake contact group id"
+}
