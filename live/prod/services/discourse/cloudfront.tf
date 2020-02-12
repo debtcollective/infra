@@ -69,7 +69,6 @@ resource "aws_cloudfront_distribution" "uploads" {
     Name        = local.s3_origin_id
     Environment = local.environment
   }
-
 }
 
 resource "aws_route53_record" "cdn" {
