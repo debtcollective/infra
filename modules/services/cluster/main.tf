@@ -106,7 +106,9 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu_usage" {
     ClusterName = aws_ecs_cluster.cluster.name
   }
 
-  alarm_actions = [var.slack_topic_arn]
+  alarm_actions             = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
+  insufficient_data_actions = [var.slack_topic_arn]
 }
 
 resource "aws_cloudwatch_metric_alarm" "high_memory_usage" {
@@ -126,5 +128,29 @@ resource "aws_cloudwatch_metric_alarm" "high_memory_usage" {
     ClusterName = aws_ecs_cluster.cluster.name
   }
 
-  alarm_actions = [var.slack_topic_arn]
+  alarm_actions             = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
+  insufficient_data_actions = [var.slack_topic_arn]
+}
+
+// Send alarm when ALB identifies unhealthy hosts
+resource "aws_cloudwatch_metric_alarm" "alb_unhealthyhosts" {
+  alarm_name          = "alarmname"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "UnhealthyHostCount"
+  namespace           = "AWS/NetworkELB"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = 0
+  alarm_description   = "Number of unhealthy nodes in Load Balancer"
+  actions_enabled     = "true"
+
+  alarm_actions             = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
+  insufficient_data_actions = [var.slack_topic_arn]
+
+  dimensions = {
+    LoadBalancer = aws_lb.lb.arn_suffix
+  }
 }
