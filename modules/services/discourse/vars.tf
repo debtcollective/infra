@@ -174,3 +174,8 @@ variable "discourse_aws_access_key_id" {
 variable "discourse_aws_secret_access_key" {
   description = "AWS access key secret for S3 uploads"
 }
+
+variable "skylight_authentication" {
+  description = "skylight.io api key"
+  default     = ""
+}

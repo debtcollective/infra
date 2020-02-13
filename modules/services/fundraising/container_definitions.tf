@@ -101,6 +101,10 @@ module "container_definitions" {
       name  = "AMPLITUDE_API_KEY",
       value = var.amplitude_api_key
     },
+    {
+      name  = "SKYLIGHT_AUTHENTICATION",
+      value = var.skylight_authentication
+    },
   ]
 
   port_mappings = [

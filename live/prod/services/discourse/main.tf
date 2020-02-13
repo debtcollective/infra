@@ -51,8 +51,9 @@ module "discourse" {
   cdn_url            = aws_cloudfront_distribution.assets.domain_name
   discourse_hostname = local.fqdn
 
-  monitoring      = true
-  slack_topic_arn = local.slack_topic_arn
+  monitoring              = true
+  slack_topic_arn         = local.slack_topic_arn
+  skylight_authentication = var.skylight_authentication
 
   discourse_smtp_address  = var.discourse_smtp_address
   discourse_smtp_username = var.discourse_smtp_username
