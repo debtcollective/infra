@@ -26,3 +26,9 @@ variable "amplitude_api_key" {
 variable "ga_measurement_id" {
   description = "Google Analytics UA-XXXXX-Y"
 }
+
+// Skylight
+variable "skylight_authentication" {
+  description = "skylight.io api key"
+  default     = ""
+}
