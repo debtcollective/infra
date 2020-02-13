@@ -26,6 +26,7 @@ env:
   DISCOURSE_SSO_JWT_SECRET: '${discourse_sso_jwt_secret}'
   LANG: en_US.UTF-8
   LETSENCRYPT_ACCOUNT_EMAIL: '${discourse_letsencrypt_account_email}'
+  SKYLIGHT_AUTHENTICATION: '${skylight_authentication}'
   USE_DB_S3_CONFIG: true
 expose:
   - '80:80'
@@ -58,6 +59,7 @@ hooks:
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-signup-fields.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-collectives.git'
           - 'git clone https://github.com/debtcollective/discourse-sentry.git'
+          - 'git clone https://github.com/debtcollective/discourse-skylight.git'
     - exec:
         cd: $home
         cmd:

@@ -80,3 +80,9 @@ variable "statuscake_apikey" {
 variable "statuscake_contact_group_id" {
   description = "StatusCake contact group id"
 }
+
+// Skylight
+variable "skylight_authentication" {
+  description = "skylight.io api key"
+  default     = ""
+}
