@@ -30,6 +30,24 @@ resource "aws_s3_bucket" "uploads" {
     Terraform   = true
     Name        = local.uploads_bucket_name
     Environment = local.environment
+    Replication = true
+  }
+
+  replication_configuration {
+    role = var.replication_role_arn
+
+    rules {
+      id     = "discourse_uploads_replica_${local.environment}"
+      status = "Enabled"
+
+      filter {
+      }
+
+      destination {
+        bucket        = var.uploads_bucket_replica_arn
+        storage_class = "STANDARD"
+      }
+    }
   }
 }
 

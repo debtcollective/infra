@@ -86,3 +86,14 @@ variable "skylight_authentication" {
   description = "skylight.io api key"
   default     = ""
 }
+
+// S3 replication
+variable "uploads_bucket_replica_arn" {
+  description = "replication bucket arn"
+  default     = ""
+}
+
+variable "replication_role_arn" {
+  description = "replication role arn"
+  default     = ""
+}
