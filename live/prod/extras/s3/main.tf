@@ -23,10 +23,18 @@ locals {
 resource "aws_s3_bucket" "discourse_uploads_replica" {
   bucket = "${local.discourse_uploads_bucket_name}-replica"
   acl    = "private"
+
+  versioning {
+    enabled = true
+  }
 }
 
 // Replication bucket for Dispute tools uploads
 resource "aws_s3_bucket" "dispute_tools_uploads_replica" {
   bucket = "${local.dispute_tools_uploads_bucket_name}-replica"
   acl    = "private"
+
+  versioning {
+    enabled = true
+  }
 }

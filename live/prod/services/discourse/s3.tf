@@ -34,7 +34,7 @@ resource "aws_s3_bucket" "uploads" {
   }
 
   replication_configuration {
-    role = var.replication_role_arn
+    role = local.replication_role_arn
 
     rules {
       id     = "discourse_uploads_replica_${local.environment}"
@@ -44,11 +44,16 @@ resource "aws_s3_bucket" "uploads" {
       }
 
       destination {
-        bucket        = var.uploads_bucket_replica_arn
+        bucket        = local.uploads_bucket_replica_arn
         storage_class = "STANDARD"
       }
     }
   }
+
+  versioning {
+    enabled = true
+  }
+
 }
 
 resource "aws_s3_bucket" "backups" {
