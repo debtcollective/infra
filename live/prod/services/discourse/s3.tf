@@ -36,11 +36,41 @@ resource "aws_s3_bucket" "uploads" {
   replication_configuration {
     role = local.replication_role_arn
 
+    // copy all directories except for the assets one
     rules {
-      id     = "discourse_uploads_replica_${local.environment}"
+      id     = "discourse_tombstone_${local.environment}"
       status = "Enabled"
 
       filter {
+        prefix = "tombstone/"
+      }
+
+      destination {
+        bucket        = local.uploads_bucket_replica_arn
+        storage_class = "STANDARD"
+      }
+    }
+
+    rules {
+      id     = "discourse_optimized_${local.environment}"
+      status = "Enabled"
+
+      filter {
+        prefix = "optimized/"
+      }
+
+      destination {
+        bucket        = local.uploads_bucket_replica_arn
+        storage_class = "STANDARD"
+      }
+    }
+
+    rules {
+      id     = "discourse_original_${local.environment}"
+      status = "Enabled"
+
+      filter {
+        prefix = "original/"
       }
 
       destination {
@@ -53,7 +83,6 @@ resource "aws_s3_bucket" "uploads" {
   versioning {
     enabled = true
   }
-
 }
 
 resource "aws_s3_bucket" "backups" {
