@@ -70,6 +70,18 @@ data "terraform_remote_state" "discourse" {
   }
 }
 
+data "terraform_remote_state" "s3" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.s3_remote_state_workspace
+    }
+  }
+}
+
 data "aws_ssm_parameter" "db_user" {
   name = data.terraform_remote_state.postgres_setup.outputs.dispute_tools_db_user_ssm_key
 }
@@ -93,6 +105,9 @@ locals {
 
   discourse_domain = data.terraform_remote_state.discourse.outputs.domain
 
+  uploads_bucket_replica_arn = data.terraform_remote_state.s3.outputs.disputes_uploads_replica_bucket_arn
+  replication_role_arn       = data.terraform_remote_state.s3.outputs.replication_role_arn
+
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
   lb_listener_id = data.terraform_remote_state.cluster.outputs.lb_listener_id
@@ -106,5 +121,6 @@ locals {
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
   redis_remote_state_workspace          = "${local.environment}-redis"
   remote_state_organization             = "debtcollective"
+  s3_remote_state_workspace             = "${local.environment}-extras-s3"
   vpc_remote_state_workspace            = "${local.environment}-network"
 }

@@ -30,6 +30,61 @@ resource "aws_s3_bucket" "uploads" {
     Terraform   = true
     Name        = local.uploads_bucket_name
     Environment = local.environment
+    Replication = true
+  }
+
+  replication_configuration {
+    role = local.replication_role_arn
+
+    // copy all directories except for the assets one
+    rules {
+      id       = "discourse_original_${local.environment}"
+      status   = "Enabled"
+      priority = 0
+
+      filter {
+        prefix = "original/"
+      }
+
+      destination {
+        bucket        = local.uploads_bucket_replica_arn
+        storage_class = "STANDARD"
+      }
+    }
+
+    rules {
+      id       = "discourse_optimized_${local.environment}"
+      status   = "Enabled"
+      priority = 1
+
+      filter {
+        prefix = "optimized/"
+      }
+
+      destination {
+        bucket        = local.uploads_bucket_replica_arn
+        storage_class = "STANDARD"
+      }
+    }
+
+    rules {
+      id       = "discourse_tombstone_${local.environment}"
+      status   = "Enabled"
+      priority = 2
+
+      filter {
+        prefix = "tombstone/"
+      }
+
+      destination {
+        bucket        = local.uploads_bucket_replica_arn
+        storage_class = "STANDARD"
+      }
+    }
+  }
+
+  versioning {
+    enabled = true
   }
 }
 

@@ -68,6 +68,7 @@ resource "aws_cloudfront_distribution" "uploads" {
     Terraform   = true
     Name        = local.s3_origin_id
     Environment = local.environment
+    Cache       = true
   }
 }
 
