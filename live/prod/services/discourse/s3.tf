@@ -1,7 +1,7 @@
 // S3 buckets and permissions
 resource "aws_s3_bucket" "uploads" {
   bucket = local.uploads_bucket_name
-  acl    = "public-read"
+  acl    = "private"
 
   cors_rule {
     allowed_headers = ["Authorization"]
@@ -86,6 +86,28 @@ resource "aws_s3_bucket" "uploads" {
   versioning {
     enabled = true
   }
+}
+
+data "aws_iam_policy_document" "uploads" {
+  statement {
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.uploads.arn}/assets/*"
+    ]
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "uploads" {
+  bucket = aws_s3_bucket.uploads.id
+  policy = data.aws_iam_policy_document.uploads.json
 }
 
 resource "aws_s3_bucket" "backups" {
