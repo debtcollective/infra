@@ -38,11 +38,12 @@ resource "aws_s3_bucket" "uploads" {
 
     // copy all directories except for the assets one
     rules {
-      id     = "discourse_tombstone_${local.environment}"
-      status = "Enabled"
+      id       = "discourse_original_${local.environment}"
+      status   = "Enabled"
+      priority = 0
 
       filter {
-        prefix = "tombstone/"
+        prefix = "original/"
       }
 
       destination {
@@ -52,8 +53,9 @@ resource "aws_s3_bucket" "uploads" {
     }
 
     rules {
-      id     = "discourse_optimized_${local.environment}"
-      status = "Enabled"
+      id       = "discourse_optimized_${local.environment}"
+      status   = "Enabled"
+      priority = 1
 
       filter {
         prefix = "optimized/"
@@ -66,11 +68,12 @@ resource "aws_s3_bucket" "uploads" {
     }
 
     rules {
-      id     = "discourse_original_${local.environment}"
-      status = "Enabled"
+      id       = "discourse_tombstone_${local.environment}"
+      status   = "Enabled"
+      priority = 2
 
       filter {
-        prefix = "original/"
+        prefix = "tombstone/"
       }
 
       destination {
