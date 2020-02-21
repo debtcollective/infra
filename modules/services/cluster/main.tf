@@ -107,8 +107,8 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu_usage" {
   }
 
   alarm_actions             = [var.slack_topic_arn]
-  ok_actions                = [var.slack_topic_arn]
   insufficient_data_actions = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
 }
 
 resource "aws_cloudwatch_metric_alarm" "high_memory_usage" {
@@ -129,8 +129,8 @@ resource "aws_cloudwatch_metric_alarm" "high_memory_usage" {
   }
 
   alarm_actions             = [var.slack_topic_arn]
-  ok_actions                = [var.slack_topic_arn]
   insufficient_data_actions = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
 }
 
 // Send alarm when ALB identifies unhealthy hosts
@@ -147,8 +147,8 @@ resource "aws_cloudwatch_metric_alarm" "alb_unhealthyhosts" {
   actions_enabled     = "true"
 
   alarm_actions             = [var.slack_topic_arn]
-  ok_actions                = [var.slack_topic_arn]
   insufficient_data_actions = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
 
   dimensions = {
     LoadBalancer = aws_lb.lb.arn_suffix

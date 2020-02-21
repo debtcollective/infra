@@ -138,5 +138,7 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu_usage" {
     InstanceId = aws_instance.discourse.id
   }
 
-  alarm_actions = [var.slack_topic_arn]
+  alarm_actions             = [var.slack_topic_arn]
+  insufficient_data_actions = [var.slack_topic_arn]
+  ok_actions                = [var.slack_topic_arn]
 }
