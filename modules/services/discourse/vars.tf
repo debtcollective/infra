@@ -61,6 +61,16 @@ variable "discourse_db_password" {
   description = "Discourse database password"
 }
 
+// Redis Configuration
+variable "discourse_redis_host" {
+  description = "Discourse redis host"
+}
+
+variable "discourse_redis_port" {
+  description = "Discourse redis port"
+  default     = "6379"
+}
+
 variable "discourse_letsencrypt_account_email" {
   description = "email to setup Let's Encrypt"
   default     = "orlando@hashlabs.com"

@@ -65,6 +65,9 @@ module "discourse" {
   discourse_db_password = local.db_pass
   discourse_sso_secret  = var.discourse_sso_secret
 
+  discourse_redis_host = local.redis_host
+  discourse_redis_port = local.redis_port
+
   discourse_reply_by_email_address = var.discourse_reply_by_email_address
   discourse_pop3_polling_username  = var.discourse_pop3_polling_username
   discourse_pop3_polling_password  = var.discourse_pop3_polling_password

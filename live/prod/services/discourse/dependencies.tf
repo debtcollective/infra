@@ -70,6 +70,18 @@ data "terraform_remote_state" "s3" {
   }
 }
 
+data "terraform_remote_state" "redis" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.redis_remote_state_workspace
+    }
+  }
+}
+
 data "aws_ssm_parameter" "db_user" {
   name = data.terraform_remote_state.postgres_setup.outputs.discourse_db_user_ssm_key
 }
@@ -101,6 +113,9 @@ locals {
   db_port    = data.terraform_remote_state.postgres.outputs.db_port
   db_user    = data.aws_ssm_parameter.db_user.value
 
+  redis_host = data.terraform_remote_state.redis.outputs.host
+  redis_port = data.terraform_remote_state.redis.outputs.port
+
   ssh_key_pair_name     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
   vpc_id                = data.terraform_remote_state.vpc.outputs.vpc_id
   subnet_id             = data.terraform_remote_state.vpc.outputs.public_subnet_ids[0]
@@ -114,6 +129,7 @@ locals {
   notify_slack_remote_state_workspace   = "${local.environment}-extras-notify-slack"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
+  redis_remote_state_workspace          = "${local.environment}-redis"
   remote_state_organization             = "debtcollective"
   s3_remote_state_workspace             = "${local.environment}-extras-s3"
   vpc_remote_state_workspace            = "${local.environment}-network"
