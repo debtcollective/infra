@@ -10,6 +10,8 @@ env:
   DISCOURSE_ENABLE_CORS: true
   DISCOURSE_HOSTNAME: '${discourse_hostname}'
   DISCOURSE_MAXMIND_LICENSE_KEY: '${discourse_maxmind_license_key}'
+  DISCOURSE_REDIS_HOST: '${discourse_redis_host}'
+  DISCOURSE_REDIS_PORT: '${discourse_redis_port}'
   DISCOURSE_S3_ACCESS_KEY_ID: '${discourse_s3_access_key_id}'
   DISCOURSE_S3_BACKUP_BUCKET: '${discourse_s3_backup_bucket}'
   DISCOURSE_S3_CDN_URL: '${discourse_s3_cdn_url}'
@@ -67,7 +69,6 @@ hooks:
           - 'apt-get update && apt-get -y install postgresql-client-11'
           - 'ln -s -f /usr/lib/postgresql/11/bin/pg_dump /usr/bin/pg_dump'
 templates:
-  - templates/redis.template.yml
   - templates/web.template.yml
   - templates/web.ratelimited.template.yml
   - templates/web.ssl.template.yml

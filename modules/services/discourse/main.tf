@@ -60,6 +60,9 @@ resource "aws_instance" "discourse" {
         discourse_db_username = var.discourse_db_username
         discourse_db_password = var.discourse_db_password
 
+        discourse_redis_host = var.discourse_redis_host
+        discourse_redis_port = var.discourse_redis_port
+
         discourse_developer_emails          = var.discourse_developer_emails
         discourse_hostname                  = var.discourse_hostname
         discourse_maxmind_license_key       = var.discourse_maxmind_license_key
