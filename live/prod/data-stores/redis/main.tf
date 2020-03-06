@@ -20,19 +20,21 @@ data "aws_availability_zones" "available" {
 }
 
 module "redis" {
-  source = "git::https://github.com/cloudposse/terraform-aws-elasticache-redis.git?ref=tags/0.13.0"
+  source = "git::https://github.com/cloudposse/terraform-aws-elasticache-redis.git?ref=tags/0.16.0"
   stage  = "prod"
   name   = "redis"
 
-  # This is the security groups that will have access to Redis
-  security_groups             = local.vpc_security_group_ids
-  vpc_id                      = local.vpc_id
-  subnets                     = local.subnet_ids
-  instance_type               = "cache.t2.micro"
-  engine_version              = "4.0.10"
-  alarm_cpu_threshold_percent = 90
-  transit_encryption_enabled  = false
-  auth_token                  = null
-  availability_zones          = data.aws_availability_zones.available.names
-  automatic_failover          = false
+  alarm_cpu_threshold_percent  = 90
+  auth_token                   = null
+  availability_zones           = data.aws_availability_zones.available.names
+  engine_version               = "5.0.6"
+  family                       = "redis5.0"
+  existing_security_groups     = local.vpc_security_group_ids
+  instance_type                = "cache.t2.micro"
+  subnets                      = local.subnet_ids
+  transit_encryption_enabled   = false
+  use_existing_security_groups = true
+  vpc_id                       = local.vpc_id
+
+  parameter = []
 }

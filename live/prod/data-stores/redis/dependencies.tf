@@ -15,5 +15,5 @@ locals {
   subnet_ids                 = data.terraform_remote_state.vpc.outputs.private_subnet_ids
   vpc_id                     = data.terraform_remote_state.vpc.outputs.vpc_id
   vpc_remote_state_workspace = "prod-network"
-  vpc_security_group_ids     = [data.terraform_remote_state.vpc.outputs.ec2_security_group_id]
+  vpc_security_group_ids     = [data.terraform_remote_state.vpc.outputs.redis_security_group_id]
 }
