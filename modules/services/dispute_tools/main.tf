@@ -40,7 +40,7 @@ resource "aws_lb_listener_rule" "dispute_tools" {
 // Create ECS task definition
 resource "aws_ecs_task_definition" "dispute_tools" {
   family                = "dispute_tools_${var.environment}"
-  container_definitions = module.container_definitions.json
+  container_definitions = "[${module.container_definition_app.json_map},${module.container_definition_workers.json_map}]"
 }
 
 // Create ECS service
