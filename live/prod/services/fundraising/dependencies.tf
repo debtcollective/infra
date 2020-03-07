@@ -95,7 +95,7 @@ locals {
   discourse_login_url  = "${local.discourse_uri}/session/sso_cookies"
   discourse_signup_url = "${local.discourse_uri}/session/sso_cookies/signup"
   discourse_uri        = "https://${data.terraform_remote_state.discourse.outputs.domain}"
-  redis_host           = data.terraform_remote_state.redis.outputs.host
+  redis_host           = data.terraform_remote_state.redis.outputs.endpoint
   redis_port           = data.terraform_remote_state.redis.outputs.port
   redis_url            = "redis://${local.redis_host}:${local.redis_port}/0"
   sso_cookie_name      = data.terraform_remote_state.discourse.outputs.sso_cookie_name

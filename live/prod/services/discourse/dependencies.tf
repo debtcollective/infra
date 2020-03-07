@@ -113,7 +113,7 @@ locals {
   db_port    = data.terraform_remote_state.postgres.outputs.db_port
   db_user    = data.aws_ssm_parameter.db_user.value
 
-  redis_host = data.terraform_remote_state.redis.outputs.host
+  redis_host = data.terraform_remote_state.redis.outputs.endpoint
   redis_port = data.terraform_remote_state.redis.outputs.port
 
   ssh_key_pair_name     = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
