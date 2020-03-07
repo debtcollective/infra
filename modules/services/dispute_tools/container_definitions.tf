@@ -227,7 +227,7 @@ module "container_definition_workers" {
   container_image              = var.container_image
 
   // run workers
-  command = ["yarn start:workers"]
+  command = ["yarn", "start:workers"]
 
   environment = local.environment
 
