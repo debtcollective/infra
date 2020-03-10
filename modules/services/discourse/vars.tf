@@ -129,6 +129,11 @@ variable "security_groups" {
   description = "VPC Security Groups IDs to be used by the instance"
 }
 
+variable "swap_size" {
+  description = "Size of swap in GBs"
+  default     = "4G"
+}
+
 variable "instance_type" {
   description = "EC2 instance type"
   default     = "t3a.small"
@@ -136,7 +141,7 @@ variable "instance_type" {
 
 variable "volume_size" {
   description = "EBS block size"
-  default     = 20
+  default     = 30
 }
 
 variable "monitoring" {

@@ -42,6 +42,9 @@ resource "aws_instance" "discourse" {
   monitoring = var.monitoring
 
   user_data = templatefile("${path.module}/cloud-config.yml", {
+    # swap size
+    swap_size = var.swap_size
+
     # web.yml file
     web_yml_b64 = base64encode(
       templatefile("${path.module}/web.yml", {
