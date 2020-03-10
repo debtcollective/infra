@@ -87,8 +87,6 @@ module "discourse" {
 
   discourse_sso_cookie_name = local.sso_cookie_name
 
-  volume_size = 30
-
   key_name        = local.ssh_key_pair_name
   subnet_id       = local.subnet_id
   security_groups = local.ec2_security_group_id
