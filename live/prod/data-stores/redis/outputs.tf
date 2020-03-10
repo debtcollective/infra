@@ -5,7 +5,7 @@ output "id" {
 
 output "security_group_id" {
   value       = module.redis.security_group_id
-  description = "Security group ID"
+  description = "Redis security group ID"
 }
 
 output "port" {
@@ -16,4 +16,9 @@ output "port" {
 output "host" {
   value       = module.redis.host
   description = "Redis host"
+}
+
+output "endpoint" {
+  value       = module.redis.endpoint
+  description = "Redis endpoint"
 }

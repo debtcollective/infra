@@ -24,7 +24,7 @@ module "redis" {
   stage  = "prod"
   name   = "redis"
 
-  alarm_cpu_threshold_percent  = 90
+  alarm_cpu_threshold_percent  = 85
   auth_token                   = null
   availability_zones           = data.aws_availability_zones.available.names
   engine_version               = "5.0.6"
