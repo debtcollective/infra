@@ -92,14 +92,6 @@ locals {
       value = var.sentry_endpoint
     },
     {
-      name  = "STRIPE_PRIVATE",
-      value = var.stripe_private
-    },
-    {
-      name  = "STRIPE_PUBLISHABLE",
-      value = var.stripe_publishable
-    },
-    {
       name  = "GMAPS_KEY",
       value = var.google_maps_api_key
     },

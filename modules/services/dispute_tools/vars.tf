@@ -95,14 +95,6 @@ variable "loggly_api_key" {
   description = "Loggly API key"
 }
 
-variable "stripe_private" {
-  description = "Stripe private key"
-}
-
-variable "stripe_publishable" {
-  description = "Stripe shared key"
-}
-
 variable "google_maps_api_key" {
   description = "Google maps API key"
 }
