@@ -174,6 +174,10 @@ locals {
     {
       name  = "GOOGLE_ANALYTICS_UA",
       value = var.google_analytics_ua
+    },
+    {
+      name  = "DONATE_URL",
+      value = var.donate_url
     }
   ]
 }
