@@ -92,14 +92,6 @@ locals {
       value = var.sentry_endpoint
     },
     {
-      name  = "STRIPE_PRIVATE",
-      value = var.stripe_private
-    },
-    {
-      name  = "STRIPE_PUBLISHABLE",
-      value = var.stripe_publishable
-    },
-    {
       name  = "GMAPS_KEY",
       value = var.google_maps_api_key
     },
@@ -182,6 +174,10 @@ locals {
     {
       name  = "GOOGLE_ANALYTICS_UA",
       value = var.google_analytics_ua
+    },
+    {
+      name  = "DONATE_URL",
+      value = var.donate_url
     }
   ]
 }

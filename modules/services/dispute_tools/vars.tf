@@ -95,12 +95,9 @@ variable "loggly_api_key" {
   description = "Loggly API key"
 }
 
-variable "stripe_private" {
-  description = "Stripe private key"
-}
-
-variable "stripe_publishable" {
-  description = "Stripe shared key"
+variable "donate_url" {
+  description = "Donate URL"
+  default     = "https://membership.debtcollective.org"
 }
 
 variable "google_maps_api_key" {

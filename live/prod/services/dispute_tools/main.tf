@@ -53,6 +53,7 @@ module "dispute_tools" {
   contact_email        = var.contact_email
   disputes_bcc_address = var.disputes_bcc_address
   sender_email         = var.sender_email
+  donate_url           = var.donate_url
 
   sso_cookie_name          = "_dispute_tools__${local.environment}"
   landing_page_url         = "https://debtcollective.org"
@@ -76,8 +77,6 @@ module "dispute_tools" {
   doe_disclosure_state           = var.doe_disclosure_state
   doe_disclosure_zip             = var.doe_disclosure_zip
 
-  stripe_private       = var.stripe_private
-  stripe_publishable   = var.stripe_publishable
   loggly_api_key       = var.loggly_api_key
   sentry_endpoint      = var.sentry_endpoint
   google_maps_api_key  = var.google_maps_api_key
