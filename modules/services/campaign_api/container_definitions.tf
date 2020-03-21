@@ -59,7 +59,23 @@ module "container_definitions" {
     {
       name  = "PLAYGROUND",
       value = var.playground
-    }
+    },
+    {
+      name  = "DISCOURSE_BADGE_ID",
+      value = var.discourse_badge_id
+    },
+    {
+      name  = "DISCOURSE_API_USERNAME",
+      value = var.discourse_api_username
+    },
+    {
+      name  = "DISCOURSE_API_KEY",
+      value = var.discourse_api_key
+    },
+    {
+      name  = "DISCOURSE_API_URL",
+      value = var.discourse_api_url
+    },
   ]
 
   port_mappings = [

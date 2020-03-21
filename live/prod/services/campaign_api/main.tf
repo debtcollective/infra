@@ -40,13 +40,17 @@ module "campaign_api" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
-  database_url         = local.database_url
-  discourse_login_url  = local.discourse_login_url
-  discourse_signup_url = local.discourse_signup_url
-  introspection        = local.introspection
-  playground           = local.playground
-  sso_cookie_name      = local.sso_cookie_name
-  sso_jwt_secret       = local.sso_jwt_secret
-  cors_origin          = local.cors_origin
-  sentry_dsn           = var.sentry_dsn
+  cors_origin            = local.cors_origin
+  database_url           = local.database_url
+  discourse_api_key      = var.discourse_api_key
+  discourse_api_url      = local.discourse_uri
+  discourse_api_username = var.discourse_api_username
+  discourse_badge_id     = var.discourse_badge_id
+  discourse_login_url    = local.discourse_login_url
+  discourse_signup_url   = local.discourse_signup_url
+  introspection          = local.introspection
+  playground             = local.playground
+  sentry_dsn             = var.sentry_dsn
+  sso_cookie_name        = local.sso_cookie_name
+  sso_jwt_secret         = local.sso_jwt_secret
 }
