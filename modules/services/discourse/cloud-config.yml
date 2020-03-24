@@ -25,7 +25,12 @@ runcmd:
 
   # Add ssh keys for ubuntu user (/home/ubuntu/.ssh/authorized_keys)
   - mkdir -p /home/ubuntu/.ssh
+
+  # TODO: find a better way to do this
+  # orlando
   - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNmbm3AR92kE0igfVUJ9ZpY48oVS4Po+qH/3Jb6gF5NkHju+67Rf2MDkWQ4NzNp9yjlxL7LQk7c0dNuIR++GSS6dOLxixPXnLcYadqJF2h5qPV8RMNkOTuHR/zWPPEh77Xur8NoFtroBaCEMulfmGNUauyaNcV/KoK4/lxN53JItJaUt7OzdMU12jOdLsN985Neu2rPVIFv3eYty/rSEtTWkmIwVvVXkpFzoRTuNM+hYTPiAniHiON/h+wfNG5Ei4Lu/dGhy0NZRavF9TQTvLv/vsXQta6q+HzvF4IYsj2Dt0YBvNNL/uyO4mfA08U0jjnJCh7sjIHHrju9Q/i6r2sjNOoiynDnorUXAlUn++gkyFlksnRMLTxAKgvwYVsiQMjoOdIacp3Xwn11BaO6VsGf/9ub+P9B5XbG6gfwtVEWaag2FkWuIeFLF6qMwMAqpZFSG+lFO0iqFwxTO7MnwRTDxmiE13tfl3QHdciTc+qjtnNEPIhbJR0pQmtwZnnOmFdrxcb8phwdZOvUFA0OSXEL0VwvM6NaORpVxfotdWyZJ/JIhv1Jre0h+folgd1FIuNjZ7dVGQvbEwwVZDbsPHZNKbacHjD/sj9sK+rEll1RKTS8ReDBPWek1aoA9V80FSV6aMtI4/pVOXP6/1CBYEgB4nzZUBlzlS3uiCx9C6s4Q== orlando@hashlabs.com" >> /home/ubuntu/.ssh/authorized_keys
+  # jacques
+  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNhQYQhGY+dV5hOejEsVN/b3lxNojy6TqO7s9wd7s2oYsf3chg4ji/TJhhSMiTIptB0Td7XTvcCRA+HShGRkk5uTEbqdRt6bGuqcQ0hytnsdZ7SLbvEAaPPpFnKaPakM9ZkHxh9TfXtlxdogeDjDRAX51uQm5QMLuUTgoDqJFPT3Kdo+kiXPaQHnMX+IHpk/zDgc01rDSykADov2ihm48ZKUTqbWcxMB2vwEwolkBUTXXVXCGAPDVnPD5D+R8bXOw0pBYHJA9U9YbCdCUddNI2aOnzQlafRqCVpGtcY2immStuIQHR8c7JxmVenKJKN5E5AT0mqbal5W/iSwdiFSwG09zxu+nAzFUxG56oZNymH+O4s0MZUwUN2gC6QoRG37pe5ZNbZ8/mVTc6OB48PlmLko+s2NqgP0v40OnmU0wXny4LHUBuu98wlaKcf6giBRRfSKBHB85Fnvuu1oHY057HlayyFDHMOz4ti6h0yzP/wJHHiPYR25EaWDM5gfL24vhUU3IddqikAGBjWTFhejC69N14eUP5i3bvz2nqIBpma2wv8SFeMacVwJtguqQA4dkP3bmeNxJ/HDDB+ywn0CVrfCzcMRs7F+4HQrCiECmfgATT5py+btQzqIaBkeNZg08a76ypVnhwMynAgvNzqQquB7dWcJ5OiMjsZdi7/4cbNw== jlaroche@shaarli.home-lab.site" >> /home/ubuntu/.ssh/authorized_keys
 
   # enable swap
   - sudo fallocate -l ${swap_size} /swapfile
