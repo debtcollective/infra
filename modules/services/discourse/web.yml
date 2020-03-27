@@ -63,6 +63,8 @@ hooks:
           - 'git clone https://github.com/debtcollective/discourse-sentry.git'
           - 'git clone https://github.com/debtcollective/discourse-skylight.git'
           - 'git clone https://github.com/debtcollective/discourse-mailchimp-list.git'
+          - 'git clone https://github.com/discourse/discourse-adplugin.git'
+
     - exec:
         cd: $home
         cmd:
