@@ -48,8 +48,8 @@ module "campaign_api" {
   discourse_badge_id     = var.discourse_badge_id
   discourse_login_url    = local.discourse_login_url
   discourse_signup_url   = local.discourse_signup_url
-  introspection          = local.introspection
-  playground             = local.playground
+  introspection          = var.introspection
+  playground             = var.playground
   sentry_dsn             = var.sentry_dsn
   sso_cookie_name        = local.sso_cookie_name
   sso_jwt_secret         = local.sso_jwt_secret

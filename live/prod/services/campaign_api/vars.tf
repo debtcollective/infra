@@ -13,3 +13,13 @@ variable "discourse_api_username" {
 variable "discourse_api_key" {
   description = "Discourse API Key"
 }
+
+variable "introspection" {
+  description = "GraphQL introspection"
+  default     = true
+}
+
+variable "playground" {
+  description = "GraphQL playground"
+  default     = false
+}
