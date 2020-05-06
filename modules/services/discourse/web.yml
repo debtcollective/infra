@@ -51,10 +51,9 @@ hooks:
           - 'git clone https://github.com/discourse/docker_manager.git'
           - 'git clone https://github.com/discourse/discourse-assign.git'
           - 'git clone https://github.com/discourse/discourse-staff-notes.git'
-          - 'git clone https://github.com/angusmcleod/discourse-events.git'
-          - 'git clone https://github.com/angusmcleod/discourse-locations.git'
-          # remove this fork once it's fixed in upstream
-          - 'git clone https://github.com/debtcollective/discourse-custom-wizard.git'
+          - 'git clone https://github.com/paviliondev/discourse-events.git'
+          - 'git clone https://github.com/paviliondev/discourse-locations.git'
+          - 'git clone https://github.com/paviliondev/discourse-custom-wizard.git'
           - 'git clone -b master --single-branch https://github.com/debtcollective/discourse-debtcollective-theme.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-wizards.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-private-message.git'
