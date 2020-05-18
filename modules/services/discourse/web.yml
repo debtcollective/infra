@@ -54,7 +54,6 @@ hooks:
           - 'git clone https://github.com/paviliondev/discourse-events.git'
           - 'git clone https://github.com/paviliondev/discourse-locations.git'
           - 'git clone https://github.com/paviliondev/discourse-custom-wizard.git'
-          - 'git clone -b master --single-branch https://github.com/debtcollective/discourse-debtcollective-theme.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-wizards.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-private-message.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-sso.git'
