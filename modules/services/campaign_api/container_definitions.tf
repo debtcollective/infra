@@ -76,6 +76,18 @@ module "container_definitions" {
       name  = "DISCOURSE_API_URL",
       value = var.discourse_api_url
     },
+    {
+      name  = "MAILCHIMP_API_KEY",
+      value = var.mailchimp_api_key
+    },
+    {
+      name  = "MAILCHIMP_LIST_ID",
+      value = var.mailchimp_list_id
+    },
+    {
+      name  = "MAILCHIMP_TAG",
+      value = var.mailchimp_tag
+    },
   ]
 
   port_mappings = [

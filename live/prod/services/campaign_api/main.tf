@@ -49,6 +49,9 @@ module "campaign_api" {
   discourse_login_url    = local.discourse_login_url
   discourse_signup_url   = local.discourse_signup_url
   introspection          = var.introspection
+  mailchimp_api_key      = var.mailchimp_api_key
+  mailchimp_list_id      = var.mailchimp_list_id
+  mailchimp_tag          = var.mailchimp_tag
   playground             = var.playground
   sentry_dsn             = var.sentry_dsn
   sso_cookie_name        = local.sso_cookie_name
