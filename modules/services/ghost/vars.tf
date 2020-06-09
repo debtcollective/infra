@@ -43,14 +43,18 @@ variable "db_host" {
   description = "Database Host URL"
 }
 
-variable "db_username" {
-  description = "Database Username"
+variable "db_username_ssm_key" {
+  description = "Database Username ssm key for encrypted secrets"
 }
 
-variable "db_password" {
-  description = "Database Password"
+variable "db_password_ssm_key" {
+  description = "Database Password ssm key for encrypted secrets"
 }
 
 variable "db_name" {
   description = "Database name"
+}
+
+variable "execution_role_arn" {
+  description = "Execution role for task definition, given we are using secrets it's needed"
 }

@@ -29,14 +29,6 @@ module "container_definitions" {
       value = var.db_name
     },
     {
-      name  = "database__connection__user",
-      value = var.db_username
-    },
-    {
-      name  = "database__connection__password",
-      value = var.db_password
-    },
-    {
       name  = "database__connection__host",
       value = var.db_host
     },
@@ -48,6 +40,17 @@ module "container_definitions" {
       name  = "NODE_ENV",
       value = "production"
     },
+  ]
+
+  secrets = [
+    {
+      name : "database__connection__user",
+      valueFrom : var.db_username_ssm_key
+    },
+    {
+      name : "database__connection__password",
+      valueFrom : var.db_password_ssm_key
+    }
   ]
 
   port_mappings = [

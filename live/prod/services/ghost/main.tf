@@ -35,13 +35,14 @@ module "ghost" {
   source      = "../../../../modules/services/ghost"
   environment = local.environment
 
-  domain         = aws_route53_record.ghost.fqdn
-  ecs_cluster_id = local.ecs_cluster_id
-  lb_listener_id = local.lb_listener_id
-  vpc_id         = local.vpc_id
+  domain             = aws_route53_record.ghost.fqdn
+  ecs_cluster_id     = local.ecs_cluster_id
+  lb_listener_id     = local.lb_listener_id
+  vpc_id             = local.vpc_id
+  execution_role_arn = local.execution_role_arn
 
-  db_host     = local.db_host
-  db_name     = local.db_name
-  db_password = local.db_password
-  db_username = local.db_username
+  db_host             = local.db_host
+  db_name             = local.db_name
+  db_password_ssm_key = local.db_password_ssm_key
+  db_username_ssm_key = local.db_username_ssm_key
 }

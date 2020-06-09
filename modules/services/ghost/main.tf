@@ -15,7 +15,9 @@ resource "aws_lb_target_group" "ghost" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/"
+    path     = "/ghost"
+    protocol = "HTTPS"
+    matcher  = "301"
   }
 
   lifecycle {
@@ -42,6 +44,7 @@ resource "aws_lb_listener_rule" "ghost" {
 resource "aws_ecs_task_definition" "ghost" {
   family                = "ghost_${var.environment}"
   container_definitions = module.container_definitions.json
+  execution_role_arn    = var.execution_role_arn
 }
 
 // Create ECS service
