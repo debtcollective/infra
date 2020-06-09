@@ -15,9 +15,9 @@ resource "aws_lb_target_group" "ghost" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path     = "/ghost"
-    protocol = "HTTPS"
+    interval = 60
     matcher  = "301"
+    path     = "/"
   }
 
   lifecycle {
