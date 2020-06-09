@@ -1,6 +1,6 @@
 locals {
   container_name = "ghost"
-  container_port = 3000
+  container_port = 2368
   name_prefix    = "gh-${substr(var.environment, 0, 2)}-"
 
 }
@@ -15,7 +15,7 @@ resource "aws_lb_target_group" "ghost" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/api/health"
+    path = "/"
   }
 
   lifecycle {
@@ -40,7 +40,7 @@ resource "aws_lb_listener_rule" "ghost" {
 
 // Create ECS task definition
 resource "aws_ecs_task_definition" "ghost" {
-  family                = "metabase_${var.environment}"
+  family                = "ghost_${var.environment}"
   container_definitions = module.container_definitions.json
 }
 

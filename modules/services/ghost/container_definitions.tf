@@ -10,7 +10,7 @@ resource "aws_cloudwatch_log_group" "ghost" {
 }
 
 module "container_definitions" {
-  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
+  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.25.0"
 
   container_name               = local.container_name
   container_cpu                = null
@@ -43,7 +43,7 @@ module "container_definitions" {
     {
       name  = "url",
       value = var.domain
-    }
+    },
     {
       name  = "NODE_ENV",
       value = "production"
