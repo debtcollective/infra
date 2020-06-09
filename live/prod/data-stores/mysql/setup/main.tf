@@ -16,8 +16,10 @@ provider "aws" {
 }
 
 provider "mysql" {
-  host     = "localhost:3306"
+  endpoint = "localhost:3306"
   username = local.master_db_user
   password = local.master_db_pass
-  tls      = true
+
+  // This needs to be false since we are running from localhost
+  tls = false
 }

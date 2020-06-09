@@ -26,6 +26,7 @@ locals {
   master_db_pass               = data.aws_ssm_parameter.master_db_pass.value
   master_db_name               = data.terraform_remote_state.mysql.outputs.db_name
   master_db_port               = data.terraform_remote_state.mysql.outputs.db_port
+  db_host                      = data.terraform_remote_state.mysql.outputs.db_address
   privileges = [
     "ALL",
   ]
