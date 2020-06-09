@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "_/ghost:latest"
+  default     = "ghost:latest"
 }
 
 variable "container_memory_reservation" {
@@ -35,7 +35,7 @@ variable "desired_count" {
 
 variable "log_retention_in_days" {
   description = "Cloudwatch logs retention"
-  default     = 3
+  default     = 7
 }
 
 // Ghost app variables
