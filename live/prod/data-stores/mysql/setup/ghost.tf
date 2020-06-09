@@ -27,7 +27,6 @@ resource "aws_ssm_parameter" "ghost_db_pass" {
 // Create MySQL user and role
 resource "mysql_user" "ghost" {
   user               = aws_ssm_parameter.ghost_db_user.value
-  host               = local.db_host
   plaintext_password = aws_ssm_parameter.ghost_db_pass.value
 }
 
@@ -38,7 +37,6 @@ resource "mysql_database" "ghost" {
 
 resource "mysql_grant" "ghost" {
   user       = mysql_user.ghost.user
-  host       = mysql_user.ghost.host
   database   = mysql_database.ghost.name
   privileges = local.privileges
 

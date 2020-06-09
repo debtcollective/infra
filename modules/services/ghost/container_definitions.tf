@@ -42,7 +42,7 @@ module "container_definitions" {
     },
     {
       name  = "url",
-      value = var.domain
+      value = "https://${var.domain}"
     },
     {
       name  = "NODE_ENV",
