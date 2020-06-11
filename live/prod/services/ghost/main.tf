@@ -45,4 +45,9 @@ module "ghost" {
   db_name             = local.db_name
   db_password_ssm_key = local.db_password_ssm_key
   db_username_ssm_key = local.db_username_ssm_key
+  mail_from           = var.mail_from
+  mail_host           = var.mail_host
+  mail_pass           = var.mail_pass
+  mail_port           = var.mail_port
+  mail_user           = var.mail_user
 }

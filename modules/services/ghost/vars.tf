@@ -38,6 +38,10 @@ variable "log_retention_in_days" {
   default     = 7
 }
 
+variable "execution_role_arn" {
+  description = "Execution role for task definition, given we are using secrets it's needed"
+}
+
 // Ghost app variables
 variable "db_host" {
   description = "Database Host URL"
@@ -55,6 +59,27 @@ variable "db_name" {
   description = "Database name"
 }
 
-variable "execution_role_arn" {
-  description = "Execution role for task definition, given we are using secrets it's needed"
+variable "mail_transport" {
+  description = "Mail transport protocol"
+  default = "SMTP"
+}
+
+variable "mail_host" {
+  description = "Mail host"
+}
+
+variable "mail_port" {
+  description = "Mail port"
+}
+
+variable "mail_user" {
+  description = "Mail user"
+}
+
+variable "mail_pass" {
+  description = "Mail password"
+}
+
+variable "mail_from" {
+  description = "Mail default from address"
 }
