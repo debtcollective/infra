@@ -20,6 +20,17 @@ data "aws_iam_policy_document" "ecs_instance_policy" {
       identifiers = ["ecs.amazonaws.com"]
     }
   }
+
+  statement {
+    sid     = ""
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
 }
 
 resource "aws_iam_role" "ecs_instance_role" {
@@ -112,6 +123,13 @@ data "aws_iam_policy_document" "ecs_iam_role" {
       "iam:ListInstanceProfilesForRole",
       "iam:ListRoles",
       "iam:ListUsers",
+      "secretsmanager:GetSecret",
+      "secretsmanager:GetSecretValue",
+      "ssm:DescribeParameters",
+      "ssm:GetParameter",
+      "ssm:GetParameterHistory",
+      "ssm:GetParameters",
+      "ssm:GetParametersByPath",
     ]
   }
 }
