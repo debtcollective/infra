@@ -40,12 +40,37 @@ resource "aws_db_subnet_group" "pg_sg" {
   subnet_ids  = var.subnet_ids
 }
 
+// Postgres Parameter group
+resource "aws_db_parameter_group" "postgres" {
+  name_prefix = "postgres11-"
+  family      = "postgres11"
+
+  parameter {
+    apply_method = "pending-reboot"
+    name  = "pg_stat_statements.track"
+    value = "all"
+  }
+
+  parameter {
+    apply_method = "pending-reboot"
+    name  = "shared_preload_libraries"
+    value = "pg_stat_statements"
+  }
+
+  # 16kb instead of the default 2kb
+  parameter {
+    apply_method = "pending-reboot"
+    name  = "track_activity_query_size"
+    value = "16393"
+  }
+}
+
 // Postgres Database
 resource "aws_db_instance" "pg" {
   identifier        = "postgres-${var.environment}"
   allocated_storage = "20"
   engine            = "postgres"
-  engine_version    = "11.4"
+  engine_version    = "11.6"
   instance_class    = var.instance_class
   name              = local.db_name
   username          = aws_ssm_parameter.master_user.value
@@ -58,7 +83,9 @@ resource "aws_db_instance" "pg" {
   vpc_security_group_ids = var.vpc_security_group_ids
 
   db_subnet_group_name = aws_db_subnet_group.pg_sg.name
-  parameter_group_name = "default.postgres11"
+  parameter_group_name = aws_db_parameter_group.postgres.name
+
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
   multi_az                  = true
   storage_type              = "gp2"
