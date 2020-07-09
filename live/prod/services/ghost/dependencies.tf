@@ -79,4 +79,6 @@ locals {
   mysql_setup_remote_state_workspace = "${local.environment}-mysql-setup"
   remote_state_organization          = "debtcollective"
   vpc_remote_state_workspace         = "${local.environment}-network"
+
+  uploads_bucket_name = "ghost-uploads-${local.environment}"
 }
