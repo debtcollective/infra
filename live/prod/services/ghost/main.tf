@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "ghost" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "ghost"
+  name    = "blog"
   type    = "A"
 
   alias {
@@ -30,12 +30,6 @@ resource "aws_route53_record" "ghost" {
     evaluate_target_health = true
   }
 }
-
-// create S3 bucket
-
-// create AIM role
-
-// Check cloudfront dependencies
 
 module "ghost" {
   source      = "../../../../modules/services/ghost"
