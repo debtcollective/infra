@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "debtcollective/ghost:latest"
+  default     = "debtcollective/ghost-s3:latest"
 }
 
 variable "container_memory_reservation" {
