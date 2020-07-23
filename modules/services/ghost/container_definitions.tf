@@ -61,6 +61,26 @@ module "container_definitions" {
       value = var.mail_pass
     },
     {
+      name  = "storage__active",
+      value = "ghost-s3"
+    },
+    {
+      name  = "storage__ghost-s3__accessKeyId",
+      value = var.s3_access_key_id
+    },
+    {
+      name  = "storage__ghost-s3__secretAccessKey",
+      value = var.s3_secret_access_key
+    },
+    {
+      name  = "storage__ghost-s3__bucket",
+      value = var.s3_bucket
+    },
+    {
+      name  = "storage__ghost-s3__region",
+      value = var.s3_region
+    },
+    {
       name  = "url",
       value = "https://${var.domain}"
     },

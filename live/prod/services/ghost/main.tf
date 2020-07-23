@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "ghost" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "ghost"
+  name    = "blog"
   type    = "A"
 
   alias {
@@ -45,9 +45,15 @@ module "ghost" {
   db_name             = local.db_name
   db_password_ssm_key = local.db_password_ssm_key
   db_username_ssm_key = local.db_username_ssm_key
+
   mail_from           = var.mail_from
   mail_host           = var.mail_host
   mail_pass           = var.mail_pass
   mail_port           = var.mail_port
   mail_user           = var.mail_user
+
+  s3_access_key_id = aws_iam_access_key.ghost.id
+  s3_secret_access_key = aws_iam_access_key.ghost.secret
+  s3_bucket = aws_s3_bucket.uploads.id
+  s3_region = aws_s3_bucket.uploads.region
 }

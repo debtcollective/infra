@@ -4,12 +4,12 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "ghost:latest"
+  default     = "debtcollective/ghost-s3:latest"
 }
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 1024
+  default     = 512
 }
 
 variable "vpc_id" {
@@ -82,4 +82,20 @@ variable "mail_pass" {
 
 variable "mail_from" {
   description = "Mail default from address"
+}
+
+variable "s3_access_key_id" {
+  description = "AWS S3 Access key id"
+}
+
+variable "s3_secret_access_key" {
+  description = "AWS S3 Secret access key"
+}
+
+variable "s3_bucket" {
+  description = "AWS S3 Bucket"
+}
+
+variable "s3_region" {
+  description = "AWS S3 bucket region"
 }
