@@ -69,6 +69,14 @@ hooks:
         cmd:
           - 'apt-get update && apt-get -y install postgresql-client-11'
           - 'ln -s -f /usr/lib/postgresql/11/bin/pg_dump /usr/bin/pg_dump'
+run:
+  - replace:
+      filename: "/etc/nginx/conf.d/discourse.conf"
+      from: /types.*\{[^\}]+\}/
+      to: "types {
+        text/csv csv;
+        application/json map;
+      }"
 templates:
   - templates/web.template.yml
   - templates/web.ratelimited.template.yml
