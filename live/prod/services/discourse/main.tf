@@ -32,14 +32,24 @@ resource "aws_route53_record" "discourse" {
   records = [module.discourse.public_ip]
 }
 
-// Monitor website uptime
-resource "statuscake_test" "discourse" {
+// Monitor Discourse uptime
+resource "statuscake_test" "discourse_service" {
   website_name  = local.fqdn
   website_url   = "https://${local.fqdn}/srv/status"
   test_type     = "HTTP"
   check_rate    = 300
   contact_group = [var.statuscake_contact_group_id]
   find_string   = "ok"
+}
+
+// Monitor Discourse home page rendering
+resource "statuscake_test" "discourse_homepage" {
+  website_name  = local.fqdn
+  website_url   = "https://${local.fqdn}"
+  test_type     = "HTTP"
+  check_rate    = 300
+  contact_group = [var.statuscake_contact_group_id]
+  find_string   = "Student Debt Collective"
 }
 
 module "discourse" {
