@@ -80,5 +80,9 @@ locals {
   remote_state_organization          = "debtcollective"
   vpc_remote_state_workspace         = "${local.environment}-network"
 
-  uploads_bucket_name = "ghost-uploads-${local.environment}"
+  acm_certificate_domain = "*.debtcollective.org"
+  cdn_alias              = "ghost-cdn-${local.environment}"
+  domain                 = "debtcollective.org"
+  s3_origin_id           = "ghost-${local.environment}"
+  uploads_bucket_name    = "ghost-uploads-${local.environment}"
 }

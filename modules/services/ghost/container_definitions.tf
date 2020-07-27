@@ -81,6 +81,10 @@ module "container_definitions" {
       value = var.s3_region
     },
     {
+      name  = "storage__ghost-s3__assetHost",
+      value = var.cdn_url
+    },
+    {
       name  = "url",
       value = "https://${var.domain}"
     },

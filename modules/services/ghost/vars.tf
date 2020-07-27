@@ -61,7 +61,7 @@ variable "db_name" {
 
 variable "mail_transport" {
   description = "Mail transport protocol"
-  default = "SMTP"
+  default     = "SMTP"
 }
 
 variable "mail_host" {
@@ -98,4 +98,8 @@ variable "s3_bucket" {
 
 variable "s3_region" {
   description = "AWS S3 bucket region"
+}
+
+variable "cdn_url" {
+  description = "Cloudfront distribution URL to serve assets via CDN"
 }
