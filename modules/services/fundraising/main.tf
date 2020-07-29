@@ -65,13 +65,13 @@ resource "aws_lb_listener_rule" "fundraising" {
 
 // Create ECS task definition
 resource "aws_ecs_task_definition" "fundraising" {
-  family                = "fundraising_${var.environment}"
+  family                = "membership_${var.environment}"
   container_definitions = module.container_definitions.json
 }
 
 // Create ECS service
 resource "aws_ecs_service" "fundraising" {
-  name            = "fundraising"
+  name            = "membership"
   cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.fundraising.arn
   desired_count   = var.desired_count
