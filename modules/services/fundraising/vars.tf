@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "debtcollective/fundraising:latest"
+  default     = "debtcollective/membership:latest"
 }
 
 variable "container_memory_reservation" {
