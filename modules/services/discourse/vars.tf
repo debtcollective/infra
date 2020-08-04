@@ -73,7 +73,7 @@ variable "discourse_redis_port" {
 
 variable "discourse_letsencrypt_account_email" {
   description = "email to setup Let's Encrypt"
-  default     = "orlando@hashlabs.com"
+  default     = "orlando@debtcollective.org"
 }
 
 variable "discourse_sso_secret" {
