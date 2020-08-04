@@ -1,10 +1,10 @@
-resource "aws_cloudwatch_log_group" "fundraising" {
-  name              = "/${var.environment}/services/fundraising"
+resource "aws_cloudwatch_log_group" "membership" {
+  name              = "/${var.environment}/services/membership"
   retention_in_days = var.log_retention_in_days
 
   tags = {
     Environment = var.environment
-    Application = "fundraising"
+    Application = "membership"
     Terraform   = true
   }
 }
@@ -119,7 +119,7 @@ module "container_definitions" {
     logDriver = "awslogs"
     options = {
       "awslogs-region" = data.aws_region.current.name
-      "awslogs-group"  = aws_cloudwatch_log_group.fundraising.name
+      "awslogs-group"  = aws_cloudwatch_log_group.membership.name
     }
     secretOptions = null
   }

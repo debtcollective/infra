@@ -1,31 +1,11 @@
 /**
- *Fundraising module creates a ECS deployment with Fundraising app docker image
+ *Membership module creates a ECS deployment with Membership app docker image
  *The cluster is created inside a VPC.
  *
- *This module creates all the necessary pieces that are needed to run a cluster, including:
- *
- ** Auto Scaling Groups
- ** EC2 Launch Configurations
- ** Application load balancer (ELB)
- *
- *## Usage:
- *
- *```hcl
- *module "fundraising" {
- *  source      = "../services/fundraising"
- *  environment = "${var.environment}"
- *  image       = "${var.image}"
- *
- *  db_username = "${var.db_username}"
- *  db_pass     = "${var.db_pass}"
- *  db_host     = "${var.db_host}"
- *  db_port     = "${var.db_port}"
- *  db_name     = "${var.db_name}"
- *}
- *```
+ *This module creates all the necessary pieces that are needed to run a service inside the provided cluster
  */
 locals {
-  container_name = "fundraising"
+  container_name = "membership"
   container_port = "5000"
   name_prefix    = "fr-${substr(var.environment, 0, 2)}-"
 }
@@ -33,7 +13,7 @@ locals {
 data "aws_region" "current" {}
 
 // Load balancer
-resource "aws_lb_target_group" "fundraising" {
+resource "aws_lb_target_group" "membership" {
   name_prefix = local.name_prefix
   port        = 80
   protocol    = "HTTP"
@@ -49,12 +29,12 @@ resource "aws_lb_target_group" "fundraising" {
 }
 
 // Services only should define this to work correctly
-resource "aws_lb_listener_rule" "fundraising" {
+resource "aws_lb_listener_rule" "membership" {
   listener_arn = var.lb_listener_id
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.fundraising.arn
+    target_group_arn = aws_lb_target_group.membership.arn
   }
 
   condition {
@@ -64,20 +44,20 @@ resource "aws_lb_listener_rule" "fundraising" {
 }
 
 // Create ECS task definition
-resource "aws_ecs_task_definition" "fundraising" {
+resource "aws_ecs_task_definition" "membership" {
   family                = "membership_${var.environment}"
   container_definitions = module.container_definitions.json
 }
 
 // Create ECS service
-resource "aws_ecs_service" "fundraising" {
+resource "aws_ecs_service" "membership" {
   name            = "membership"
   cluster         = var.ecs_cluster_id
-  task_definition = aws_ecs_task_definition.fundraising.arn
+  task_definition = aws_ecs_task_definition.membership.arn
   desired_count   = var.desired_count
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.fundraising.arn
+    target_group_arn = aws_lb_target_group.membership.arn
     container_name   = local.container_name
     container_port   = local.container_port
   }
