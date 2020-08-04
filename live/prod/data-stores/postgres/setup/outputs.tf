@@ -40,17 +40,17 @@ output "metabase_db_name" {
 
 }
 
-# Fundraising
-output "fundraising_db_user_ssm_key" {
-  value = aws_ssm_parameter.fundraising_db_user.name
+# Membership
+output "membership_db_user_ssm_key" {
+  value = aws_ssm_parameter.membership_db_user.name
 }
 
-output "fundraising_db_pass_ssm_key" {
-  value = aws_ssm_parameter.fundraising_db_pass.name
+output "membership_db_pass_ssm_key" {
+  value = aws_ssm_parameter.membership_db_pass.name
 }
 
-output "fundraising_db_name" {
-  value = "fundraising_${local.environment}"
+output "membership_db_name" {
+  value = postgresql_database.membership.name
 
 }
 
