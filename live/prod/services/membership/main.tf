@@ -32,7 +32,7 @@ resource "aws_route53_record" "membership" {
 }
 
 module "membership" {
-  source      = "../../../../modules/services/fundraising"
+  source      = "../../../../modules/services/membership"
   environment = local.environment
 
   domain         = aws_route53_record.membership.fqdn
