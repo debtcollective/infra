@@ -6,7 +6,7 @@ terraform {
     organization = "debtcollective"
 
     workspaces {
-      name = "prod-app-fundraising"
+      name = "prod-app-membership"
     }
   }
 }
