@@ -13,13 +13,13 @@ resource "random_password" "membership_db_pass" {
 
 // Store both in SSM
 resource "aws_ssm_parameter" "membership_db_user" {
-  name  = "/${local.environment}/services/fundraising/db_user"
+  name  = "/${local.environment}/services/membership/db_user"
   type  = "String"
   value = "fundraising_${random_string.membership_db_user.result}"
 }
 
 resource "aws_ssm_parameter" "membership_db_pass" {
-  name  = "/${local.environment}/services/fundraising/db_pass"
+  name  = "/${local.environment}/services/membership/db_pass"
   type  = "SecureString"
   value = random_password.membership_db_pass.result
 }
