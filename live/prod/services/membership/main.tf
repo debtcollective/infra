@@ -6,7 +6,7 @@ terraform {
     organization = "debtcollective"
 
     workspaces {
-      name = "prod-app-fundraising"
+      name = "prod-app-membership"
     }
   }
 }
@@ -19,7 +19,7 @@ data "aws_route53_zone" "primary" {
   name = "debtcollective.org"
 }
 
-resource "aws_route53_record" "fundraising" {
+resource "aws_route53_record" "membership" {
   zone_id = data.aws_route53_zone.primary.zone_id
   name    = "membership"
   type    = "A"
@@ -31,11 +31,11 @@ resource "aws_route53_record" "fundraising" {
   }
 }
 
-module "fundraising" {
-  source      = "../../../../modules/services/fundraising"
+module "membership" {
+  source      = "../../../../modules/services/membership"
   environment = local.environment
 
-  domain         = aws_route53_record.fundraising.fqdn
+  domain         = aws_route53_record.membership.fqdn
   ecs_cluster_id = local.ecs_cluster_id
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id

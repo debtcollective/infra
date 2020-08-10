@@ -1,4 +1,4 @@
 output "service_name" {
-  value       = aws_ecs_service.fundraising.name
+  value       = module.membership.service_name
   description = "ECS Service name"
 }

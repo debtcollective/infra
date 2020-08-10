@@ -38,7 +38,7 @@ variable "log_retention_in_days" {
   default     = 3
 }
 
-// Fundraising app variables
+// Membership app variables
 variable "database_url" {
   description = "Postgres database URL"
 }

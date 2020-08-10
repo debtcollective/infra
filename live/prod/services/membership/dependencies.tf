@@ -72,11 +72,11 @@ data "terraform_remote_state" "discourse" {
 
 
 data "aws_ssm_parameter" "db_user" {
-  name = data.terraform_remote_state.postgres_setup.outputs.fundraising_db_user_ssm_key
+  name = data.terraform_remote_state.postgres_setup.outputs.membership_db_user_ssm_key
 }
 
 data "aws_ssm_parameter" "db_pass" {
-  name = data.terraform_remote_state.postgres_setup.outputs.fundraising_db_pass_ssm_key
+  name = data.terraform_remote_state.postgres_setup.outputs.membership_db_pass_ssm_key
 }
 
 data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
@@ -88,7 +88,7 @@ locals {
 
   database_url         = "postgres://${local.db_user}:${urlencode(local.db_pass)}@${local.db_address}:${local.db_port}/${local.db_name}"
   db_address           = data.terraform_remote_state.postgres.outputs.db_address
-  db_name              = data.terraform_remote_state.postgres_setup.outputs.fundraising_db_name
+  db_name              = data.terraform_remote_state.postgres_setup.outputs.membership_db_name
   db_pass              = data.aws_ssm_parameter.db_pass.value
   db_port              = data.terraform_remote_state.postgres.outputs.db_port
   db_user              = data.aws_ssm_parameter.db_user.value

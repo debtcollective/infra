@@ -1,4 +1,4 @@
-// Fundraising app variables
+// Membership app variables
 variable "recaptcha_site_key" {
   description = "reCAPTCHA site key"
 }
