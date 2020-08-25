@@ -28,6 +28,31 @@ variable "domain" {
   description = "FQDN where app will be available"
 }
 
+variable "mail_from" {
+  description = "Reply to address used in emails sent from this app"
+}
+
+variable "smtp_address" {
+  description = "SMTP address"
+}
+
+variable "smtp_port" {
+  description = "SMTP port"
+  default     = 587
+}
+
+variable "smtp_domain" {
+  description = "SMTP domain"
+}
+
+variable "smtp_username" {
+  description = "SMTP username"
+}
+
+variable "smtp_password" {
+  description = "SMTP password"
+}
+
 variable "desired_count" {
   description = "Number of instances to be run"
   default     = 1
