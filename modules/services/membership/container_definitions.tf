@@ -42,6 +42,34 @@ module "container_definitions" {
       value = var.database_url
     },
     {
+      name  = "ASSET_HOST",
+      value = var.domain
+    },
+    {
+      name  = "MAIL_FROM",
+      value = var.mail_from
+    },
+    {
+      name  = "SMTP_ADDRESS",
+      value = var.smtp_address
+    },
+    {
+      name  = "SMTP_PORT",
+      value = var.smtp_port
+    },
+    {
+      name  = "SMTP_DOMAIN",
+      value = var.smtp_domain
+    },
+    {
+      name  = "SMTP_USERNAME",
+      value = var.smtp_username
+    },
+    {
+      name  = "SMTP_PASSWORD",
+      value = var.smtp_password
+    },
+    {
       name  = "DISCOURSE_LOGIN_URL",
       value = var.discourse_login_url
     },

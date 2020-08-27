@@ -32,3 +32,29 @@ variable "skylight_authentication" {
   description = "skylight.io api key"
   default     = ""
 }
+
+// SMTP
+variable "mail_from" {
+  description = "Reply to address used in emails sent from this app"
+}
+
+variable "smtp_address" {
+  description = "SMTP address"
+}
+
+variable "smtp_port" {
+  description = "SMTP port"
+  default     = 587
+}
+
+variable "smtp_domain" {
+  description = "SMTP domain"
+}
+
+variable "smtp_username" {
+  description = "SMTP username"
+}
+
+variable "smtp_password" {
+  description = "SMTP password"
+}

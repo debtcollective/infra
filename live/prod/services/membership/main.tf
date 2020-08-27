@@ -40,18 +40,24 @@ module "membership" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
+  amplitude_api_key       = var.amplitude_api_key
   database_url            = local.database_url
   discourse_login_url     = local.discourse_login_url
   discourse_signup_url    = local.discourse_signup_url
+  ga_measurement_id       = var.ga_measurement_id
+  mail_from               = var.mail_from
+  recaptcha_secret_key    = var.recaptcha_secret_key
+  recaptcha_site_key      = var.recaptcha_site_key
   redis_url               = local.redis_url
+  sentry_dsn              = var.sentry_dsn
+  skylight_authentication = var.skylight_authentication
+  smtp_address            = var.smtp_address
+  smtp_domain             = var.smtp_domain
+  smtp_password           = var.smtp_password
+  smtp_port               = var.smtp_port
+  smtp_username           = var.smtp_username
   sso_cookie_name         = local.sso_cookie_name
   sso_jwt_secret          = local.sso_jwt_secret
-  recaptcha_site_key      = var.recaptcha_site_key
-  recaptcha_secret_key    = var.recaptcha_secret_key
-  stripe_secret_key       = var.stripe_secret_key
   stripe_publishable_key  = var.stripe_publishable_key
-  sentry_dsn              = var.sentry_dsn
-  amplitude_api_key       = var.amplitude_api_key
-  ga_measurement_id       = var.ga_measurement_id
-  skylight_authentication = var.skylight_authentication
+  stripe_secret_key       = var.stripe_secret_key
 }
