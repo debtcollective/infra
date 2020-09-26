@@ -53,7 +53,6 @@ hooks:
           - 'git clone https://github.com/discourse/discourse-staff-notes.git'
           - 'git clone https://github.com/paviliondev/discourse-events.git'
           - 'git clone https://github.com/paviliondev/discourse-locations.git'
-          - 'git clone https://github.com/paviliondev/discourse-custom-wizard.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-sso.git'
           - 'git clone https://github.com/debtcollective/discourse-sentry.git'
           - 'git clone https://github.com/debtcollective/discourse-skylight.git'
