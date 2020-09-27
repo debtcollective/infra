@@ -82,6 +82,30 @@ module "container_definitions" {
       value = var.discourse_admin_role
     },
     {
+      name  = "DISCOURSE_URL",
+      value = var.discourse_url
+    },
+    {
+      name  = "DISCOURSE_USERNAME",
+      value = var.discourse_username
+    },
+    {
+      name  = "DISCOURSE_API_KEY",
+      value = var.discourse_api_key
+    },
+    {
+      name  = "MEMBER_HUB_URL",
+      value = var.member_hub_url
+    },
+    {
+      name  = "CORS_ORIGINS",
+      value = var.cors_origins
+    },
+    {
+      name  = "COOKIE_DOMAIN",
+      value = var.cookie_domain
+    },
+    {
       name  = "SECRET_KEY_BASE",
       value = random_string.secret_key_base.result
     },

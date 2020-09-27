@@ -44,6 +44,12 @@ module "membership" {
   database_url            = local.database_url
   discourse_login_url     = local.discourse_login_url
   discourse_signup_url    = local.discourse_signup_url
+  discourse_url           = local.discourse_url
+  discourse_username      = var.discourse_username
+  discourse_api_key       = var.discourse_api_key
+  member_hub_url          = var.member_hub_url
+  cors_origins            = var.cors_origins
+  cookie_domain           = var.cookie_domain
   ga_measurement_id       = var.ga_measurement_id
   mail_from               = var.mail_from
   recaptcha_secret_key    = var.recaptcha_secret_key

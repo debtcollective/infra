@@ -1,4 +1,24 @@
 // Membership app variables
+variable "discourse_username" {
+  description = "Discourse API username"
+}
+
+variable "discourse_api_key" {
+  description = "Discourse API key"
+}
+
+variable "member_hub_url" {
+  description = "Member Hub URL"
+}
+
+variable "cors_origins" {
+  description = "Allowed CORS origins"
+}
+
+variable "cookie_domain" {
+  description = "Session Cookie domain"
+}
+
 variable "recaptcha_site_key" {
   description = "reCAPTCHA site key"
 }

@@ -88,17 +88,41 @@ variable "discourse_signup_url" {
   description = "SSO signup URL"
 }
 
+variable "discourse_url" {
+  description = "Discourse URL"
+}
+
+variable "discourse_username" {
+  description = "Discourse API username"
+}
+
+variable "discourse_api_key" {
+  description = "Discourse API key"
+}
+
+variable "discourse_admin_role" {
+  description = "Role with access to the admin backend"
+  default     = "dispute_pro"
+}
+
+variable "member_hub_url" {
+  description = "Member Hub URL"
+}
+
+variable "cors_origins" {
+  description = "Allowed CORS origins"
+}
+
+variable "cookie_domain" {
+  description = "Session Cookie domain"
+}
+
 variable "recaptcha_site_key" {
   description = "reCAPTCHA site key"
 }
 
 variable "recaptcha_secret_key" {
   description = "reCAPTCHA secret key"
-}
-
-variable "discourse_admin_role" {
-  description = "Role with access to the admin backend"
-  default     = "dispute_pro"
 }
 
 variable "stripe_secret_key" {
