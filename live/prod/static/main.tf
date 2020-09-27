@@ -20,15 +20,19 @@ data "aws_route53_zone" "primary" {
 }
 
 resource "aws_route53_record" "landing" {
-  zone_id = data.aws_route53_zone.primary.zone_id
   name    = ""
+  records = [var.landing_ip_address]
+  ttl     = 300
   type    = "A"
+  zone_id = data.aws_route53_zone.primary.zone_id
+}
 
-  alias {
-    name                   = var.landing_cloudfront_domain_name
-    zone_id                = var.cloudfront_zone_id
-    evaluate_target_health = false
-  }
+resource "aws_route53_record" "landing_www" {
+  name    = "www"
+  records = [var.landing_domain_name]
+  ttl     = 300
+  type    = "CNAME"
+  zone_id = data.aws_route53_zone.primary.zone_id
 }
 
 resource "aws_route53_record" "power_report" {
