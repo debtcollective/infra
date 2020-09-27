@@ -7,7 +7,11 @@ variable "landing_cloudfront_domain_name" {
 }
 
 variable "landing_domain_name" {
-  description = "cloudfront domain name"
+  description = "landing domain name for CNAME record"
+}
+
+variable "landing_ip_address" {
+  description = "landing ip adress for A record"
 }
 
 variable "cloudfront_zone_id" {
