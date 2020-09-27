@@ -20,15 +20,11 @@ data "aws_route53_zone" "primary" {
 }
 
 resource "aws_route53_record" "landing" {
-  zone_id = data.aws_route53_zone.primary.zone_id
   name    = ""
+  records = [var.landing_domain_name]
+  ttl     = 300
   type    = "A"
-
-  alias {
-    name                   = var.landing_cloudfront_domain_name
-    zone_id                = var.cloudfront_zone_id
-    evaluate_target_health = false
-  }
+  zone_id = data.aws_route53_zone.primary.zone_id
 }
 
 resource "aws_route53_record" "power_report" {
