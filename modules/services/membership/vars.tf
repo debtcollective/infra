@@ -105,7 +105,7 @@ variable "discourse_admin_role" {
   default     = "dispute_pro"
 }
 
-variable "member_hub_url" {
+variable "home_page_url" {
   description = "Member Hub URL"
 }
 

@@ -45,7 +45,7 @@ variable "loggly_api_key" {
 
 variable "donate_url" {
   description = "Donate URL"
-  default     = "https://membership.debtcollective.org"
+  default     = "https://debtcollective.org/donate"
 }
 
 variable "google_maps_api_key" {
