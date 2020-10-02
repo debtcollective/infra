@@ -7,8 +7,8 @@ variable "discourse_api_key" {
   description = "Discourse API key"
 }
 
-variable "member_hub_url" {
-  description = "Member Hub URL"
+variable "home_page_url" {
+  description = "Home page URL"
 }
 
 variable "cors_origins" {

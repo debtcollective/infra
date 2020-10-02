@@ -94,8 +94,8 @@ module "container_definitions" {
       value = var.discourse_api_key
     },
     {
-      name  = "MEMBER_HUB_URL",
-      value = var.member_hub_url
+      name  = "HOME_PAGE_URL",
+      value = var.home_page_url
     },
     {
       name  = "CORS_ORIGINS",
