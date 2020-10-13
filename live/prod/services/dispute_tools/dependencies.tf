@@ -46,18 +46,6 @@ data "terraform_remote_state" "postgres_setup" {
   }
 }
 
-data "terraform_remote_state" "redis" {
-  backend = "remote"
-
-  config = {
-    organization = local.remote_state_organization
-
-    workspaces = {
-      name = local.redis_remote_state_workspace
-    }
-  }
-}
-
 data "terraform_remote_state" "discourse" {
   backend = "remote"
 
@@ -121,7 +109,6 @@ locals {
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
-  redis_remote_state_workspace          = "${local.environment}-redis"
   remote_state_organization             = "debtcollective"
   s3_remote_state_workspace             = "${local.environment}-extras-s3"
   vpc_remote_state_workspace            = "${local.environment}-network"
