@@ -40,6 +40,9 @@ module "dispute_tools" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
+  redis_host = local.redis_host
+  redis_port = local.redis_port
+
   db_connection_string = "postgres://${local.db_username}:${local.db_password}@${local.db_host}:${local.db_port}/${local.db_name}"
 
   smtp_host            = var.smtp_host

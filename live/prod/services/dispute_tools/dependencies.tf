@@ -46,6 +46,18 @@ data "terraform_remote_state" "postgres_setup" {
   }
 }
 
+data "terraform_remote_state" "redis" {
+  backend = "remote"
+
+  config = {
+    organization = local.remote_state_organization
+
+    workspaces = {
+      name = local.redis_remote_state_workspace
+    }
+  }
+}
+
 data "terraform_remote_state" "discourse" {
   backend = "remote"
 
@@ -91,6 +103,9 @@ locals {
   db_port     = data.terraform_remote_state.postgres.outputs.db_port
   db_username = data.aws_ssm_parameter.db_user.value
 
+  redis_host = data.terraform_remote_state.redis.outputs.endpoint
+  redis_port = data.terraform_remote_state.redis.outputs.port
+
   discourse_domain = data.terraform_remote_state.discourse.outputs.domain
   sso_cookie_name  = data.terraform_remote_state.discourse.outputs.sso_cookie_name
   sso_jwt_secret   = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
@@ -109,6 +124,7 @@ locals {
   iam_remote_state_workspace            = "global-iam"
   postgres_remote_state_workspace       = "${local.environment}-postgres"
   postgres_setup_remote_state_workspace = "${local.environment}-postgres-setup"
+  redis_remote_state_workspace          = "${local.environment}-redis"
   remote_state_organization             = "debtcollective"
   s3_remote_state_workspace             = "${local.environment}-extras-s3"
   vpc_remote_state_workspace            = "${local.environment}-network"

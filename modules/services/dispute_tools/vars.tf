@@ -34,6 +34,15 @@ variable "desired_count" {
 }
 
 // dispute-tools variables
+// BullMQ uses redis
+variable "redis_host" {
+  description = "Redis host"
+}
+
+variable "redis_port" {
+  description = "Redis port"
+}
+
 // TODO: this should be the loginUrl
 variable "sso_endpoint" {
   description = "SSO authentication endpoint"
