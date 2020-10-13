@@ -1,11 +1,3 @@
-variable "sso_secret" {
-  description = "Shared secret for SSO"
-}
-
-variable "jwt_secret" {
-  description = "Unshared secret for JWT encoding"
-}
-
 variable "contact_email" {
   description = "Administrator contact email"
 }

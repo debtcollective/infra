@@ -34,24 +34,13 @@ variable "desired_count" {
 }
 
 // dispute-tools variables
-variable "redis_host" {
-  description = "Redis host"
-}
-
-variable "redis_port" {
-  description = "Redis port"
-}
-
+// TODO: this should be the loginUrl
 variable "sso_endpoint" {
   description = "SSO authentication endpoint"
 }
 
-variable "sso_secret" {
-  description = "Shared secret for SSO"
-}
-
-variable "jwt_secret" {
-  description = "Unshared secret for JWT encoding"
+variable "sso_jwt_secret" {
+  description = "SSO JWT secret as defined in Discourse"
 }
 
 variable "sso_cookie_name" {

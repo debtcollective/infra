@@ -40,11 +40,7 @@ module "dispute_tools" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
-  redis_host = local.redis_host
-  redis_port = local.redis_port
-
   db_connection_string = "postgres://${local.db_username}:${local.db_password}@${local.db_host}:${local.db_port}/${local.db_name}"
-  sso_secret           = var.sso_secret
 
   smtp_host            = var.smtp_host
   smtp_pass            = var.smtp_pass
@@ -55,10 +51,11 @@ module "dispute_tools" {
   sender_email         = var.sender_email
   donate_url           = var.donate_url
 
-  sso_cookie_name          = "_dispute_tools__${local.environment}"
+  sso_cookie_name          = local.sso_cookie_name
   landing_page_url         = "https://debtcollective.org"
   site_url                 = "https://${aws_route53_record.dispute_tools.fqdn}"
-  sso_endpoint             = "https://${local.discourse_domain}/session/sso_provider"
+  sso_endpoint             = "${local.discourse_domain}/session/sso_cookies"
+  sso_jwt_secret           = local.sso_jwt_secret
   discourse_base_url       = "https://${local.discourse_domain}"
   static_assets_bucket_url = "https://s3.amazonaws.com/tds-static"
   discourse_api_key        = var.discourse_api_key
@@ -80,7 +77,6 @@ module "dispute_tools" {
   loggly_api_key       = var.loggly_api_key
   sentry_endpoint      = var.sentry_endpoint
   google_maps_api_key  = var.google_maps_api_key
-  jwt_secret           = var.jwt_secret
   recaptcha_site_key   = var.recaptcha_site_key
   recaptcha_secret_key = var.recaptcha_secret_key
   google_analytics_ua  = var.google_analytics_ua

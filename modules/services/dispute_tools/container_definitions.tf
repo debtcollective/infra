@@ -12,24 +12,12 @@ resource "aws_cloudwatch_log_group" "dispute_tools" {
 locals {
   environment = [
     {
-      name  = "REDIS_HOST",
-      value = var.redis_host
-    },
-    {
-      name  = "REDIS_PORT",
-      value = var.redis_port
-    },
-    {
       name  = "SSO_ENDPOINT",
       value = var.sso_endpoint
     },
     {
-      name  = "SSO_SECRET",
-      value = var.sso_secret
-    },
-    {
-      name  = "JWT_SECRET",
-      value = var.jwt_secret
+      name  = "SSO_JWT_SECRET",
+      value = var.sso_jwt_secret
     },
     {
       name  = "SSO_COOKIE_NAME",
