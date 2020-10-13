@@ -57,7 +57,7 @@ module "dispute_tools" {
   sso_cookie_name          = local.sso_cookie_name
   landing_page_url         = "https://debtcollective.org"
   site_url                 = "https://${aws_route53_record.dispute_tools.fqdn}"
-  sso_endpoint             = "${local.discourse_domain}/session/sso_cookies"
+  sso_endpoint             = "https://${local.discourse_domain}/session/sso_cookies"
   sso_jwt_secret           = local.sso_jwt_secret
   discourse_base_url       = "https://${local.discourse_domain}"
   static_assets_bucket_url = "https://s3.amazonaws.com/tds-static"
