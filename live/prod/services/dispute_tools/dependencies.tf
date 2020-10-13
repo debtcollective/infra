@@ -90,6 +90,9 @@ data "aws_ssm_parameter" "db_pass" {
   name = data.terraform_remote_state.postgres_setup.outputs.dispute_tools_db_pass_ssm_key
 }
 
+data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
+  name = "/${local.environment}/services/discourse/sso_jwt_secret"
+}
 
 locals {
   environment = "prod"
@@ -104,6 +107,8 @@ locals {
   redis_port = data.terraform_remote_state.redis.outputs.port
 
   discourse_domain = data.terraform_remote_state.discourse.outputs.domain
+  sso_cookie_name  = data.terraform_remote_state.discourse.outputs.sso_cookie_name
+  sso_jwt_secret   = data.aws_ssm_parameter.discourse_sso_jwt_secret.value
 
   uploads_bucket_replica_arn = data.terraform_remote_state.s3.outputs.disputes_uploads_replica_bucket_arn
   replication_role_arn       = data.terraform_remote_state.s3.outputs.replication_role_arn
