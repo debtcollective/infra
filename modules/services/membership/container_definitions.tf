@@ -130,6 +130,10 @@ module "container_definitions" {
       value = var.recaptcha_secret_key
     },
     {
+      name  = "RECAPTCHA_V3_SECRET_KEY",
+      value = var.recaptcha_v3_secret_key
+    },
+    {
       name  = "STRIPE_SECRET_KEY",
       value = var.stripe_secret_key
     },

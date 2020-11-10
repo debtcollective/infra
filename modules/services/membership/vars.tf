@@ -125,6 +125,10 @@ variable "recaptcha_secret_key" {
   description = "reCAPTCHA secret key"
 }
 
+variable "recaptcha_v3_secret_key" {
+  description = "reCAPTCHA v3 secret key"
+}
+
 variable "stripe_secret_key" {
   description = "Stripe secret key"
 }

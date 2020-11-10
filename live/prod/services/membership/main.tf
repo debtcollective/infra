@@ -54,6 +54,7 @@ module "membership" {
   mail_from               = var.mail_from
   recaptcha_secret_key    = var.recaptcha_secret_key
   recaptcha_site_key      = var.recaptcha_site_key
+  recaptcha_v3_secret_key = var.recaptcha_v3_secret_key
   redis_url               = local.redis_url
   sentry_dsn              = var.sentry_dsn
   skylight_authentication = var.skylight_authentication
