@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
 }
 
 module "redis" {
-  source = "git::https://github.com/cloudposse/terraform-aws-elasticache-redis.git?ref=tags/0.16.0"
+  source = "git::https://github.com/cloudposse/terraform-aws-elasticache-redis.git?ref=tags/0.25.0"
   stage  = "test"
   name   = "redis"
 
@@ -28,7 +28,7 @@ module "redis" {
   auth_token                   = null
   availability_zones           = data.aws_availability_zones.available.names
   engine_version               = "6.x"
-  family                       = "redis6.0"
+  family                       = "redis6.x"
   existing_security_groups     = local.vpc_security_group_ids
   instance_type                = "cache.t3.micro"
   subnets                      = local.subnet_ids
