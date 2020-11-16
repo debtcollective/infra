@@ -47,28 +47,28 @@ resource "aws_db_parameter_group" "postgres" {
 
   parameter {
     apply_method = "pending-reboot"
-    name  = "pg_stat_statements.track"
-    value = "all"
+    name         = "pg_stat_statements.track"
+    value        = "all"
   }
 
   parameter {
     apply_method = "pending-reboot"
-    name  = "shared_preload_libraries"
-    value = "pg_stat_statements"
+    name         = "shared_preload_libraries"
+    value        = "pg_stat_statements"
   }
 
   # 16kb instead of the default 2kb
   parameter {
     apply_method = "pending-reboot"
-    name  = "track_activity_query_size"
-    value = "16393"
+    name         = "track_activity_query_size"
+    value        = "16393"
   }
 }
 
 // Postgres Database
 resource "aws_db_instance" "pg" {
   identifier        = "postgres-${var.environment}"
-  allocated_storage = "20"
+  allocated_storage = var.allocated_storage
   engine            = "postgres"
   engine_version    = "11.6"
   instance_class    = var.instance_class
@@ -89,7 +89,7 @@ resource "aws_db_instance" "pg" {
 
   multi_az                  = true
   storage_type              = "gp2"
-  skip_final_snapshot       = false
+  skip_final_snapshot       = var.skip_final_snapshot
   final_snapshot_identifier = "pg-${var.environment}-final-${md5(random_string.final_snapshot_identifier.result)}"
 
   tags = {
