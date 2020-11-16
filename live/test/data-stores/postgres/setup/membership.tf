@@ -15,7 +15,7 @@ resource "random_password" "membership_db_pass" {
 resource "aws_ssm_parameter" "membership_db_user" {
   name  = "/${local.environment}/services/membership/db_user"
   type  = "String"
-  value = "fundraising_${random_string.membership_db_user.result}"
+  value = "membership_${random_string.membership_db_user.result}"
 }
 
 resource "aws_ssm_parameter" "membership_db_pass" {
@@ -34,7 +34,7 @@ resource "postgresql_role" "membership" {
 }
 
 resource "postgresql_database" "membership" {
-  name       = "fundraising_${local.environment}"
+  name       = "membership_${local.environment}"
   owner      = local.master_db_user
   lc_collate = "en_US.UTF-8"
   lc_ctype   = "en_US.UTF-8"
