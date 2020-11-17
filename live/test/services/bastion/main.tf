@@ -18,12 +18,3 @@ provider "aws" {
 locals {
   environment = "test"
 }
-
-module "bastion" {
-  source      = "../../../../modules/services/bastion"
-  environment = local.environment
-
-  key_name               = local.ssh_key_pair_name
-  subnet_id              = local.subnet_id
-  vpc_security_group_ids = [local.ec2_security_group_id]
-}
