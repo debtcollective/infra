@@ -46,6 +46,8 @@ module "discourse" {
   s3_cdn_url         = local.s3_cdn_url
   cdn_url            = aws_cloudfront_distribution.assets.domain_name
   discourse_hostname = local.fqdn
+  instance_type      = "t3a.micro"
+  volume_size        = 5
 
   monitoring              = true
   slack_topic_arn         = local.slack_topic_arn

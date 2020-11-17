@@ -99,4 +99,8 @@ resource "aws_s3_bucket" "backups" {
     Name        = local.backups_bucket_name
     Environment = local.environment
   }
+
+  versioning {
+    enabled = false
+  }
 }
