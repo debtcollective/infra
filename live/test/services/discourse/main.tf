@@ -47,7 +47,6 @@ module "discourse" {
   cdn_url            = aws_cloudfront_distribution.assets.domain_name
   discourse_hostname = local.fqdn
   instance_type      = "t3a.micro"
-  volume_size        = 8
 
   monitoring              = true
   slack_topic_arn         = local.slack_topic_arn
