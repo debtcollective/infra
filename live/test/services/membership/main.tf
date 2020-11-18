@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "membership" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "membership"
+  name    = "membership-test"
   type    = "A"
 
   alias {
@@ -57,6 +57,7 @@ module "membership" {
   recaptcha_v3_secret_key = var.recaptcha_v3_secret_key
   redis_url               = local.redis_url
   sentry_dsn              = var.sentry_dsn
+  sentry_environment      = var.sentry_environment
   skylight_authentication = var.skylight_authentication
   smtp_address            = var.smtp_address
   smtp_domain             = var.smtp_domain

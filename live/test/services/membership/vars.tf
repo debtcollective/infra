@@ -43,6 +43,10 @@ variable "sentry_dsn" {
   description = "Sentry DSN"
 }
 
+variable "sentry_environment" {
+  description = "Sentry Environment"
+}
+
 variable "amplitude_api_key" {
   description = "Amplitude API key"
 }
