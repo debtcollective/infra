@@ -21,10 +21,18 @@ variable "instance_class" {
   default = "db.t2.micro"
 }
 
+variable "allocated_storage" {
+  default = 20
+}
+
 variable "subnet_ids" {
   type = list
 }
 
 variable "vpc_security_group_ids" {
   type = list
+}
+
+variable "skip_final_snapshot" {
+  default = false
 }

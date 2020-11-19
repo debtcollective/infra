@@ -146,6 +146,10 @@ module "container_definitions" {
       value = var.sentry_dsn
     },
     {
+      name  = "SENTRY_ENVIRONMENT",
+      value = var.sentry_environment
+    },
+    {
       name  = "PORT",
       value = local.container_port
     },
