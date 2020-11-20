@@ -32,6 +32,84 @@ resource "aws_eip" "discourse" {
   vpc      = true
 }
 
+data "template_file" "web_yml" {
+  template = file("${path.module}/web.yml")
+  vars = {
+    discourse_cdn_url = var.cdn_url
+
+    discourse_smtp_port             = var.discourse_smtp_port
+    discourse_smtp_username         = var.discourse_smtp_username
+    discourse_smtp_password         = var.discourse_smtp_password
+    discourse_smtp_address          = var.discourse_smtp_address
+    discourse_smtp_enable_start_tls = var.discourse_smtp_enable_start_tls
+    discourse_smtp_authentication   = var.discourse_smtp_authentication
+
+    discourse_db_host     = var.discourse_db_host
+    discourse_db_port     = var.discourse_db_port
+    discourse_db_name     = var.discourse_db_name
+    discourse_db_username = var.discourse_db_username
+    discourse_db_password = var.discourse_db_password
+
+    discourse_redis_host = var.discourse_redis_host
+    discourse_redis_port = var.discourse_redis_port
+
+    discourse_developer_emails          = var.discourse_developer_emails
+    discourse_hostname                  = var.discourse_hostname
+    discourse_maxmind_license_key       = var.discourse_maxmind_license_key
+    discourse_letsencrypt_account_email = var.discourse_letsencrypt_account_email
+    discourse_sso_jwt_secret            = aws_ssm_parameter.discourse_sso_jwt_secret.value
+    discourse_sso_cookie_name           = var.discourse_sso_cookie_name
+    discourse_sso_cookie_domain         = var.discourse_sso_cookie_domain
+
+    discourse_s3_region            = var.discourse_uploads_bucket_region
+    discourse_s3_access_key_id     = var.discourse_aws_access_key_id
+    discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
+    discourse_s3_upload_bucket     = var.discourse_uploads_bucket_name
+    discourse_s3_backup_bucket     = var.discourse_backups_bucket_name
+    discourse_s3_cdn_url           = var.s3_cdn_url
+
+    skylight_authentication = var.skylight_authentication
+  }
+}
+
+data "template_file" "settings_yml" {
+  template = file("${path.module}/settings.yml")
+  vars = {
+    sso_secret = var.discourse_sso_secret
+
+    reply_by_email_address = var.discourse_reply_by_email_address
+    pop3_polling_host      = var.discourse_pop3_polling_host
+    pop3_polling_port      = var.discourse_pop3_polling_port
+    pop3_polling_username  = var.discourse_pop3_polling_username
+    pop3_polling_password  = var.discourse_pop3_polling_password
+
+    ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
+
+    s3_access_key_id     = var.discourse_aws_access_key_id
+    s3_secret_access_key = var.discourse_aws_secret_access_key
+    s3_upload_bucket     = var.discourse_uploads_bucket_name
+    cdn_url              = var.cdn_url
+    s3_cdn_url           = var.s3_cdn_url
+
+    backup_frequency = "3"
+    s3_backup_bucket = var.discourse_backups_bucket_name
+  }
+}
+
+data "template_file" "cloud_config_yml" {
+  template = file("${path.module}/cloud-config.yml")
+  vars = {
+    # swap size
+    swap_size = var.swap_size
+
+    # web.yml file
+    web_yml_b64 = base64encode(data.template_file.web_yml.rendered)
+
+    # settings.yml file
+    settings_yml_b64 = base64encode(data.template_file.settings_yml.rendered)
+  }
+}
+
 resource "aws_instance" "discourse" {
   instance_type          = var.instance_type
   key_name               = var.key_name
@@ -41,73 +119,7 @@ resource "aws_instance" "discourse" {
 
   monitoring = var.monitoring
 
-  user_data = templatefile("${path.module}/cloud-config.yml", {
-    # swap size
-    swap_size = var.swap_size
-
-    # web.yml file
-    web_yml_b64 = base64encode(
-      templatefile("${path.module}/web.yml", {
-        discourse_cdn_url = var.cdn_url
-
-        discourse_smtp_port             = var.discourse_smtp_port
-        discourse_smtp_username         = var.discourse_smtp_username
-        discourse_smtp_password         = var.discourse_smtp_password
-        discourse_smtp_address          = var.discourse_smtp_address
-        discourse_smtp_enable_start_tls = var.discourse_smtp_enable_start_tls
-        discourse_smtp_authentication   = var.discourse_smtp_authentication
-
-        discourse_db_host     = var.discourse_db_host
-        discourse_db_port     = var.discourse_db_port
-        discourse_db_name     = var.discourse_db_name
-        discourse_db_username = var.discourse_db_username
-        discourse_db_password = var.discourse_db_password
-
-        discourse_redis_host = var.discourse_redis_host
-        discourse_redis_port = var.discourse_redis_port
-
-        discourse_developer_emails          = var.discourse_developer_emails
-        discourse_hostname                  = var.discourse_hostname
-        discourse_maxmind_license_key       = var.discourse_maxmind_license_key
-        discourse_letsencrypt_account_email = var.discourse_letsencrypt_account_email
-        discourse_sso_jwt_secret            = aws_ssm_parameter.discourse_sso_jwt_secret.value
-        discourse_sso_cookie_name           = var.discourse_sso_cookie_name
-        discourse_sso_cookie_domain         = var.discourse_sso_cookie_domain
-
-        discourse_s3_region            = var.discourse_uploads_bucket_region
-        discourse_s3_access_key_id     = var.discourse_aws_access_key_id
-        discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
-        discourse_s3_upload_bucket     = var.discourse_uploads_bucket_name
-        discourse_s3_backup_bucket     = var.discourse_backups_bucket_name
-        discourse_s3_cdn_url           = var.s3_cdn_url
-
-        skylight_authentication = var.skylight_authentication
-      })
-    )
-
-    # settings.yml file
-    settings_yml_b64 = base64encode(
-      templatefile("${path.module}/settings.yml", {
-        sso_secret = var.discourse_sso_secret
-
-        reply_by_email_address = var.discourse_reply_by_email_address
-        pop3_polling_host      = var.discourse_pop3_polling_host
-        pop3_polling_port      = var.discourse_pop3_polling_port
-        pop3_polling_username  = var.discourse_pop3_polling_username
-        pop3_polling_password  = var.discourse_pop3_polling_password
-
-        ga_universal_tracking_code = var.discourse_ga_universal_tracking_code
-
-        s3_access_key_id     = var.discourse_aws_access_key_id
-        s3_secret_access_key = var.discourse_aws_secret_access_key
-        s3_upload_bucket     = var.discourse_uploads_bucket_name
-        s3_cdn_url           = var.cdn_url
-
-        backup_frequency = "3"
-        s3_backup_bucket = var.discourse_backups_bucket_name
-      })
-    )
-  })
+  user_data = data.template_file.cloud_config_yml.rendered
 
   tags = {
     Name        = "discourse_${var.environment}"

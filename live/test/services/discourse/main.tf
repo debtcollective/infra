@@ -44,7 +44,7 @@ module "discourse" {
 
   domain             = local.fqdn
   s3_cdn_url         = local.s3_cdn_url
-  cdn_url            = aws_cloudfront_distribution.assets.domain_name
+  cdn_url            = "https://${aws_cloudfront_distribution.assets.domain_name}"
   discourse_hostname = local.fqdn
   instance_type      = "t3a.micro"
 
