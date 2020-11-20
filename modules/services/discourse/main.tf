@@ -79,7 +79,7 @@ resource "aws_instance" "discourse" {
         discourse_s3_secret_access_key = var.discourse_aws_secret_access_key
         discourse_s3_upload_bucket     = var.discourse_uploads_bucket_name
         discourse_s3_backup_bucket     = var.discourse_backups_bucket_name
-        discourse_s3_cdn_url           = var.cdn_url
+        discourse_s3_cdn_url           = var.s3_cdn_url
 
         skylight_authentication = var.skylight_authentication
       })
