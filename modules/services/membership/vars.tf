@@ -157,3 +157,11 @@ variable "skylight_authentication" {
   description = "Skylight.io api key"
   default     = ""
 }
+
+variable "mailchimp_api_key" {
+  description = "Mailchimp API key for newsletter integration"
+}
+
+variable "mailchimp_list_id" {
+  description = "Mailchimp newsletter list id"
+}

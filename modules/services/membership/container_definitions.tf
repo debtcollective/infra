@@ -165,6 +165,14 @@ module "container_definitions" {
       name  = "SKYLIGHT_AUTHENTICATION",
       value = var.skylight_authentication
     },
+    {
+      name  = "MAILCHIMP_API_KEY",
+      value = var.mailchimp_api_key
+    },
+    {
+      name  = "MAILCHIMP_LIST_ID",
+      value = var.mailchimp_list_id
+    }
   ]
 
   port_mappings = [
