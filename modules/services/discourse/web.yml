@@ -57,7 +57,6 @@ hooks:
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-sso.git'
           - 'git clone https://github.com/debtcollective/discourse-sentry.git'
           - 'git clone https://github.com/debtcollective/discourse-skylight.git'
-          - 'git clone https://github.com/debtcollective/discourse-mailchimp-list.git'
           - 'git clone https://github.com/discourse/discourse-adplugin.git'
           - 'git clone https://github.com/discourse/discourse-chat-integration.git'
 
