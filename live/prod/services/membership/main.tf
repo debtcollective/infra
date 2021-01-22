@@ -70,4 +70,6 @@ module "membership" {
   sso_jwt_secret          = local.sso_jwt_secret
   stripe_publishable_key  = var.stripe_publishable_key
   stripe_secret_key       = var.stripe_secret_key
+  algolia_app_id          = var.algolia_app_id
+  algolia_api_key         = var.algolia_api_key
 }

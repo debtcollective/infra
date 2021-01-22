@@ -165,3 +165,11 @@ variable "mailchimp_api_key" {
 variable "mailchimp_list_id" {
   description = "Mailchimp newsletter list id"
 }
+
+variable "algolia_app_id" {
+  description = "Algolia places app id"
+}
+
+variable "algolia_api_key" {
+  description = "Algolia places api key"
+}

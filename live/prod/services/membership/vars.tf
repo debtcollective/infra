@@ -93,3 +93,12 @@ variable "smtp_username" {
 variable "smtp_password" {
   description = "SMTP password"
 }
+
+// Algolia
+variable "algolia_app_id" {
+  description = "Algolia places app id"
+}
+
+variable "algolia_api_key" {
+  description = "Algolia places api key"
+}
