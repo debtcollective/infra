@@ -172,6 +172,14 @@ module "container_definitions" {
     {
       name  = "MAILCHIMP_LIST_ID",
       value = var.mailchimp_list_id
+    },
+    {
+      name  = "ALGOLIA_APP_ID",
+      value = var.algolia_app_id
+    },
+    {
+      name  = "ALGOLIA_API_KEY",
+      value = var.algolia_api_key
     }
   ]
 
