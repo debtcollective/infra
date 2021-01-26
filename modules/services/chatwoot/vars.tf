@@ -11,7 +11,7 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 1024
+  default     = 512
 }
 
 variable "vpc_id" {
@@ -40,10 +40,6 @@ variable "log_retention_in_days" {
   default     = 3
 }
 
-variable "domain" {
-  description = "Domain name"
-}
-
 /*
  * Chatwoot env variables
  */
@@ -51,7 +47,6 @@ variable "domain" {
 /* App */
 variable "frontend_url" {
   description = "Front-end full URL"
-  default     = var.domain
 }
 
 variable "default_locale" {
