@@ -9,16 +9,7 @@ resource "aws_cloudwatch_log_group" "chatwoot" {
   }
 }
 
-module "container_definitions" {
-  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
-
-  container_name               = local.container_name
-  container_cpu                = null
-  container_memory             = null
-  container_memory_reservation = var.container_memory_reservation
-  essential                    = true
-  container_image              = var.container_image
-
+locals {
   environment = [
     /* Email */
     {
@@ -120,6 +111,23 @@ module "container_definitions" {
 
     /* Channels */
   ]
+}
+
+module "container_definition_app" {
+  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
+
+  container_name               = local.container_name
+  container_cpu                = null
+  container_memory             = null
+  container_memory_reservation = var.container_memory_reservation
+  essential                    = true
+  container_image              = var.container_image
+
+  environment = local.environment
+
+  entrypoint = ["docker/entrypoints/rails.sh"]
+  command    = ["bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
+
 
   port_mappings = [
     {
@@ -128,6 +136,31 @@ module "container_definitions" {
       protocol      = "tcp"
     }
   ]
+
+  log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      "awslogs-region" = data.aws_region.current.name
+      "awslogs-group"  = aws_cloudwatch_log_group.chatwoot.name
+    }
+    secretOptions = null
+  }
+}
+
+module "container_definition_workers" {
+  source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
+
+  container_name               = local.container_name
+  container_cpu                = null
+  container_memory             = null
+  container_memory_reservation = var.container_memory_reservation
+  essential                    = true
+  container_image              = var.container_image
+
+  environment = local.environment
+
+  entrypoint = ["docker/entrypoints/rails.sh"]
+  command    = ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
 
   log_configuration = {
     logDriver = "awslogs"
