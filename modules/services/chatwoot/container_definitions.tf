@@ -150,7 +150,7 @@ module "container_definition_app" {
 module "container_definition_workers" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
-  container_name               = local.container_name
+  container_name               = "${local.container_name}-workers"
   container_cpu                = null
   container_memory             = null
   container_memory_reservation = var.container_memory_reservation
