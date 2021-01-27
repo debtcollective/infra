@@ -67,7 +67,7 @@ data "aws_ssm_parameter" "db_pass" {
 }
 
 locals {
-  environment = "prod"
+  environment = "test"
 
   db_host             = data.terraform_remote_state.postgres.outputs.db_address
   db_name             = data.terraform_remote_state.postgres_setup.outputs.chatwoot_db_name

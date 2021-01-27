@@ -1,6 +1,4 @@
 // User for Chatwoot s3 uploads
-data "aws_caller_identity" "current" {}
-
 resource "aws_iam_user" "chatwoot" {
   name = "chatwoot_uploads_${local.environment}"
   path = "/terraform/${local.environment}/chatwoot/"
@@ -14,11 +12,6 @@ resource "aws_iam_user" "chatwoot" {
 data "aws_iam_policy_document" "chatwoot" {
   statement {
     sid = "1"
-
-    principals {
-      type        = "AWS"
-      identifiers = [data.aws_caller_identity.current.arn]
-    }
 
     actions = [
       "s3:DeleteObject",
