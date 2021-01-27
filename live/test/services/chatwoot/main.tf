@@ -41,9 +41,23 @@ module "chatwoot" {
   vpc_id                       = local.vpc_id
   container_memory_reservation = 256
 
-  db_host     = local.db_host
-  db_name     = local.db_name
-  db_password = local.db_password
-  db_port     = local.db_port
-  db_username = local.db_username
+  frontend_url    = "https://${aws_route53_record.chatwoot.fqdn}"
+  database_url    = "postgres://${local.db_username}:${local.db_password}@${local.db_host}:${local.db_port}/${local.db_name}"
+  secret_key_base = var.secret_key_base
+
+  mailer_sender_email = var.mailer_sender_email
+  smtp_address        = var.smtp_address
+  smtp_username       = var.smtp_username
+  smtp_password       = var.smtp_password
+  smtp_domain         = var.smtp_domain
+
+  vapid_public_key  = var.vapid_public_key
+  vapid_private_key = var.vapid_private_key
+
+  s3_bucket_name        = aws_s3_bucket.uploads.id
+  aws_access_key_id     = aws_iam_access_key.chatwoot.id
+  aws_secret_access_key = aws_iam_access_key.chatwoot.secret
+  aws_region            = aws_s3_bucket.uploads.region
+
+  redis_url = local.redis_url
 }
