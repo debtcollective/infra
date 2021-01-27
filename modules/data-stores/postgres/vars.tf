@@ -36,3 +36,8 @@ variable "vpc_security_group_ids" {
 variable "skip_final_snapshot" {
   default = false
 }
+
+variable "engine_version" {
+  description = "postgres engine version"
+  default     = "11.6"
+}

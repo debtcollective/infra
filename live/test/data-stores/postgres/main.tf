@@ -25,4 +25,5 @@ module "postgres" {
   vpc_security_group_ids = local.vpc_security_group_ids
   allocated_storage      = 5
   skip_final_snapshot    = true
+  engine_version         = "11.9"
 }
