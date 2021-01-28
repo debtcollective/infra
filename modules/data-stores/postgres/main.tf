@@ -70,7 +70,7 @@ resource "aws_db_instance" "pg" {
   identifier        = "postgres-${var.environment}"
   allocated_storage = var.allocated_storage
   engine            = "postgres"
-  engine_version    = "11.6"
+  engine_version    = var.engine_version
   instance_class    = var.instance_class
   name              = local.db_name
   username          = aws_ssm_parameter.master_user.value

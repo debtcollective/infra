@@ -19,7 +19,8 @@ data "aws_ssm_parameter" "master_db_pass" {
 }
 
 locals {
-  environment                     = "test"
+  environment = "test"
+
   postgres_remote_state_workspace = "test-postgres"
   remote_state_organization       = "debtcollective"
   master_db_user                  = data.aws_ssm_parameter.master_db_user.value
