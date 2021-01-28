@@ -81,3 +81,16 @@ output "campaign_api_db_name" {
   value = "campaign_api_${local.environment}"
 
 }
+
+# Chatwoot
+output "chatwoot_db_user_ssm_key" {
+  value = aws_ssm_parameter.chatwoot_db_user.name
+}
+
+output "chatwoot_db_pass_ssm_key" {
+  value = aws_ssm_parameter.chatwoot_db_pass.name
+}
+
+output "chatwoot_db_name" {
+  value = postgresql_database.chatwoot.name
+}
