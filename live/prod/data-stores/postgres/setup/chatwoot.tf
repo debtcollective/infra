@@ -7,7 +7,7 @@ resource "random_string" "chatwoot_db_user" {
 resource "random_password" "chatwoot_db_pass" {
   length           = 24
   special          = true
-  min_special      = 1
+  min_special      = 3
   override_special = "~*^+"
 }
 

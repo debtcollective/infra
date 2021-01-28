@@ -42,7 +42,7 @@ module "chatwoot" {
   container_memory_reservation = 256
 
   frontend_url    = "https://${aws_route53_record.chatwoot.fqdn}"
-  database_url    = "postgres://${local.db_username}:${local.db_password}@${local.db_host}:${local.db_port}/${local.db_name}"
+  database_url    = "postgres://${local.db_username}:${urlencode(local.db_password)}@${local.db_host}:${local.db_port}/${local.db_name}"
   secret_key_base = var.secret_key_base
 
   mailer_sender_email = var.mailer_sender_email
