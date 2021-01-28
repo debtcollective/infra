@@ -17,7 +17,7 @@ resource "aws_lb_target_group" "chatwoot" {
   health_check {
     interval = 120
     timeout  = 60
-    matcher  = "200-299"
+    matcher  = "200"
     path     = "/"
   }
 

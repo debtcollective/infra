@@ -154,7 +154,6 @@ module "container_definition_workers" {
   container_cpu                = null
   container_memory             = null
   container_memory_reservation = var.container_memory_reservation
-  essential                    = true
   container_image              = var.container_image
 
   environment = local.environment
