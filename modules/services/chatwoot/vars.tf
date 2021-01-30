@@ -138,4 +138,13 @@ variable "redis_url" {
   description = "Redis URL in redis uri scheme"
 }
 
+/* Slack */
+variable "slack_client_id" {
+  description = "Slack app client id"
+}
+
+variable "slack_client_secret" {
+  description = "Slack app client secret id"
+}
+
 /* Channels */

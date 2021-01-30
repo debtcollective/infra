@@ -59,5 +59,8 @@ module "chatwoot" {
   aws_secret_access_key = aws_iam_access_key.chatwoot.secret
   aws_region            = aws_s3_bucket.uploads.region
 
+  slack_client_id     = var.slack_client_id
+  slack_client_secret = var.slack_client_secret
+
   redis_url = local.redis_url
 }

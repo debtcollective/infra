@@ -47,3 +47,12 @@ variable "vapid_public_key" {
 variable "vapid_private_key" {
   description = "VAPID private key"
 }
+
+/* Slack */
+variable "slack_client_id" {
+  description = "Slack app client id"
+}
+
+variable "slack_client_secret" {
+  description = "Slack app client secret id"
+}

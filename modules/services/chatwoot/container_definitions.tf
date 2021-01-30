@@ -109,6 +109,16 @@ locals {
       value = var.redis_url
     },
 
+    /* Slack */
+    {
+      name  = "SLACK_CLIENT_ID",
+      value = var.slack_client_id
+    },
+    {
+      name  = "SLACK_CLIENT_SECRET",
+      value = var.slack_client_secret
+    },
+
     /* Channels */
   ]
 }
