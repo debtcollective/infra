@@ -62,5 +62,7 @@ module "chatwoot" {
   slack_client_id     = var.slack_client_id
   slack_client_secret = var.slack_client_secret
 
+  sentry_dsn = var.sentry_dsn
+
   redis_url = local.redis_url
 }

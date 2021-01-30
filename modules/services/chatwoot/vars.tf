@@ -147,4 +147,9 @@ variable "slack_client_secret" {
   description = "Slack app client secret id"
 }
 
+/* Sentry */
+variable "sentry_dsn" {
+  description = "Sentry.io DSN"
+}
+
 /* Channels */

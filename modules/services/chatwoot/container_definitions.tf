@@ -119,6 +119,12 @@ locals {
       value = var.slack_client_secret
     },
 
+    /* Sentry */
+    {
+      name  = "SENTRY_DSN",
+      value = var.sentry_dsn
+    },
+
     /* Channels */
   ]
 }
