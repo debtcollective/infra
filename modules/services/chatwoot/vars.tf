@@ -107,6 +107,10 @@ variable "smtp_port" {
   default     = "587"
 }
 
+variable "mailgun_ingress_signing_key" {
+  description = "Mailgun ingress signing key"
+}
+
 /* Push notifications */
 variable "vapid_public_key" {
   description = "VAPID public key"

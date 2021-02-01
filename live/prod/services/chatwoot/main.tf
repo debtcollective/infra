@@ -45,11 +45,12 @@ module "chatwoot" {
   database_url    = "postgres://${local.db_username}:${urlencode(local.db_password)}@${local.db_host}:${local.db_port}/${local.db_name}"
   secret_key_base = var.secret_key_base
 
-  mailer_sender_email = var.mailer_sender_email
-  smtp_address        = var.smtp_address
-  smtp_username       = var.smtp_username
-  smtp_password       = var.smtp_password
-  smtp_domain         = var.smtp_domain
+  mailer_sender_email         = var.mailer_sender_email
+  mailgun_ingress_signing_key = var.mailgun_ingress_signing_key
+  smtp_address                = var.smtp_address
+  smtp_domain                 = var.smtp_domain
+  smtp_password               = var.smtp_password
+  smtp_username               = var.smtp_username
 
   vapid_public_key  = var.vapid_public_key
   vapid_private_key = var.vapid_private_key
