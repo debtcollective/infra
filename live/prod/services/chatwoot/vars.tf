@@ -39,7 +39,7 @@ variable "smtp_port" {
   default     = "587"
 }
 
-variable "mailgun_ingress_signing_key" {
+variable "mailgun_ingress_api_key" {
   description = "Mailgun ingress signing key"
 }
 

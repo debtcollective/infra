@@ -49,8 +49,8 @@ locals {
       value = "mailgun"
     },
     {
-      name  = "MAILGUN_INGRESS_SIGNING_KEY",
-      value = var.mailgun_ingress_signing_key
+      name  = "MAILGUN_INGRESS_API_KEY",
+      value = var.mailgun_ingress_api_key
     },
 
     /* App */
