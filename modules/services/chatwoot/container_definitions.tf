@@ -44,6 +44,14 @@ locals {
       name  = "SMTP_PORT",
       value = var.smtp_port
     },
+    {
+      name  = "RAILS_INBOUND_EMAIL_SERVICE",
+      value = "mailgun"
+    },
+    {
+      name  = "MAILGUN_INGRESS_API_KEY",
+      value = var.mailgun_ingress_api_key
+    },
 
     /* App */
     {

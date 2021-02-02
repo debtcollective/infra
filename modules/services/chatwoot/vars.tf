@@ -10,7 +10,7 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 512
+  default     = 256
 }
 
 variable "vpc_id" {
@@ -105,6 +105,10 @@ variable "smtp_enable_starttls_auto" {
 variable "smtp_port" {
   description = "SMTP port"
   default     = "587"
+}
+
+variable "mailgun_ingress_api_key" {
+  description = "Mailgun ingress signing key"
 }
 
 /* Push notifications */
