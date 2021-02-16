@@ -65,5 +65,7 @@ module "chatwoot" {
 
   sentry_dsn = var.sentry_dsn
 
+  ip_lookup_api_key = var.ip_lookup_api_key
+
   redis_url = local.redis_url
 }

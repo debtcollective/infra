@@ -65,3 +65,8 @@ variable "slack_client_secret" {
 variable "sentry_dsn" {
   description = "Sentry.io DSN"
 }
+
+/* MaxMind */
+variable "ip_lookup_api_key" {
+  description = "Ip lookup api_key"
+}

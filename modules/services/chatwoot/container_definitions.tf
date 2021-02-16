@@ -133,6 +133,16 @@ locals {
       value = var.sentry_dsn
     },
 
+    /* MaxMind */
+    {
+      name  = "IP_LOOKUP_SERVICE",
+      value = var.ip_lookup_service
+    },
+    {
+      name  = "IP_LOOKUP_API_KEY",
+      value = var.ip_lookup_api_key
+    },
+
     /* Channels */
   ]
 }
@@ -184,6 +194,8 @@ module "container_definition_workers" {
 
   entrypoint = ["docker/entrypoints/rails.sh"]
   command    = ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+
+  port_mappings = []
 
   log_configuration = {
     logDriver = "awslogs"

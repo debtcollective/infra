@@ -156,4 +156,14 @@ variable "sentry_dsn" {
   description = "Sentry.io DSN"
 }
 
+/* MaxMind Geolocation */
+variable "ip_lookup_service" {
+  description = "Ip lookup service"
+  default     = "geoip2"
+}
+
+variable "ip_lookup_api_key" {
+  description = "Ip lookup api_key"
+}
+
 /* Channels */
