@@ -30,7 +30,7 @@ module "redis" {
   engine_version               = "5.0.6"
   family                       = "redis5.0"
   existing_security_groups     = local.vpc_security_group_ids
-  instance_type                = "cache.t2.micro"
+  instance_type                = "cache.t3.micro"
   subnets                      = local.subnet_ids
   transit_encryption_enabled   = false
   use_existing_security_groups = true
