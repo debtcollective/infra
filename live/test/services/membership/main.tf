@@ -40,18 +40,22 @@ module "membership" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
+  algolia_api_key         = var.algolia_api_key
+  algolia_app_id          = var.algolia_app_id
   amplitude_api_key       = var.amplitude_api_key
+  cookie_domain           = var.cookie_domain
+  cors_origins            = var.cors_origins
   database_url            = local.database_url
+  discourse_api_key       = var.discourse_api_key
   discourse_login_url     = local.discourse_login_url
   discourse_signup_url    = local.discourse_signup_url
   discourse_url           = local.discourse_url
   discourse_username      = var.discourse_username
-  discourse_api_key       = var.discourse_api_key
-  home_page_url           = var.home_page_url
-  cors_origins            = var.cors_origins
-  cookie_domain           = var.cookie_domain
   ga_measurement_id       = var.ga_measurement_id
+  home_page_url           = var.home_page_url
   mail_from               = var.mail_from
+  mailchimp_api_key       = var.mailchimp_api_key
+  mailchimp_list_id       = var.mailchimp_list_id
   recaptcha_secret_key    = var.recaptcha_secret_key
   recaptcha_site_key      = var.recaptcha_site_key
   recaptcha_v3_secret_key = var.recaptcha_v3_secret_key
@@ -68,6 +72,4 @@ module "membership" {
   sso_jwt_secret          = local.sso_jwt_secret
   stripe_publishable_key  = var.stripe_publishable_key
   stripe_secret_key       = var.stripe_secret_key
-  algolia_app_id          = var.algolia_app_id
-  algolia_api_key         = var.algolia_api_key
 }

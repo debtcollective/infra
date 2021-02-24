@@ -55,6 +55,14 @@ variable "ga_measurement_id" {
   description = "Google Analytics UA-XXXXX-Y"
 }
 
+variable "mailchimp_api_key" {
+  description = "Mailchimp API key for newsletter integration"
+}
+
+variable "mailchimp_list_id" {
+  description = "Mailchimp newsletter list id"
+}
+
 // Skylight
 variable "skylight_authentication" {
   description = "skylight.io api key"
