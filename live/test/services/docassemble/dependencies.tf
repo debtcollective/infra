@@ -54,10 +54,6 @@ data "aws_ssm_parameter" "db_pass" {
   name = data.terraform_remote_state.postgres_setup.outputs.docassemble_db_pass_ssm_key
 }
 
-data "aws_ssm_parameter" "discourse_sso_jwt_secret" {
-  name = "/${local.environment}/services/discourse/sso_jwt_secret"
-}
-
 locals {
   environment = "test"
 

@@ -6,7 +6,7 @@
  */
 locals {
   container_name = "docassemble"
-  container_port = "9001"
+  container_port = "80"
   name_prefix    = "fr-${substr(var.environment, 0, 2)}-"
 }
 
@@ -64,5 +64,9 @@ resource "aws_ecs_service" "docassemble" {
     target_group_arn = aws_lb_target_group.docassemble.arn
     container_name   = local.container_name
     container_port   = local.container_port
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

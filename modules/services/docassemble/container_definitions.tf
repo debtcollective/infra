@@ -21,6 +21,14 @@ module "container_definitions" {
 
   environment = [
     {
+      name  = "BEHINDHTTPSLOADBALANCER",
+      value = true
+    },
+    {
+      name  = "EC2",
+      value = true
+    },
+    {
       name  = "DAHOSTNAME",
       value = var.domain
     },
@@ -57,6 +65,26 @@ module "container_definitions" {
   port_mappings = [
     {
       containerPort = local.container_port
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "514"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "8082"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "25672"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "9001"
       hostPort      = null
       protocol      = "tcp"
     }
