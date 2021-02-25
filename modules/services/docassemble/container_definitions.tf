@@ -31,7 +31,7 @@ module "container_definitions" {
     },
     {
       name  = "DBBACKUP",
-      value = var.db_backup
+      value = var.db_backups
     },
     {
       name  = "DBHOST",
@@ -48,11 +48,11 @@ module "container_definitions" {
     {
       name  = "DBUSER",
       value = var.db_user
-    }
+    },
     {
       name  = "S3BUCKET",
       value = var.s3_bucket
-    }
+    },
     {
       name  = "TIMEZONE",
       value = var.timezone
