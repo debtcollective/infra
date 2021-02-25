@@ -9,11 +9,6 @@ resource "aws_cloudwatch_log_group" "docassemble" {
   }
 }
 
-resource "random_string" "secret_key_base" {
-  length  = 48
-  special = false
-}
-
 module "container_definitions" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
