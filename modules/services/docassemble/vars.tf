@@ -39,7 +39,7 @@ variable "log_retention_in_days" {
 }
 
 // Docassemble app variables
-variable "db_backup" {
+variable "db_backups" {
   description = "Do db backups"
 }
 
