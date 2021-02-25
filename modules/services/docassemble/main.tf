@@ -20,8 +20,12 @@ resource "aws_lb_target_group" "docassemble" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/health-check"
+    interval = 120
+    timeout  = 60
+    matcher  = "200"
+    path     = "/"
   }
+
 
   lifecycle {
     create_before_destroy = true
