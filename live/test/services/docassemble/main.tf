@@ -45,6 +45,11 @@ module "docassemble" {
   db_name = local.db_name
   db_password = local.db_password
   db_user = local.db_user
-  s3_bucket = ""
+
   timezone = var.timezone
+
+  s3_bucket        = aws_s3_bucket.uploads.id
+  aws_access_key_id     = aws_iam_access_key.chatwoot.id
+  aws_secret_access_key = aws_iam_access_key.chatwoot.secret
+  aws_region            = aws_s3_bucket.uploads.region
 }
