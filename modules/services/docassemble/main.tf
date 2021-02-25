@@ -6,7 +6,7 @@
  */
 locals {
   container_name = "docassemble"
-  container_port = "5000"
+  container_port = "9001"
   name_prefix    = "fr-${substr(var.environment, 0, 2)}-"
 }
 
