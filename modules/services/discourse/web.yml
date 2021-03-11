@@ -31,6 +31,8 @@ env:
   LANG: en_US.UTF-8
   LETSENCRYPT_ACCOUNT_EMAIL: '${discourse_letsencrypt_account_email}'
   SKYLIGHT_AUTHENTICATION: '${skylight_authentication}'
+params:
+  version: stable
 expose:
   - '80:80'
   - '443:443'
