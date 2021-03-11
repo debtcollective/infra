@@ -35,15 +35,11 @@ expose:
   - '80:80'
   - '443:443'
 hooks:
-  # uncomment code below after install and configuration
-  # discourse complains on bootstrap that s3 settings are not set
-  # which is true when building for the first time
-
-  #after_assets_precompile:
-  #  - exec:
-  #      cd: $home
-  #      cmd:
-  #        - 'bundle exec rake s3:upload_assets'
+  after_assets_precompile:
+    - exec:
+        cd: $home
+        cmd:
+          - 'bundle exec rake s3:upload_assets'
 
   after_code:
     - exec:
@@ -52,8 +48,7 @@ hooks:
           - 'git clone https://github.com/discourse/docker_manager.git'
           - 'git clone https://github.com/discourse/discourse-assign.git'
           - 'git clone https://github.com/discourse/discourse-staff-notes.git'
-          - 'git clone https://github.com/paviliondev/discourse-events.git'
-          - 'git clone https://github.com/paviliondev/discourse-locations.git'
+          - 'git clone https://github.com/discourse/discourse-calendar.git'
           - 'git clone https://github.com/debtcollective/discourse-debtcollective-sso.git'
           - 'git clone https://github.com/debtcollective/discourse-sentry.git'
           - 'git clone https://github.com/debtcollective/discourse-skylight.git'
