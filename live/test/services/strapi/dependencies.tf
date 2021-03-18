@@ -46,18 +46,6 @@ data "terraform_remote_state" "postgres_setup" {
   }
 }
 
-data "terraform_remote_state" "redis" {
-  backend = "remote"
-
-  config = {
-    organization = local.remote_state_organization
-
-    workspaces = {
-      name = local.redis_remote_state_workspace
-    }
-  }
-}
-
 data "aws_ssm_parameter" "db_user" {
   name = data.terraform_remote_state.postgres_setup.outputs.strapi_db_user_ssm_key
 }
@@ -74,10 +62,6 @@ locals {
   db_password         = data.aws_ssm_parameter.db_pass.value
   db_port             = data.terraform_remote_state.postgres.outputs.db_port
   db_username         = data.aws_ssm_parameter.db_user.value
-  redis_host          = data.terraform_remote_state.redis.outputs.endpoint
-  redis_port          = data.terraform_remote_state.redis.outputs.port
-  redis_url           = "redis://${local.redis_host}:${local.redis_port}/1"
-  uploads_bucket_name = "strapi-uploads-${local.environment}"
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name
