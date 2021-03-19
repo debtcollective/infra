@@ -94,16 +94,3 @@ output "chatwoot_db_pass_ssm_key" {
 output "chatwoot_db_name" {
   value = postgresql_database.chatwoot.name
 }
-
-# Strapi
-output "strapi_db_user_ssm_key" {
-  value = aws_ssm_parameter.strapi_db_user.name
-}
-
-output "strapi_db_pass_ssm_key" {
-  value = aws_ssm_parameter.strapi_db_pass.name
-}
-
-output "strapi_db_name" {
-  value = postgresql_database.strapi.name
-}

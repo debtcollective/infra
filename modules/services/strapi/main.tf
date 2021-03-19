@@ -15,7 +15,10 @@ resource "aws_lb_target_group" "strapi" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/api/health"
+    interval = 120
+    timeout  = 60
+    matcher  = "200"
+    path     = "/"
   }
 
   lifecycle {
