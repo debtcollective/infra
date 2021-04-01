@@ -93,6 +93,8 @@ resource "aws_s3_bucket_object" "object" {
     s3_secret_access_key = var.s3_secret_access_key
     s3_region            = var.s3_region
 
+    redis_url = var.redis_url
+
     smtp_username = var.smtp_username
     smtp_password = var.smtp_password
     smtp_host     = var.smtp_host

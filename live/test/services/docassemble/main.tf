@@ -50,6 +50,8 @@ module "docassemble" {
   timezone  = var.timezone
   secretkey = var.secretkey
 
+  redis_url = local.redis_url
+
   s3_bucket            = aws_s3_bucket.uploads.id
   s3_access_key_id     = aws_iam_access_key.docassemble.id
   s3_secret_access_key = aws_iam_access_key.docassemble.secret

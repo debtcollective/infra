@@ -9,24 +9,49 @@ resource "aws_cloudwatch_log_group" "docassemble" {
   }
 }
 
+locals {
+  s3_env_vars = [
+    {
+      name  = "S3ENABLE",
+      value = true
+    },
+    {
+      name  = "S3BUCKET",
+      value = var.s3_bucket
+    },
+    {
+      name  = "S3ACCESSKEY",
+      value = var.s3_access_key_id
+    },
+    {
+      name  = "S3SECRETACCESSKEY",
+      value = var.s3_secret_access_key
+    },
+    {
+      name  = "S3REGION",
+      value = var.s3_region
+    },
+  ]
+}
+
 module "container_definition_backend" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = local.container_name
   container_cpu                = null
   container_memory             = null
-  container_memory_reservation = var.container_memory_reservation
+  container_memory_reservation = var.container_memory_reservation * 2
   essential                    = true
   container_image              = var.container_image
 
-  environment = [
+  environment = concat(local.s3_env_vars, [
     {
       name  = "BEHINDHTTPSLOADBALANCER",
       value = true
     },
     {
-      name  = "EC2",
-      value = true
+      name  = "CONTAINERROLE",
+      value = "rabbitmq:log:cron:mail"
     },
     {
       name  = "DAHOSTNAME",
@@ -53,14 +78,14 @@ module "container_definition_backend" {
       value = var.db_user
     },
     {
-      name  = "S3BUCKET",
-      value = var.s3_bucket
+      name  = "REDIS",
+      value = var.redis_url
     },
     {
       name  = "TIMEZONE",
       value = var.timezone
     }
-  ]
+  ])
 
   port_mappings = [
     {
@@ -107,19 +132,15 @@ module "container_definition_app" {
   container_cpu                = null
   container_memory             = null
   container_memory_reservation = var.container_memory_reservation
-  essential                    = true
+  essential                    = false
   container_image              = var.container_image
 
-  environment = [
+  environment = concat(local.s3_env_vars, [
     {
       name  = "CONTAINERROLE",
       value = "web:celery"
     },
-    {
-      name  = "S3BUCKET",
-      value = var.s3_bucket
-    },
-  ]
+  ])
 
   port_mappings = [
     {

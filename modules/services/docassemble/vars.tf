@@ -110,6 +110,11 @@ variable "s3_region" {
   description = "AWS S3 region"
 }
 
+/* Redis */
+variable "redis_url" {
+  description = "Redis URL schema (redis://host/db)"
+}
+
 /* App */
 variable "timezone" {
   description = "App timezone"
