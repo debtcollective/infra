@@ -39,6 +39,7 @@ variable "log_retention_in_days" {
 }
 
 // Docassemble app variables
+/* Database */
 variable "db_backups" {
   description = "Do db backups"
 }
@@ -59,11 +60,72 @@ variable "db_user" {
   description = "Database user"
 }
 
+/* Mail */
+variable "smtp_username" {
+  description = "Mailgun SMTP username"
+}
+
+variable "smtp_password" {
+  description = "Mailgun SMTP password"
+}
+
+variable "smtp_host" {
+  description = "Mailgun SMTP host"
+}
+
+variable "smtp_port" {
+  description = "Mailgun SMTP port"
+}
+
+variable "mail_from" {
+  default = "'\"Administrator\" <no-reply@mg.evictiondefensetest.com>'"
+}
+
+variable "mail_lawyer" {
+  default = "evictiondefensela@innercitylaw.org"
+}
+
+variable "mail_cc" {
+  default = "evictiondefensela@debtcollective.org"
+}
+
+/* S3 */
 variable "s3_bucket" {
   description = "AWS S3 bucket name"
 }
 
+variable "s3_access_key_id" {
+  description = "AWS S3 access key"
+}
+
+variable "s3_secret_access_key" {
+  description = "AWS S3 secret access key"
+}
+
+variable "s3_region" {
+  description = "AWS S3 region"
+}
+
+/* App */
 variable "timezone" {
   description = "App timezone"
-  default = "America/Los_Angeles"
+  default     = "America/Los_Angeles"
+}
+
+variable "debug" {
+  default = false
+}
+
+variable "secretkey" {
+  description = "Docassemble secret key"
+}
+
+variable "default_interview" {
+  description = "Docassemble default interview"
+  default     = "docassemble.evictiondefense:data/questions/interview.yml"
+}
+
+variable "landing_url" {
+  description = "Landing page URL"
+  default     = "https://evictiondefensela.org/"
 }

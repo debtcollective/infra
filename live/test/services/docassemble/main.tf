@@ -40,13 +40,21 @@ module "docassemble" {
   lb_listener_id = local.lb_listener_id
   vpc_id         = local.vpc_id
 
-  db_backups = var.db_backups
-  db_host = local.db_address
-  db_name = local.db_name
+  db_backups  = var.db_backups
+  db_host     = local.db_address
+  db_name     = local.db_name
   db_password = local.db_pass
-  db_user = local.db_user
+  db_user     = local.db_user
 
   timezone = var.timezone
 
-  s3_bucket        = aws_s3_bucket.uploads.id
+  s3_bucket            = aws_s3_bucket.uploads.id
+  s3_access_key_id     = aws_iam_access_key.docassemble.id
+  s3_secret_access_key = aws_iam_access_key.docassemble.secret
+  s3_region           = aws_s3_bucket.uploads.region
+
+  smtp_username = var.smtp_username
+  smtp_password = var.smtp_password
+  smtp_host     = var.smtp_host
+  smtp_port     = var.smtp_port
 }

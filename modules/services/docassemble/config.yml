@@ -1,0 +1,69 @@
+debug: ${debug}
+enable playground: false
+allow demo: false
+exitpage: ${landing_url}
+db:
+  prefix: postgresql+psycopg2://
+  name: ${db_name}
+  user: ${db_user}
+  password: ${db_password}
+  host: ${db_host}
+  port: ${db_port}
+  table prefix: null
+  backup: false
+secretkey: ${secretkey}
+backup days: 14
+default title: docassemble
+default short title: doc
+mail:
+  username: ${smtp_username}
+  password: ${smtp_password}
+  server: ${smtp_server}
+  default sender: ${mail_from}
+  port: ${smtp_port}
+server administrator email: webmaster@localhost
+default interview: ${default_interview}
+language: en
+locale: en_US.utf8
+os locale: en_US.UTF-8 UTF-8
+timezone: ${timezone}
+redis: null
+s3:
+  enable: true
+  access key id: ${s3_access_key_id}
+  secret access key: ${s3_secret_access_key}
+  bucket: ${s3_bucket}
+  region: ${s3_region}
+  endpoint url: null
+collect statistics: false
+ec2: true
+log server: null
+use cloud urls: false
+use minio: false
+use https: false
+use lets encrypt: false
+lets encrypt email: null
+behind https load balancer: true
+xsendfile: false
+update on start: true
+allow updates: true
+url root: https://${domain}
+external hostname: ${domain}
+expose websockets: false
+websockets ip: null
+websockets port: null
+root: /
+words:
+  - docassemble.base:data/sources/us-words.yml
+  - docassemble.evictiondefense:data/sources/es-words.yml
+allow non-idempotent questions: false
+restrict input variables: True
+web server: nginx
+new markdown to docx: True
+stable version: false
+sql ping: false
+default icons: font awesome
+lawyer email: ${mail_lawyer}
+cc email: ${mail_cc}
+resume interview after login: True
+interview delete days: 0
