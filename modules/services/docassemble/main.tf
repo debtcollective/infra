@@ -88,10 +88,10 @@ resource "aws_s3_bucket_object" "object" {
     db_host     = var.db_host
     db_port     = var.db_port
 
-    s3_bucket            = aws_s3_bucket.uploads.id
-    s3_access_key_id     = aws_iam_access_key.docassemble.id
-    s3_secret_access_key = aws_iam_access_key.docassemble.secret
-    s3_region            = aws_s3_bucket.uploads.region
+    s3_bucket            = var.s3_bucket
+    s3_access_key_id     = var.s3_access_key_id
+    s3_secret_access_key = var.s3_secret_access_key
+    s3_region            = var.s3_region
 
     smtp_username = var.smtp_username
     smtp_password = var.smtp_password

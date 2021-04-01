@@ -9,7 +9,7 @@ resource "aws_cloudwatch_log_group" "docassemble" {
   }
 }
 
-module "container_definitions_backend" {
+module "container_definition_backend" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = "${local.container_name}-backend"
@@ -100,7 +100,7 @@ module "container_definitions_backend" {
   }
 }
 
-module "container_definitions_app" {
+module "container_definition_app" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = "${local.container_name}-app"
@@ -117,7 +117,7 @@ module "container_definitions_app" {
     },
     {
       name  = "S3BUCKET",
-      value = "${s3_bucket}"
+      value = var.s3_bucket
     },
   ]
 

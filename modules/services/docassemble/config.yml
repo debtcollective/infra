@@ -18,7 +18,7 @@ default short title: doc
 mail:
   username: ${smtp_username}
   password: ${smtp_password}
-  server: ${smtp_server}
+  server: ${smtp_host}
   default sender: ${mail_from}
   port: ${smtp_port}
 server administrator email: webmaster@localhost

@@ -48,6 +48,10 @@ variable "db_host" {
   description = "Database host"
 }
 
+variable "db_port" {
+  description = "Database port"
+}
+
 variable "db_name" {
   description = "Database name"
 }
