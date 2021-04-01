@@ -12,7 +12,7 @@ resource "aws_cloudwatch_log_group" "docassemble" {
 module "container_definition_backend" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
-  container_name               = "${local.container_name}-backend"
+  container_name               = local.container_name
   container_cpu                = null
   container_memory             = null
   container_memory_reservation = var.container_memory_reservation

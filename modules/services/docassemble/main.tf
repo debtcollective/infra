@@ -73,7 +73,7 @@ resource "aws_ecs_service" "docassemble" {
 
 resource "aws_s3_bucket_object" "object" {
   bucket = var.s3_bucket
-  key    = "new_object_key"
+  key    = "config.yml"
   content = templatefile("${path.module}/config.yml", {
     debug             = var.debug
     landing_url       = var.landing_url
