@@ -37,7 +37,7 @@ locals {
 module "container_definition_backend" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
-  container_name               = local.container_name
+  container_name               = local.backend_container_name
   container_cpu                = null
   container_memory             = null
   container_memory_reservation = var.container_memory_reservation * 2
@@ -89,7 +89,7 @@ module "container_definition_backend" {
 
   port_mappings = [
     {
-      containerPort = local.container_port
+      containerPort = "25"
       hostPort      = null
       protocol      = "tcp"
     },
@@ -99,7 +99,22 @@ module "container_definition_backend" {
       protocol      = "tcp"
     },
     {
-      containerPort = "8082"
+      containerPort = "8080"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "4369"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "5671"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
+      containerPort = "5672"
       hostPort      = null
       protocol      = "tcp"
     },
@@ -128,7 +143,7 @@ module "container_definition_backend" {
 module "container_definition_app" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
-  container_name               = "${local.container_name}-app"
+  container_name               = local.app_container_name
   container_cpu                = null
   container_memory             = null
   container_memory_reservation = var.container_memory_reservation
