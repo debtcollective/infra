@@ -84,7 +84,7 @@ module "container_definition_backend" {
     {
       name  = "TIMEZONE",
       value = var.timezone
-    }
+    },
   ])
 
   port_mappings = [
@@ -99,12 +99,12 @@ module "container_definition_backend" {
       protocol      = "tcp"
     },
     {
-      containerPort = "8080"
+      containerPort = "4369"
       hostPort      = null
       protocol      = "tcp"
     },
     {
-      containerPort = "4369"
+      containerPort = "8080"
       hostPort      = null
       protocol      = "tcp"
     },

@@ -22,10 +22,11 @@ resource "aws_lb_target_group" "docassemble" {
   vpc_id      = var.vpc_id
 
   health_check {
-    interval = 120
-    timeout  = 60
-    matcher  = "200"
-    path     = "/"
+    interval            = 120
+    timeout             = 60
+    unhealthy_threshold = 10
+    matcher             = "200"
+    path                = "/"
   }
 
 
@@ -84,6 +85,7 @@ resource "aws_s3_bucket_object" "object" {
     timezone          = var.timezone
     domain            = var.domain
     default_interview = var.default_interview
+    pythonpackages    = split(";", var.pythonpackages)
 
     db_name     = var.db_name
     db_user     = var.db_user

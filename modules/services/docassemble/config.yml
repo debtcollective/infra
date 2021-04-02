@@ -35,6 +35,10 @@ s3:
   bucket: ${s3_bucket}
   region: ${s3_region}
   endpoint url: null
+python packages: 
+  %{~ for package in pythonpackages  ~}
+  - ${package}
+  %{~ endfor ~}
 collect statistics: false
 ec2: false
 log server: null

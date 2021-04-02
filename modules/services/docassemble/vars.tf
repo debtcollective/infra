@@ -131,7 +131,10 @@ variable "secretkey" {
 
 variable "default_interview" {
   description = "Docassemble default interview"
-  default     = "docassemble.evictiondefense:data/questions/interview.yml"
+}
+
+variable "pythonpackages" {
+  description = "Interview packages to be installed, pass it in git url format. Ex. git+https://<access_token>@github.com/debtcollective/docassemble-evictiondefense.git@main"
 }
 
 variable "landing_url" {

@@ -47,8 +47,10 @@ module "docassemble" {
   db_user     = local.db_user
   db_port     = local.db_port
 
-  timezone  = var.timezone
-  secretkey = var.secretkey
+  timezone          = var.timezone
+  secretkey         = var.secretkey
+  pythonpackages    = var.pythonpackages
+  default_interview = var.default_interview
 
   redis_url = local.redis_url
 
