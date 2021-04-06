@@ -27,7 +27,7 @@ language: en
 locale: en_US.utf8
 os locale: en_US.UTF-8 UTF-8
 timezone: ${timezone}
-redis: null
+redis: ${redis_url}
 s3:
   enable: true
   access key id: ${s3_access_key_id}
@@ -35,8 +35,12 @@ s3:
   bucket: ${s3_bucket}
   region: ${s3_region}
   endpoint url: null
+python packages: 
+  %{~ for package in pythonpackages  ~}
+  - ${package}
+  %{~ endfor ~}
 collect statistics: false
-ec2: true
+ec2: false
 log server: null
 use cloud urls: false
 use minio: false

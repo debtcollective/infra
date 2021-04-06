@@ -34,3 +34,11 @@ variable "landing_url" {
   description = "Landing page URL"
   default     = "https://evictiondefensela.org/"
 }
+
+variable "pythonpackages" {
+  description = "Interview packages to be installed, pass it in git url format. Ex. git+https://<access_token>@github.com/debtcollective/docassemble-evictiondefense.git@main"
+}
+
+variable "default_interview" {
+  description = "Docassemble default interview"
+}
