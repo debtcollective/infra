@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "docassemble" {
 
 // Create ECS service
 resource "aws_ecs_service" "docassemble" {
-  name            = "docassemble_${var.environment}"
+  name            = "docassemble"
   cluster         = var.ecs_cluster_id
   task_definition = aws_ecs_task_definition.docassemble.arn
   desired_count   = var.desired_count
