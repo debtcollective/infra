@@ -35,10 +35,11 @@ module "membership" {
   source      = "../../../../modules/services/membership"
   environment = local.environment
 
-  domain         = aws_route53_record.membership.fqdn
-  ecs_cluster_id = local.ecs_cluster_id
-  lb_listener_id = local.lb_listener_id
-  vpc_id         = local.vpc_id
+  container_image = "debtcollective/membership:development"
+  domain          = aws_route53_record.membership.fqdn
+  ecs_cluster_id  = local.ecs_cluster_id
+  lb_listener_id  = local.lb_listener_id
+  vpc_id          = local.vpc_id
 
   algolia_api_key         = var.algolia_api_key
   algolia_app_id          = var.algolia_app_id
