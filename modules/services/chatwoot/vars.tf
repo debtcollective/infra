@@ -68,7 +68,7 @@ variable "secret_key_base" {
 
 variable "log_level" {
   description = "Log level for the app"
-  default     = "debug"
+  default     = "info"
 }
 
 variable "rails_log_to_stdout" {
