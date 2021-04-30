@@ -78,6 +78,10 @@ locals {
       name  = "LOG_LEVEL",
       value = var.log_level
     },
+    {
+      name  = "RAILS_LOG_TO_STDOUT",
+      value = var.rails_log_to_stdout
+    },
 
     /* Push notifications */
     {

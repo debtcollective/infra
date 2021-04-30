@@ -68,7 +68,12 @@ variable "secret_key_base" {
 
 variable "log_level" {
   description = "Log level for the app"
-  default     = "info"
+  default     = "debug"
+}
+
+variable "rails_log_to_stdout" {
+  description = "Log to stdout"
+  default     = true
 }
 
 /* Email */
