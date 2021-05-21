@@ -38,9 +38,9 @@ module "container_definition_backend" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = local.backend_container_name
-  container_cpu                = null
+  container_cpu                = var.container_cpu
   container_memory             = null
-  container_memory_reservation = var.container_memory_reservation * 2
+  container_memory_reservation = var.container_memory_reservation
   essential                    = true
   container_image              = var.container_image
 
