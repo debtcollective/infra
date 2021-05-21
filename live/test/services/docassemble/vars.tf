@@ -1,3 +1,11 @@
+variable "container_memory_reservation" {
+  description = "Memory reservation for containers"
+}
+
+variable "container_cpu" {
+  description = "Container CPUs to allocate"
+}
+
 /* Mail */
 variable "smtp_username" {
   description = "Mailgun SMTP username"
