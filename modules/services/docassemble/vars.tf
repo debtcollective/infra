@@ -9,7 +9,7 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 2048
+  default     = 1963
 }
 variable "container_cpu" {
   description = "Container CPUs to allocate"
