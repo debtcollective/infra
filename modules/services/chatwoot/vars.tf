@@ -71,6 +71,11 @@ variable "log_level" {
   default     = "info"
 }
 
+variable "rails_log_to_stdout" {
+  description = "Log to stdout"
+  default     = true
+}
+
 /* Email */
 variable "mailer_sender_email" {
   description = "Email from"

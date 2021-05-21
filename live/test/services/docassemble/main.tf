@@ -35,10 +35,12 @@ module "docassemble" {
   source      = "../../../../modules/services/docassemble"
   environment = local.environment
 
-  domain         = aws_route53_record.docassemble.fqdn
-  ecs_cluster_id = local.ecs_cluster_id
-  lb_listener_id = local.lb_listener_id
-  vpc_id         = local.vpc_id
+  domain                       = aws_route53_record.docassemble.fqdn
+  ecs_cluster_id               = local.ecs_cluster_id
+  lb_listener_id               = local.lb_listener_id
+  vpc_id                       = local.vpc_id
+  container_memory_reservation = var.container_memory_reservation
+  container_cpu                = var.container_cpu
 
   db_backups  = var.db_backups
   db_host     = local.db_address
