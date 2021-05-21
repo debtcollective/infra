@@ -22,10 +22,12 @@ resource "aws_lb_target_group" "docassemble" {
   vpc_id      = var.vpc_id
 
   health_check {
-    interval = 120
-    timeout  = 60
-    matcher  = "200"
-    path     = "/"
+    interval            = 300
+    matcher             = "200-299,300-399"
+    path                = "/"
+    timeout             = 120
+    healthy_threshold   = 2
+    unhealthy_threshold = 5
   }
 
 
