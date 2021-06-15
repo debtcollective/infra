@@ -94,3 +94,16 @@ output "chatwoot_db_pass_ssm_key" {
 output "chatwoot_db_name" {
   value = postgresql_database.chatwoot.name
 }
+
+# Docassemble
+output "docassemble_db_user_ssm_key" {
+  value = aws_ssm_parameter.docassemble_db_user.name
+}
+
+output "docassemble_db_pass_ssm_key" {
+  value = aws_ssm_parameter.docassemble_db_pass.name
+}
+
+output "docassemble_db_name" {
+  value = postgresql_database.docassemble.name
+}
