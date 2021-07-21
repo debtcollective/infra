@@ -10,10 +10,6 @@ locals {
   name_prefix    = "fr-${substr(var.environment, 0, 2)}-"
 }
 
-provider "aws" {
-  version = "~> 2.0"
-}
-
 data "aws_region" "current" {}
 
 // Load balancer
@@ -24,7 +20,14 @@ resource "aws_lb_target_group" "membership" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/health-check"
+    healthy_threshold   = 3
+    interval            = 300
+    matcher             = "200"
+    path                = "/health-check"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    timeout             = 120
+    unhealthy_threshold = 3
   }
 
   lifecycle {
