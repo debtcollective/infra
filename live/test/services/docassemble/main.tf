@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "docassemble" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "eviction-defense-${local.environment}"
+  name    = "abolition-tools-${local.environment}"
   type    = "A"
 
   alias {
