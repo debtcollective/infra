@@ -10,6 +10,10 @@ locals {
   name_prefix    = "fr-${substr(var.environment, 0, 2)}-"
 }
 
+provider "aws" {
+  version = "~> 2.0"
+}
+
 data "aws_region" "current" {}
 
 // Load balancer

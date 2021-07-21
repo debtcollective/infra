@@ -54,6 +54,7 @@ module "membership" {
   discourse_username      = var.discourse_username
   ga_measurement_id       = var.ga_measurement_id
   home_page_url           = var.home_page_url
+  login_page_url          = var.login_page_url
   mail_from               = var.mail_from
   mailchimp_api_key       = var.mailchimp_api_key
   mailchimp_list_id       = var.mailchimp_list_id

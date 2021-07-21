@@ -98,6 +98,10 @@ module "container_definitions" {
       value = var.home_page_url
     },
     {
+      name  = "LOGIN_PAGE_URL",
+      value = var.login_page_url
+    },
+    {
       name  = "CORS_ORIGINS",
       value = var.cors_origins
     },

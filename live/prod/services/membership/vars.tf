@@ -11,6 +11,10 @@ variable "home_page_url" {
   description = "Home page URL"
 }
 
+variable "login_page_url" {
+  description = "Login page URL"
+}
+
 variable "cors_origins" {
   description = "Allowed CORS origins"
 }
