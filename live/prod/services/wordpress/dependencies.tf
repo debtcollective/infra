@@ -61,11 +61,12 @@ data "terraform_remote_state" "iam" {
 locals {
   environment = "prod"
 
-  db_host             = data.terraform_remote_state.mysql.outputs.db_address
-  db_name             = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_name
-  db_username_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_user_ssm_key
-  db_password_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_pass_ssm_key
-  subnet_id           = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]
+  db_host               = data.terraform_remote_state.mysql.outputs.db_address
+  db_name               = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_name
+  db_username_ssm_key   = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_user_ssm_key
+  db_password_ssm_key   = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_pass_ssm_key
+  subnet_id             = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]
+  ec2_security_group_id = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
 
   ecs_cluster_id     = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name        = data.terraform_remote_state.cluster.outputs.lb_dns_name
