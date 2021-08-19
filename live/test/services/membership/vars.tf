@@ -55,6 +55,14 @@ variable "amplitude_api_key" {
   description = "Amplitude API key"
 }
 
+variable "chatwoot_base_url" {
+  description = "Chatwoot Base URL"
+}
+
+variable "chatwoot_token" {
+  description = "Chatwoot Website Token"
+}
+
 variable "ga_measurement_id" {
   description = "Google Analytics UA-XXXXX-Y"
 }

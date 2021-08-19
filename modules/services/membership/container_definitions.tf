@@ -184,6 +184,14 @@ module "container_definitions" {
     {
       name  = "ALGOLIA_API_KEY",
       value = var.algolia_api_key
+    },
+    {
+      name  = "CHATWOOT_BASE_URL",
+      value = var.chatwoot_base_url
+    },
+    {
+      name  = "CHATWOOT_TOKEN",
+      value = var.chatwoot_token
     }
   ]
 

@@ -41,6 +41,8 @@ module "membership" {
   vpc_id         = local.vpc_id
 
   amplitude_api_key       = var.amplitude_api_key
+  chatwoot_base_url       = var.chatwoot_base_url 
+  chatwoot_token          = var.chatwoot_token 
   cookie_domain           = var.cookie_domain
   cors_origins            = var.cors_origins
   database_url            = local.database_url

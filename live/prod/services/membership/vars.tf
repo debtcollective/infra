@@ -23,6 +23,14 @@ variable "cookie_domain" {
   description = "Session Cookie domain"
 }
 
+variable "chatwoot_base_url" {
+  description = "Chatwoot Base URL"
+}
+
+variable "chatwoot_token" {
+  description = "Chatwoot Website Token"
+}
+
 variable "recaptcha_site_key" {
   description = "reCAPTCHA site key"
 }
