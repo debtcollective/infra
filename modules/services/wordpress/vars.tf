@@ -24,6 +24,10 @@ variable "ecs_cluster_id" {
   description = "ECS cluster id where the app will run"
 }
 
+variable "ec2_security_group_id" {
+  description = "EC2 Security group ID"
+}
+
 variable "domain" {
   description = "FQDN where app will be available"
 }

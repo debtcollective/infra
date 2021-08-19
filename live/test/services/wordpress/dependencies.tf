@@ -73,6 +73,7 @@ locals {
   lb_zone_id         = data.terraform_remote_state.cluster.outputs.lb_zone_id
   vpc_id             = data.terraform_remote_state.vpc.outputs.vpc_id
   execution_role_arn = data.terraform_remote_state.iam.outputs.instance_role_arn
+  ec2_security_group_id = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
 
   cluster_remote_state_workspace     = "${local.environment}-cluster"
   iam_remote_state_workspace         = "global-iam"

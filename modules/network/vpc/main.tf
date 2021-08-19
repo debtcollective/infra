@@ -215,6 +215,13 @@ resource "aws_security_group" "ec2" {
     security_groups = [aws_security_group.elb.id]
   }
 
+  ingress {
+    from_port       = 2049
+    to_port         = 2049
+    protocol        = "tcp"
+    self            = true
+  }
+
   # outbound internet access
   egress {
     from_port   = 0
