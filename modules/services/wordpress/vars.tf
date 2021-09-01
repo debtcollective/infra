@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "debtbot/wordpress-cli"
+  default     = "debtbot/wordpress-cli:latest"
 }
 
 variable "container_memory_reservation" {

@@ -89,7 +89,7 @@ module "container_definitions" {
       value = "https://${var.domain}"
     },
     {
-      name  = "NODE_ENV",
+      name  = "ENVIRONMENT",
       value = "production"
     },
   ]
