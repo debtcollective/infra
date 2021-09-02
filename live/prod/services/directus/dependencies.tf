@@ -70,7 +70,7 @@ locals {
   environment = "prod"
 
   db_host     = data.terraform_remote_state.postgres.outputs.db_address
-  db_name     = data.terraform_remote_state.postgres_setup.outputs.directus_db_name
+  db_name     = data.terraform_remote_state.postgres_setup.outputs.docassemble_db_name
   db_password = data.aws_ssm_parameter.db_pass.value
   db_port     = data.terraform_remote_state.postgres.outputs.db_port
   db_username = data.aws_ssm_parameter.db_user.value
