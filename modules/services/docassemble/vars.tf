@@ -9,11 +9,11 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 1963
+  default     = 3926
 }
 variable "container_cpu" {
   description = "Container CPUs to allocate"
-  default     = 2048
+  default     = 4096
 }
 
 variable "vpc_id" {

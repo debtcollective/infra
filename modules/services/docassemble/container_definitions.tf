@@ -38,9 +38,9 @@ module "container_definition_backend" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = local.backend_container_name
-  container_cpu                = var.container_cpu
-  container_memory             = null
-  container_memory_reservation = ceil(var.container_memory_reservation / 2)
+  container_cpu                = 1
+  container_memory             = 1800
+  container_memory_reservation = 1800
   essential                    = true
   container_image              = var.container_image
 
@@ -51,11 +51,15 @@ module "container_definition_backend" {
     },
     {
       name  = "CONTAINERROLE",
-      value = "rabbitmq:log:cron:mail"
+      value = "redis:rabbitmq:log:cron:mail"
     },
     {
       name  = "DAHOSTNAME",
       value = var.domain
+    },
+    {
+      "name" = "EC2",
+      "value" = "true"
     },
     {
       name  = "DBBACKUP",
@@ -109,6 +113,11 @@ module "container_definition_backend" {
       protocol      = "tcp"
     },
     {
+      containerPort = "8082"
+      hostPort      = null
+      protocol      = "tcp"
+    },
+    {
       containerPort = "5671"
       hostPort      = null
       protocol      = "tcp"
@@ -144,9 +153,9 @@ module "container_definition_app" {
   source = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition.git?ref=0.23.0"
 
   container_name               = local.app_container_name
-  container_cpu                = null
-  container_memory             = null
-  container_memory_reservation = floor(var.container_memory_reservation / 2)
+  container_cpu                = 1
+  container_memory             = 1800
+  container_memory_reservation = 1800
   essential                    = false
   container_image              = var.container_image
 
