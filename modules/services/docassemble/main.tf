@@ -52,17 +52,28 @@ resource "aws_lb_listener_rule" "docassemble" {
 }
 
 // Create ECS task definition
-resource "aws_ecs_task_definition" "docassemble" {
-  family                = "docassemble_${var.environment}"
-  container_definitions = "[${module.container_definition_app.json_map},${module.container_definition_backend.json_map}]"
+resource "aws_ecs_task_definition" "backend" {
+  family                = "docassemble_backend_${var.environment}"
+  container_definitions = "[${module.container_definition_backend.json_map}]"
+}
+resource "aws_ecs_task_definition" "app" {
+  family                = "docassemble_app_${var.environment}"
+  container_definitions = "[${module.container_definition_app.json_map}]"
 }
 
 // Create ECS service
-resource "aws_ecs_service" "docassemble" {
-  name            = "docassemble"
+resource "aws_ecs_service" "backend" {
+  name            = "docassemble-backend-${var.environment}"
   cluster         = var.ecs_cluster_id
-  task_definition = aws_ecs_task_definition.docassemble.arn
-  desired_count   = var.desired_count
+  task_definition = aws_ecs_task_definition.backend.arn
+  desired_count   = 1
+}
+
+resource "aws_ecs_service" "app" {
+  name            = "docassemble-app-${var.environment}"
+  cluster         = var.ecs_cluster_id
+  task_definition = aws_ecs_task_definition.app.arn
+  desired_count   = 2
 
   load_balancer {
     target_group_arn = aws_lb_target_group.docassemble.arn
@@ -73,6 +84,7 @@ resource "aws_ecs_service" "docassemble" {
   lifecycle {
     create_before_destroy = true
   }
+
 }
 
 // Upload config to S3 bucket

@@ -156,7 +156,7 @@ module "container_definition_app" {
   container_cpu                = 1
   container_memory             = 1800
   container_memory_reservation = 1800
-  essential                    = false
+  essential                    = true
   container_image              = var.container_image
 
   environment = concat(local.s3_env_vars, [
