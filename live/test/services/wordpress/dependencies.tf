@@ -65,7 +65,7 @@ locals {
   db_name             = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_name
   db_username_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_user_ssm_key
   db_password_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_db_pass_ssm_key
-  subnet_id           = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]
+  subnet_id           = data.terraform_remote_state.vpc.outputs.private_subnet_ids
 
   ecs_cluster_id     = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name        = data.terraform_remote_state.cluster.outputs.lb_dns_name

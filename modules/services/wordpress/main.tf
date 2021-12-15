@@ -79,7 +79,8 @@ resource "aws_efs_file_system" "wordpress-data" {
 }
 
 resource "aws_efs_mount_target" "wordpress" {
-  file_system_id = aws_efs_file_system.wordpress-data.id
-  subnet_id      = var.subnet_id
+  count           = length(var.subnet_id)
+  file_system_id  = aws_efs_file_system.wordpress-data.id
+  subnet_id       = element(var.subnet_id, count.index)
   security_groups = [var.ec2_security_group_id]
 }

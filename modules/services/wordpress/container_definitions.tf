@@ -92,6 +92,24 @@ module "container_definitions" {
       name  = "ENVIRONMENT",
       value = "production"
     },
+    {
+      name  = "dc_donate_api_url",
+      value = var.dc_donate_api_url
+    },
+    {
+      name  = "dc_membership_api_url",
+      value = var.dc_membership_api_url
+    },{
+      name  = "dc_funds_api_url",
+      value = var.dc_funds_api_url
+    },
+    {
+      name  = "dc_recaptcha_v3_site_key",
+      value = var.dc_recaptcha_v3_site_key
+    },{
+      name  = "dc_stripe_public_token",
+      value = "https://${var.domain}"
+    }
   ]
 
   secrets = [
