@@ -34,6 +34,8 @@ data "terraform_remote_state" "notify_slack" {
   }
 }
 
+data "aws_efs_file_system" "wordpress-data" {}
+
 locals {
   environment = "prod"
 

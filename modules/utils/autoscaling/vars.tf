@@ -49,3 +49,10 @@ variable "tags" {
   default     = []
   type        = list
 }
+
+variable "efs_dns_name" {
+  description = "EFS dns name for mounting"
+  type    = string
+  default = ""
+}
+

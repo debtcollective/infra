@@ -62,6 +62,7 @@ data "template_file" "user_data" {
   vars = {
     environment  = var.environment
     cluster_name = var.cluster_name
+    efs_dns_name = var.efs_dns_name
   }
 }
 
