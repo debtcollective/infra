@@ -93,22 +93,15 @@ module "container_definitions" {
       value = var.environment
     },
     {
-      name  = "DC_DONATE_API_URL",
-      value = var.dc_donate_api_url
+      name  = "COMMUNITY_URL",
+      value = var.community_url
     },
     {
-      name  = "DC_MEMBERSHIP_API_URL",
-      value = var.dc_membership_api_url
+      name  = "WORDPRESS_URL",
+      value = var.wordpress_url
     },{
-      name  = "DC_FUNDS_API_URL",
-      value = var.dc_funds_api_url
-    },
-    {
-      name  = "DC_RECAPTCHA_V3_SITE_KEY",
-      value = var.dc_recaptcha_v3_site_key
-    },{
-      name  = "DC_STRIPE_PUBLIC_TOKEN",
-      value = "https://${var.domain}"
+      name  = "RETURN_URL",
+      value = var.return_url
     }
   ]
 

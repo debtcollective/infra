@@ -54,11 +54,9 @@ module "wordpress" {
   mail_port = var.mail_port
   mail_user = var.mail_user
   
-  dc_donate_api_url        = var.dc_donate_api_url
-  dc_membership_api_url    = var.dc_membership_api_url
-  dc_funds_api_url         = var.dc_funds_api_url
-  dc_recaptcha_v3_site_key = var.dc_recaptcha_v3_site_key
-  dc_stripe_public_token   = var.dc_stripe_public_token
+  community_url = var.community_url
+  wordpress_url = var.wordpress_url
+  return_url    = var.return_url
 
   s3_access_key_id     = aws_iam_access_key.wordpress.id
   s3_secret_access_key = aws_iam_access_key.wordpress.secret
