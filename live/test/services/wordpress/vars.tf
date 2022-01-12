@@ -23,10 +23,6 @@ variable "mail_from" {
   description = "Mail default from address"
 }
 
-variable "mail_from" {
-  description = "Mail default from address"
-}
-
 variable "community_url" {
   description = "Community URL for header"
 }
