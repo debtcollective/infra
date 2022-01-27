@@ -33,34 +33,6 @@ module "container_definitions" {
       value = var.db_host
     },
     {
-      name  = "mail__transport",
-      value = var.mail_transport
-    },
-    {
-      name  = "mail__from",
-      value = var.mail_from
-    },
-    {
-      name  = "mail__options__service",
-      value = var.mail_transport
-    },
-    {
-      name  = "mail__options__host",
-      value = var.mail_host
-    },
-    {
-      name  = "mail__options__port",
-      value = var.mail_port
-    },
-    {
-      name  = "mail__options__auth__user",
-      value = var.mail_user
-    },
-    {
-      name  = "mail__options__auth__pass",
-      value = var.mail_pass
-    },
-    {
       name  = "storage__active",
       value = "wordpress-s3"
     },
