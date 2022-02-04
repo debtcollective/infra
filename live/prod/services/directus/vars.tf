@@ -16,5 +16,5 @@ variable "admin_password" {
 
 variable "public_url" {
   description = "Directus public-facing url"
-  default = "https://directus.debtcollective.org"
+  default = "https://admin.debtcollective.org"
 }

@@ -53,4 +53,9 @@ module "directus" {
   admin_email    = var.admin_email
   admin_password = var.admin_password
   public_url     = local.public_url
+
+  s3_bucket_name        = aws_s3_bucket.uploads.id
+  aws_access_key_id     = aws_iam_access_key.directus.id
+  aws_secret_access_key = aws_iam_access_key.directus.secret
+  aws_region            = aws_s3_bucket.uploads.region
 }

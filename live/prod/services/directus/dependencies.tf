@@ -74,13 +74,16 @@ locals {
   db_password = data.aws_ssm_parameter.db_pass.value
   db_port     = data.terraform_remote_state.postgres.outputs.db_port
   db_username = data.aws_ssm_parameter.db_user.value
-  redis_remote_state_workspace          = "${local.environment}-redis"
-  redis_host  = data.terraform_remote_state.redis.outputs.endpoint
-  redis_port  = data.terraform_remote_state.redis.outputs.port
-  cache_redis = "redis://${local.redis_host}:${local.redis_port}/0"
-  cache_store = "redis"
-  cache_enabled = "true"
-  public_url = "https://directus.debtcollective.org"
+
+  redis_remote_state_workspace = "${local.environment}-redis"
+  redis_host                   = data.terraform_remote_state.redis.outputs.endpoint
+  redis_port                   = data.terraform_remote_state.redis.outputs.port
+  cache_redis                  = "redis://${local.redis_host}:${local.redis_port}/0"
+  cache_store                  = "redis"
+  cache_enabled                = "true"
+  
+  public_url = "https://admin.debtcollective.org"
+  uploads_bucket_name = "directus-uploads-${local.environment}"
 
   ecs_cluster_id = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
   lb_dns_name    = data.terraform_remote_state.cluster.outputs.lb_dns_name

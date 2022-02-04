@@ -83,6 +83,23 @@ variable "cache_redis" {
   description = "Redis Host URL"
 }
 
+/* Storage, we use AWS S3 */
+variable "s3_bucket_name" {
+  description = "AWS S3 bucket name"
+}
+
+variable "aws_access_key_id" {
+  description = "AWS S3 access key id"
+}
+
+variable "aws_secret_access_key" {
+  description = "AWS S3 secret access key"
+}
+
+variable "aws_region" {
+  description = "AWS S3 region"
+}
+
 variable "admin_email" {
   description = "Directus admin email"
 }
@@ -93,5 +110,5 @@ variable "admin_password" {
 
 variable "public_url" {
   description = "Directus public-facing url"
-  default = "directus.debtcollective.org"
+  default = "admin.debtcollective.org"
 }

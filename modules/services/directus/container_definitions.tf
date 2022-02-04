@@ -64,6 +64,27 @@ module "container_definitions" {
       name  = "CACHE_REDIS",
       value = var.cache_redis
     },
+    /* Storage, we use AWS S3 */
+    {
+      name  = "ACTIVE_STORAGE_SERVICE",
+      value = "amazon"
+    },
+    {
+      name  = "S3_BUCKET_NAME",
+      value = var.s3_bucket_name
+    },
+    {
+      name  = "AWS_ACCESS_KEY_ID",
+      value = var.aws_access_key_id
+    },
+    {
+      name  = "AWS_SECRET_ACCESS_KEY",
+      value = var.aws_secret_access_key
+    },
+    {
+      name  = "AWS_REGION",
+      value = var.aws_region
+    },
     {
       name  = "ADMIN_EMAIL",
       value = var.admin_email
