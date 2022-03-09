@@ -19,14 +19,6 @@ data "aws_route53_zone" "primary" {
   name = "debtcollective.org"
 }
 
-resource "aws_route53_record" "landing" {
-  name    = ""
-  records = [var.landing_ip_address]
-  ttl     = 300
-  type    = "A"
-  zone_id = data.aws_route53_zone.primary.zone_id
-}
-
 resource "aws_route53_record" "landing_www" {
   name    = "www"
   records = [var.landing_domain_name]

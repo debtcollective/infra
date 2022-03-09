@@ -21,7 +21,7 @@ data "aws_route53_zone" "primary" {
 
 resource "aws_route53_record" "wordpress" {
   zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "wordpress"
+  name    = ""
   type    = "A"
 
   alias {
@@ -48,9 +48,9 @@ module "wordpress" {
   db_password_ssm_key = local.db_password_ssm_key
   db_username_ssm_key = local.db_username_ssm_key
   
-  community_url        = var.community_url
-  wordpress_url    = var.wordpress_url
-  return_url         = var.return_url
+  community_url = var.community_url
+  wordpress_url = var.wordpress_url
+  return_url    = var.return_url
 
   s3_access_key_id     = aws_iam_access_key.wordpress.id
   s3_secret_access_key = aws_iam_access_key.wordpress.secret
