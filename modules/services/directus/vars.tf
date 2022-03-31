@@ -84,10 +84,6 @@ variable "cache_redis" {
 }
 
 /* Storage, we use AWS S3 */
-variable "s3_bucket_name" {
-  description = "AWS S3 bucket name"
-}
-
 variable "aws_access_key_id" {
   description = "AWS S3 access key id"
 }
@@ -111,4 +107,39 @@ variable "admin_password" {
 variable "public_url" {
   description = "Directus public-facing url"
   default = "admin.debtcollective.org"
+}
+
+variable "storage_locations" {
+  description = "Directus Storage Location"
+  default = "s3"
+}
+
+variable "storage_s3_driver" {
+  description = "Directus S3 Storage Adapter"
+  default = "s3"
+}
+
+variable "storage_s3_root" {
+  description = "S3 default storage location"
+}
+
+variable "storage_s3_key" {
+  description = "S3 storage key"
+}
+
+variable "storage_s3_secret" {
+  description = "s3 storage secret"
+}
+
+variable "storage_s3_bucket" {
+  description = "S3 bucket"
+}
+
+variable "storage_s3_region" {
+  description = "S3 region"
+}
+
+variable "storage_s3_acl" {
+  description = "S3 ACL"
+  default = "private"
 }

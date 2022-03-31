@@ -54,8 +54,16 @@ module "directus" {
   admin_password = var.admin_password
   public_url     = local.public_url
 
-  s3_bucket_name        = aws_s3_bucket.uploads.id
   aws_access_key_id     = aws_iam_access_key.directus.id
   aws_secret_access_key = aws_iam_access_key.directus.secret
   aws_region            = aws_s3_bucket.uploads.region
+  storage_locations     = "s3"
+  storage_s3_driver     = "s3"
+  storage_s3_root       = ""
+  storage_s3_key        = aws_iam_access_key.directus.id
+  storage_s3_secret     = aws_iam_access_key.directus.secret
+  storage_s3_bucket     = aws_s3_bucket.uploads.id
+  storage_s3_region     = aws_s3_bucket.uploads.region
+  storage_s3_acl        = aws_s3_bucket.uploads.acl
+
 }

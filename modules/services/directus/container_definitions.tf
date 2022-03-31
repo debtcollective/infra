@@ -70,10 +70,6 @@ module "container_definitions" {
       value = "amazon"
     },
     {
-      name  = "S3_BUCKET_NAME",
-      value = var.s3_bucket_name
-    },
-    {
       name  = "AWS_ACCESS_KEY_ID",
       value = var.aws_access_key_id
     },
@@ -96,6 +92,38 @@ module "container_definitions" {
     {
       name  = "PUBLIC_URL",
       value = var.public_url
+    },
+    {
+      name  = "STORAGE_LOCATIONS",
+      value = var.storage_locations
+    },
+    {
+      name  = "STORAGE_S3_DRIVER",
+      value = var.storage_s3_driver
+    },
+    {
+      name  = "STORAGE_S3_ROOT",
+      value = var.storage_s3_root
+    },
+    {
+      name  = "STORAGE_S3_KEY",
+      value = var.storage_s3_key
+    },
+    {
+      name  = "STORAGE_S3_SECRET",
+      value = var.storage_s3_secret
+    },
+    {
+      name  = "STORAGE_S3_BUCKET",
+      value = var.storage_s3_bucket
+    },
+    {
+      name  = "STORAGE_S3_REGION",
+      value = var.storage_s3_region
+    },
+    {
+      name  = "STORAGE_S3_ACL",
+      value = var.storage_s3_acl
     }
   ]
 
