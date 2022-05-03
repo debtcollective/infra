@@ -1,3 +1,16 @@
+# Directus
+output "directus_db_user_ssm_key" {
+  value = aws_ssm_parameter.directus_db_user.name
+}
+
+output "directus_db_pass_ssm_key" {
+  value = aws_ssm_parameter.directus_db_pass.name
+}
+output "directus_db_name" {
+  value = "directus_${local.environment}"
+
+}
+
 # Discourse
 output "discourse_db_user_ssm_key" {
   value = aws_ssm_parameter.discourse_db_user.name
