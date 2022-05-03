@@ -64,7 +64,7 @@ locals {
   db_host             = data.terraform_remote_state.mysql.outputs.db_address
   db_name             = data.terraform_remote_state.mysql_setup.outputs.wordpress_dev_db_name
   db_username_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_dev_db_user_ssm_key
-  db_password_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_dev_db_pass_ssm_key
+  db_password_ssm_key = data.terraform_remote_state.mysql_setup.outputs.wordpress_dev_db__pass_ssm_key
   subnet_id           = data.terraform_remote_state.vpc.outputs.private_subnet_ids
 
   ecs_cluster_id     = data.terraform_remote_state.cluster.outputs.ecs_cluster_id
@@ -75,12 +75,12 @@ locals {
   execution_role_arn = data.terraform_remote_state.iam.outputs.instance_role_arn
   ec2_security_group_id = data.terraform_remote_state.vpc.outputs.ec2_security_group_id
 
-  cluster_remote_state_workspace     = "${local.environment}-cluster"
+  cluster_remote_state_workspace     = "test-cluster"
   iam_remote_state_workspace         = "global-iam"
-  mysql_remote_state_workspace       = "${local.environment}-mysql"
-  mysql_setup_remote_state_workspace = "${local.environment}-mysql-setup"
+  mysql_remote_state_workspace       = "test-mysql"
+  mysql_setup_remote_state_workspace = "test-mysql-setup"
   remote_state_organization          = "debtcollective"
-  vpc_remote_state_workspace         = "${local.environment}-network"
+  vpc_remote_state_workspace         = "test-network"
 
   acm_certificate_domain = "*.debtcollective.org"
   cdn_alias              = "wordpress-cdn-${local.environment}"

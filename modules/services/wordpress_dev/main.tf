@@ -1,7 +1,7 @@
 locals {
   container_name = "wordpress_dev"
   container_port = 80
-  name_prefix    = "wp-dev-"
+  name_prefix    = "wp-de-"
 
 }
 

@@ -107,7 +107,7 @@ module "container_definitions" {
     logDriver = "awslogs"
     options = {
       "awslogs-region" = data.aws_region.current.name
-      "awslogs-group"  = aws_cloudwatch_log_group.wordpress.name
+      "awslogs-group"  = aws_cloudwatch_log_group.wordpress_dev.name
     }
     secretOptions = null
   }
