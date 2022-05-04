@@ -90,7 +90,7 @@ module "container_definitions" {
 
   mount_points = [
     {
-      containerPath = "/var/www/html_dev",
+      containerPath = "/var/www/html",
       sourceVolume = "efs-wordpress-data-dev"
     }
   ]

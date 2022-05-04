@@ -86,5 +86,5 @@ locals {
   cdn_alias              = "wordpress-cdn-${local.environment}"
   domain                 = "debtcollective.org"
   s3_origin_id           = "wordpress-${local.environment}"
-  uploads_bucket_name    = "wp-uploads-${local.environment}"
+  uploads_bucket_name    = "wp-uploads-dev-dc"
 }

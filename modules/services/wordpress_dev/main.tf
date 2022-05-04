@@ -70,7 +70,7 @@ resource "aws_ecs_service" "wordpress_dev" {
 
 // Create EFS
 resource "aws_efs_file_system" "wordpress-data-dev" {
-  creation_token = "es-persistent-data"
+  creation_token = "es-persistent-data-dev"
   performance_mode = "generalPurpose"
 
   tags = {
