@@ -5,7 +5,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "chatwoot/chatwoot:latest"
+  default     = "chatwoot/chatwoot:v2.8.1-ce"
 }
 
 variable "container_memory_reservation" {
