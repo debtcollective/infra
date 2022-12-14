@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "jhpyle/docassemble:latest"
+  default     = "jhpyle/docassemble@sha256:0b688e12ac76b02f24c2b0c66dcc40f0a9c396616bb0ccee582ae662e7d57a3a"
 }
 
 variable "container_memory_reservation" {
