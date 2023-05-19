@@ -8,9 +8,9 @@ sudo sed -i 's/#Port 22$/Port 12345/' /etc/ssh/sshd_config
 sudo service sshd restart || sudo service ssh restart
 
 # Tools
-# sudo yum install htop -y
-# sudo yum install rsync -y
-# sudo yum install nfs-utils -y
+sudo yum install htop -y
+sudo yum install rsync -y
+sudo yum install nfs-utils -y
 
 # Create swap file
 sudo fallocate -l 1G /swapfile
