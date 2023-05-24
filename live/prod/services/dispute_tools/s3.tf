@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "disputes" {
   acl    = "private"
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
