@@ -34,8 +34,6 @@ data "terraform_remote_state" "notify_slack" {
   }
 }
 
-data "aws_efs_file_system" "wordpress-data" {}
-
 locals {
   environment = "prod"
 
@@ -43,8 +41,8 @@ locals {
   elb_security_group_ids  = [data.terraform_remote_state.vpc.outputs.elb_security_group_id]
   iam_instance_profile_id = data.terraform_remote_state.iam.outputs.instance_profile_id
   instance_type           = "t3a.medium"
-  asg_max_size            = 6
-  asg_desired_count       = 5
+  asg_max_size            = 3
+  asg_desired_count       = 3
   key_name                = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
   subnet_ids              = data.terraform_remote_state.vpc.outputs.public_subnet_ids
   vpc_id                  = data.terraform_remote_state.vpc.outputs.vpc_id

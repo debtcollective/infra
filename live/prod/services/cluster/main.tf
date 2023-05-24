@@ -32,7 +32,6 @@ module "autoscaling" {
   environment = local.environment
 
   cluster_name            = module.cluster.ecs_cluster_name
-  efs_dns_name            = data.aws_efs_file_system.wordpress-data.dns_name
   iam_instance_profile_id = local.iam_instance_profile_id
   instance_type           = local.instance_type
   key_name                = local.key_name
