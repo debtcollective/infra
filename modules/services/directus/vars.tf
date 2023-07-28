@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "directus/directus:latest"
+  default     = "directus/directus:10.1.0"
 }
 
 variable "container_memory_reservation" {
