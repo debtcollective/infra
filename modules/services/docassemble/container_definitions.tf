@@ -162,7 +162,7 @@ module "container_definition_app" {
   environment = concat(local.s3_env_vars, [
     {
       name  = "CONTAINERROLE",
-      value = "web:celery"
+      value = "web:rabbitmq:celery"
     },
   ])
 
