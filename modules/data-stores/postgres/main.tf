@@ -42,8 +42,8 @@ resource "aws_db_subnet_group" "pg_sg" {
 
 // Postgres Parameter group
 resource "aws_db_parameter_group" "postgres" {
-  name_prefix = "postgres11-"
-  family      = "postgres11"
+  name_prefix = "postgres14-"
+  family      = "postgres14"
 
   parameter {
     apply_method = "pending-reboot"

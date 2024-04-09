@@ -39,5 +39,5 @@ variable "skip_final_snapshot" {
 
 variable "engine_version" {
   description = "postgres engine version"
-  default     = "11.6"
+  default     = "14.10"
 }

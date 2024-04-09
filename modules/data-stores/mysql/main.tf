@@ -42,8 +42,8 @@ resource "aws_db_subnet_group" "mysql_sg" {
 
 // MySQL Parameter group
 resource "aws_db_parameter_group" "mysql" {
-  name_prefix = "mysql57-"
-  family      = "mysql5.7"
+  name_prefix = "mysql8-"
+  family      = "mysql8.0.36"
 }
 
 // MySQL Database
@@ -51,7 +51,7 @@ resource "aws_db_instance" "mysql" {
   identifier        = "mysql-${var.environment}"
   allocated_storage = var.allocated_storage
   engine            = "mysql"
-  engine_version    = "5.7"
+  engine_version    = "8.0.36"
   instance_class    = var.instance_class
   name              = local.db_name
   username          = aws_ssm_parameter.master_user.value

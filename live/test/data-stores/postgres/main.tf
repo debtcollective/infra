@@ -23,7 +23,7 @@ module "postgres" {
   subnet_ids             = local.subnet_ids
   vpc_id                 = local.vpc_id
   vpc_security_group_ids = local.vpc_security_group_ids
-  allocated_storage      = 5
+  allocated_storage      = 20
   skip_final_snapshot    = true
-  engine_version         = "11.9"
+  engine_version         = "14.10"
 }
