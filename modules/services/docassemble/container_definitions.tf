@@ -39,8 +39,8 @@ module "container_definition_backend" {
 
   container_name               = local.backend_container_name
   container_cpu                = 1
-  container_memory             = 3600
-  container_memory_reservation = 3600
+  container_memory             = 1800
+  container_memory_reservation = 1800
   essential                    = true
   container_image              = var.container_image
 
