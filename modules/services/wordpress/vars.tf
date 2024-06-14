@@ -9,7 +9,7 @@ variable "container_image" {
 
 variable "container_memory_reservation" {
   description = "Memory reservation for containers"
-  default     = 1024
+  default     = 2048
 }
 
 variable "vpc_id" {
