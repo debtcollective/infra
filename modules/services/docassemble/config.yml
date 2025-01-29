@@ -40,7 +40,7 @@ python packages:
   - ${package}
   %{~ endfor ~}
 collect statistics: false
-ec2: false
+ec2: true
 log server: null
 use cloud urls: false
 use minio: false
@@ -71,3 +71,17 @@ lawyer email: ${mail_lawyer}
 cc email: ${mail_cc}
 resume interview after login: True
 interview delete days: 0
+dispatch:
+  eviction: docassemble.evictiondefense:data/questions/interview.yml
+  bail: docassemble.bailbonds:data/questions/interview.yml
+  student: docassemble.studentdebt:data/questions/interview.yml
+  discovery: docassemble.discovery:data/questions/interview.yml
+global css: /packagestatic/docassemble.bailbonds/dist/css/globalStyles.css
+global javascript: /packagestatic/docassemble.bailbonds/dist/js/global.js
+maximum content length: 0
+voicerss:
+  enable: True
+  key: 0cf2ef74dcd84bb8944b2c61871c19ef
+  dialects:
+    en: us
+    es: mx
