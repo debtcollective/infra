@@ -13,21 +13,27 @@ db:
   backup: false
 secretkey: ${secretkey}
 backup days: 14
-default title: docassemble
-default short title: doc
+default title: Debt Collective Tools
+default short title: Tools
 mail:
-  username: ${smtp_username}
-  password: ${smtp_password}
-  server: ${smtp_host}
-  default sender: ${mail_from}
-  port: ${smtp_port}
-server administrator email: webmaster@localhost
+  default sender: ${default_sender}
+  mailgun api key: ${mailgun_api_key}
+  mailgun domain: ${mailgun_domain}
+  mailgun api url: ${mailgun_api_url}
+server administrator email: ${server_admin_email}
 default interview: ${default_interview}
 language: en
 locale: en_US.utf8
 os locale: en_US.UTF-8 UTF-8
-timezone: ${timezone}
+timezone: America/Los_Angeles
+rabbitmq: ${rabbitmq}
 redis: ${redis_url}
+voicerss:
+  enable: True
+  key: ${voicerss_key}
+  dialects:
+    en: us
+    es: mx
 s3:
   enable: true
   access key id: ${s3_access_key_id}
@@ -40,8 +46,10 @@ python packages:
   - ${package}
   %{~ endfor ~}
 collect statistics: false
+google:
+  analytics id: ${analytics_id}
 ec2: true
-log server: null
+log server: 172.17.0.2
 use cloud urls: false
 use minio: false
 use https: false
@@ -59,7 +67,13 @@ websockets port: null
 root: /
 words:
   - docassemble.base:data/sources/us-words.yml
+  - docassemble.bailbonds:data/sources/es-words.yml
   - docassemble.evictiondefense:data/sources/es-words.yml
+  - docassemble.evictiondefense:data/sources/hy-words.yml
+  - docassemble.evictiondefense:data/sources/ko-words.yml
+  - docassemble.evictiondefense:data/sources/tl-words.yml
+  - docassemble.evictiondefense:data/sources/zh-words.yml
+  - docassemble.evictiondefense:data/sources/zht-words.yml
 allow non-idempotent questions: false
 restrict input variables: True
 web server: nginx
@@ -67,8 +81,13 @@ new markdown to docx: True
 stable version: false
 sql ping: false
 default icons: font awesome
+favicon: docassemble.evictiondefense:data/static/favicon
+student lawyer email: ${mail_lawyer_student}
+bail lawyer email: ${mail_lawyer_bail}
 lawyer email: ${mail_lawyer}
 cc email: ${mail_cc}
+zapier tpt email: ${mail_email_zapier}
+zapier bail email: ${server_admin_email}
 resume interview after login: True
 interview delete days: 0
 dispatch:
@@ -79,9 +98,3 @@ dispatch:
 global css: /packagestatic/docassemble.bailbonds/dist/css/globalStyles.css
 global javascript: /packagestatic/docassemble.bailbonds/dist/js/global.js
 maximum content length: 0
-voicerss:
-  enable: True
-  key: 0cf2ef74dcd84bb8944b2c61871c19ef
-  dialects:
-    en: us
-    es: mx
