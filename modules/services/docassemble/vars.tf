@@ -69,24 +69,20 @@ variable "db_user" {
 }
 
 /* Mail */
-variable "smtp_username" {
-  description = "Mailgun SMTP username"
+variable "mailgun_api_url" {
+  description = "Mailgun API URL"
 }
 
-variable "smtp_password" {
-  description = "Mailgun SMTP password"
+variable "mailgun_api_key" {
+  description = "Mailgun API key"
 }
 
-variable "smtp_host" {
-  description = "Mailgun SMTP host"
+variable "mailgun_domain" {
+  description = "Mailgun Domain"
 }
 
-variable "smtp_port" {
-  description = "Mailgun SMTP port"
-}
-
-variable "mail_from" {
-  default = "'\"Administrator\" <no-reply@mg.evictiondefensetest.com>'"
+variable "default_sender" {
+  description = "Mailgun default sender"
 }
 
 variable "mail_lawyer" {
@@ -95,6 +91,22 @@ variable "mail_lawyer" {
 
 variable "mail_cc" {
   default = "evictiondefensela@debtcollective.org"
+}
+
+variable "mail_email_zapier" {
+  description = "Zapier Email for Tools"
+}
+
+variable "mail_lawyer_bail" {
+  description = "Bail Lawyer email for Tools"
+}
+
+variable "mail_lawyer_student" {
+  description = "Student Lawyer email for Tools"
+}
+
+variable "server_admin_email" {
+  description = "Admin email for Tools"
 }
 
 /* S3 */
@@ -120,9 +132,12 @@ variable "redis_url" {
 }
 
 /* App */
-variable "timezone" {
-  description = "App timezone"
-  default     = "America/Los_Angeles"
+variable "voicerss_key" {
+  description = "Voicerss key"
+}
+
+variable "rabbitmq" {
+  description = "Rabbitmq URL"
 }
 
 variable "debug" {

@@ -49,10 +49,17 @@ module "docassemble" {
   db_user     = local.db_user
   db_port     = local.db_port
 
-  timezone          = var.timezone
-  secretkey         = var.secretkey
-  pythonpackages    = var.pythonpackages
-  default_interview = var.default_interview
+  mail_cc             = var.mail_cc
+  mail_email_zapier   = var.mail_email_zapier
+  mail_lawyer         = var.mail_lawyer
+  mail_lawyer_bail    = var.mail_lawyer_bail
+  mail_lawyer_student = var.mail_lawyer_student
+  server_admin_email  = var.server_admin_email
+  voicerss_key        = var.voicerss_key
+  rabbitmq            = var.rabbitmq
+  secretkey           = var.secretkey
+  pythonpackages      = var.pythonpackages
+  default_interview   = var.default_interview
 
   redis_url = local.redis_url
 
@@ -61,8 +68,8 @@ module "docassemble" {
   s3_secret_access_key = aws_iam_access_key.docassemble.secret
   s3_region            = aws_s3_bucket.uploads.region
 
-  smtp_username = var.smtp_username
-  smtp_password = var.smtp_password
-  smtp_host     = var.smtp_host
-  smtp_port     = var.smtp_port
+  mailgun_api_url = var.mailgun_api_url
+  mailgun_api_key = var.mailgun_api_key
+  mailgun_domain  = var.mailgun_domain
+  default_sender  = var.default_sender
 }

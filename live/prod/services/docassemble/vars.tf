@@ -7,20 +7,20 @@ variable "container_cpu" {
 }
 
 /* Mail */
-variable "smtp_username" {
-  description = "Mailgun SMTP username"
+variable "mailgun_api_url" {
+  description = "Mailgun API URL"
 }
 
-variable "smtp_password" {
-  description = "Mailgun SMTP password"
+variable "mailgun_api_key" {
+  description = "Mailgun API key"
 }
 
-variable "smtp_host" {
-  description = "Mailgun SMTP host"
+variable "mailgun_domain" {
+  description = "Mailgun Domain"
 }
 
-variable "smtp_port" {
-  description = "Mailgun SMTP port"
+variable "default_sender" {
+  description = "Mailgun default sender"
 }
 
 /* App */
@@ -33,9 +33,36 @@ variable "db_backups" {
   default     = false
 }
 
-variable "timezone" {
-  description = "App timezone"
-  default     = "America/Los_Angeles"
+variable "mail_cc" {
+  description = "CC Email for Tools"
+}
+
+variable "mail_email_zapier" {
+  description = "Zapier Email for Tools"
+}
+
+variable "mail_lawyer" {
+  description = "Lawyer email for Tools"
+}
+
+variable "mail_lawyer_bail" {
+  description = "Bail Lawyer email for Tools"
+}
+
+variable "mail_lawyer_student" {
+  description = "Student Lawyer email for Tools"
+}
+
+variable "server_admin_email" {
+  description = "Admin email for Tools"
+}
+
+variable "voicerss_key" {
+  description = "Admin email for Tools"
+}
+
+variable "rabbitmq" {
+  description = "Rabbitmq URL"
 }
 
 variable "landing_url" {

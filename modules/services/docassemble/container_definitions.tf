@@ -85,10 +85,6 @@ module "container_definition_backend" {
       name  = "REDIS",
       value = var.redis_url
     },
-    {
-      name  = "TIMEZONE",
-      value = var.timezone
-    },
   ])
 
   port_mappings = [

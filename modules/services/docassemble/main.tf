@@ -92,13 +92,20 @@ resource "aws_s3_bucket_object" "object" {
   bucket = var.s3_bucket
   key    = "config.yml"
   content = templatefile("${path.module}/config.yml", {
-    debug             = var.debug
-    landing_url       = var.landing_url
-    secretkey         = var.secretkey
-    timezone          = var.timezone
-    domain            = var.domain
-    default_interview = var.default_interview
-    pythonpackages    = split(";", var.pythonpackages)
+    debug               = var.debug
+    landing_url         = var.landing_url
+    secretkey           = var.secretkey
+    mail_cc             = var.mail_cc
+    mail_email_zapier   = var.mail_email_zapier
+    mail_lawyer         = var.mail_lawyer
+    mail_lawyer_bail    = var.mail_lawyer_bail
+    mail_lawyer_student = var.mail_lawyer_student
+    server_admin_email  = var.server_admin_email
+    voicerss_key        = var.voicerss_key
+    rabbitmq            = var.rabbitmq
+    domain              = var.domain
+    default_interview   = var.default_interview
+    pythonpackages      = split(";", var.pythonpackages)
 
     db_name     = var.db_name
     db_user     = var.db_user
@@ -113,13 +120,9 @@ resource "aws_s3_bucket_object" "object" {
 
     redis_url = var.redis_url
 
-    smtp_username = var.smtp_username
-    smtp_password = var.smtp_password
-    smtp_host     = var.smtp_host
-    smtp_port     = var.smtp_port
-    smtp_port     = var.smtp_port
-    mail_from     = var.mail_from
-    mail_lawyer   = var.mail_lawyer
-    mail_cc       = var.mail_cc
+    mailgun_api_url = var.mailgun_api_url
+    mailgun_api_key = var.mailgun_api_key
+    mailgun_domain  = var.mailgun_domain
+    default_sender  = var.default_sender
   })
 }
