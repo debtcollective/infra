@@ -27,8 +27,8 @@ module "redis" {
   alarm_cpu_threshold_percent  = 85
   auth_token                   = null
   availability_zones           = data.aws_availability_zones.available.names
-  engine_version               = "5.0.6"
-  family                       = "redis5.0"
+  engine_version               = "6.0"
+  family                       = "redis6.0"
   existing_security_groups     = local.vpc_security_group_ids
   instance_type                = "cache.t3.micro"
   subnets                      = local.subnet_ids
