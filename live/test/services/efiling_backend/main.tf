@@ -6,7 +6,7 @@ terraform {
     organization = "debtcollective"
 
     workspaces {
-      name = "prod-app-efiling-backend"
+      name = "test-efiling-backend"
     }
   }
 }

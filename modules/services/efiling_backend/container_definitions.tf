@@ -25,15 +25,15 @@ module "container_definitions" {
       value = var.frontend_url
     },
     {
-      name  = "CLIENT_ID",
+      name  = "ClientId",
       value = var.client_id
     },
     {
-      name  = "CLIENT_SECRET",
+      name  = "ClientSecret",
       value = var.client_secret
     },
     {
-      name  = "SESSION_SECRET",
+      name  = "SessionSecret",
       value = var.session_secret
     },
   ]
