@@ -22,7 +22,7 @@
  */
 locals {
   container_name = "efiling_frontend"
-  container_port = "4200"
+  container_port = "80"
   name_prefix    = substr(var.environment, 0, 2)
 }
 
