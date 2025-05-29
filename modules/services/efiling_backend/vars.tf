@@ -4,7 +4,7 @@ variable "environment" {
 
 variable "container_image" {
   description = "Docker image name"
-  default     = "hissingpanda/efiling-backend:latest"
+  default     = "hissingpanda/efiling-backend:0.0.1"
 }
 
 variable "container_memory_reservation" {
