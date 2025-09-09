@@ -36,7 +36,7 @@ resource "aws_lb_target_group" "efiling_frontend" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path = "/.well-known/apollo/server-health"
+    path = "/"
   }
 
   lifecycle {
