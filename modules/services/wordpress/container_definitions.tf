@@ -14,7 +14,7 @@ module "container_definitions" {
 
   container_name               = local.container_name
   container_cpu                = null
-  container_memory             = 2048
+  container_memory             = null
   container_memory_reservation = var.container_memory_reservation
   essential                    = true
   container_image              = var.container_image
