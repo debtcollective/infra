@@ -40,9 +40,9 @@ locals {
   ec2_security_group_ids  = [data.terraform_remote_state.vpc.outputs.ec2_security_group_id]
   elb_security_group_ids  = [data.terraform_remote_state.vpc.outputs.elb_security_group_id]
   iam_instance_profile_id = data.terraform_remote_state.iam.outputs.instance_profile_id
-  instance_type           = "r6g.medium"
-  asg_max_size            = 4
-  asg_desired_count       = 4
+  instance_type           = "t4g.medium"
+  asg_max_size            = 5
+  asg_desired_count       = 5
   key_name                = data.terraform_remote_state.vpc.outputs.ssh_key_pair_name
   subnet_ids              = data.terraform_remote_state.vpc.outputs.public_subnet_ids
   vpc_id                  = data.terraform_remote_state.vpc.outputs.vpc_id
